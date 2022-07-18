@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/For-friday/static/css/main.e93529cd.css",
+    "main.js": "/For-friday/static/js/main.40755c80.js",
+    "static/js/787.28cb0dcd.chunk.js": "/For-friday/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/For-friday/index.html",
+    "main.e93529cd.css.map": "/For-friday/static/css/main.e93529cd.css.map",
+    "main.40755c80.js.map": "/For-friday/static/js/main.40755c80.js.map",
+    "787.28cb0dcd.chunk.js.map": "/For-friday/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e93529cd.css",
+    "static/js/main.40755c80.js"
+  ]
+}
