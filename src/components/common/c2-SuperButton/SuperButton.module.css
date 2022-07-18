@@ -1,0 +1,42 @@
+.default {
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    text-transform: uppercase;
+    text-align: center;
+    color: black;
+    background: #ececec;
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+    transition: .3s;
+}
+
+.default:hover {
+    background: #2EE59D;
+    color: white;
+}
+
+.default:disabled {
+    color: #939393;
+    background-color: rgba(128, 128, 128, 0.55);
+}
+
+
+.default:disabled:hover {
+    color: #939393;
+}
+
+
+.red {
+    color: red;
+    border: 1px solid red;
+
+}
+
+.red:hover {
+    background: red;
+    color: white;
+    border-color: red;
+}
+
