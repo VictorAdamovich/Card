@@ -1,30 +1,27 @@
 import React from 'react';
 import './App.css';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import Error404 from './components/404/404';
-import Login from './components/login/login';
-import Profile from './components/profile/profile';
-import Registration from './components/registration/registration';
-import RestorePassword from './components/restorePassword/restorePassword';
-import SetNewPassword from './components/setNewPassword/setNewPassword';
-import Test from './components/test';
+import Error404 from './features/404NotFound/Error404';
+import Login from './features/login/Login';
+import Profile from './features/profile/profile';
+import Registration from './features/registration/registration';
+import NewPasswordEntry from './features/newPasswordEntry/NewPasswordEntry';
+import TestPage from './features/testPage/TestPage';
+import PasswordRecovery from './features/restorePassword/PasswordRecovery';
 
 function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/test" element={<Test/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="profile" element={<Profile/>}/>
-                <Route path="registration" element={<Registration/>}/>
-                <Route path="restorePassword" element={<RestorePassword/>}/>
-                <Route path="set-new-password" element={<SetNewPassword/>}/>
+                <Route path={'/404'} element={<Error404/>}/>
+                <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/profile'} element={<Profile/>}/>
+                <Route path={'/registration'} element={<Registration/>}/>
+                <Route path={'/newPasswordEntry'} element={<NewPasswordEntry/>}/>
+                <Route path={'/passwordRecovery'} element={<PasswordRecovery/>}/>
+                <Route path={'/testPage'} element={<TestPage/>}/>
 
-                <Route
-                    path="/404"
-                    element={<Error404/>}
-                />
-                <Route path="*" element={<Navigate to={'/404'}/>}/>
+                <Route path="*" element={<Navigate to={'/login'}/>}/>
             </Routes>
         </div>
     );
