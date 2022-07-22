@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import Error404 from '../features/404NotFound/Error404';
+import Error404 from '../common/components/404NotFound/Error404';
 import Registration from '../features/registration/registration';
 import Login from '../features/login/Login';
 import PasswordRecovery from '../features/restorePassword/PasswordRecovery';
 import SetNewPassword from '../features/SetNewPassword/SetNewPassword';
 import TestPage from '../features/testPage/TestPage';
 import Profile from '../features/profile/Profile';
-import {RoutesPath} from '../enums/routes-path';
+import {RoutesPath} from '../common/enums/routes-path';
 
 function App() {
     return (
