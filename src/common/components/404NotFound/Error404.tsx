@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Error404 = (): any => (
+import { ReturnComponentType } from '../../../types/ReturnComponentType';
+
+const Error404 = (): ReturnComponentType => (
   <div>
     <h2>Error404</h2>
   </div>

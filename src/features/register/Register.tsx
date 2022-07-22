@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const Register = (): any => (
+import { ReturnComponentType } from '../../types/ReturnComponentType';
+
+export const Register = (): ReturnComponentType => (
   <div>
     <h2>Register</h2>
   </div>

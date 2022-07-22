@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const Login = (): any => (
+import { ReturnComponentType } from '../../types/ReturnComponentType';
+
+export const Login = (): ReturnComponentType => (
   <div>
     <h2>Login</h2>
   </div>

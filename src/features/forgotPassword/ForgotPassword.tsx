@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const ForgotPassword = (): any => (
+import { ReturnComponentType } from '../../types/ReturnComponentType';
+
+export const ForgotPassword = (): ReturnComponentType => (
   <div>
     <h2>Forgot Password</h2>
   </div>
