@@ -3,6 +3,7 @@ export enum RoutesPath {
     profile = 'profile',
     login = 'login',
     registration = 'registration',
-    newPasswordEntry = 'newPasswordEntry',
-    passwordRecovery = 'passwordRecovery'
+    setNewPassword = 'SetNewPassword',
+    passwordRecovery = 'passwordRecovery',
+    testPage='test-page'
 }

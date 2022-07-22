@@ -8,18 +8,19 @@ import PasswordRecovery from '../features/restorePassword/PasswordRecovery';
 import SetNewPassword from '../features/SetNewPassword/SetNewPassword';
 import TestPage from '../features/testPage/TestPage';
 import Profile from '../features/profile/Profile';
+import {RoutesPath} from '../enums/routes-path';
 
 function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path={'/404'} element={<Error404/>}/>
-                <Route path={'/login'} element={<Login/>}/>
-                <Route path={'/profile'} element={<Profile/>}/>
-                <Route path={'/registration'} element={<Registration/>}/>
-                <Route path={'/set-new-password'} element={<SetNewPassword/>}/>
-                <Route path={'/passwordRecovery'} element={<PasswordRecovery/>}/>
-                <Route path={'/testPage'} element={<TestPage/>}/>
+                <Route path={RoutesPath.error404} element={<Error404/>}/>
+                <Route path={RoutesPath.login} element={<Login/>}/>
+                <Route path={RoutesPath.profile} element={<Profile/>}/>
+                <Route path={RoutesPath.registration} element={<Registration/>}/>
+                <Route path={RoutesPath.setNewPassword} element={<SetNewPassword/>}/>
+                <Route path={RoutesPath.passwordRecovery} element={<PasswordRecovery/>}/>
+                <Route path={RoutesPath.testPage} element={<TestPage/>}/>
 
                 <Route path="*" element={<Navigate to={'/testPage'}/>}/>
             </Routes>
