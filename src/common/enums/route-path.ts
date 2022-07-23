@@ -5,5 +5,5 @@ export enum RoutePath {
   Register = 'register',
   ForgotPassword = 'forgotPassword',
   CheckEmail = 'checkEmail',
-  CreateNewPassword = 'CreateNewPassword',
+  CreateNewPassword = 'createNewPassword',
 }
