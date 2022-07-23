@@ -63,7 +63,7 @@ export const Login = (): ReturnComponentType => {
   return (
     <Grid container justifyContent="center">
       <Grid item xs={12} sm={6} className={styles.loginContainer}>
-        <Paper className={styles.paperCont}>
+        <Paper className={styles.paperCont} elevation={12}>
           <form onSubmit={formik.handleSubmit} className={styles.form}>
             <Container component="main" maxWidth="xs" className={styles.formContainer}>
               <Box

@@ -4,7 +4,8 @@
 
 .paperCont {
     margin-top: 20px;
-    /*background-color: aquamarine;*/
+    margin-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .title {
@@ -26,8 +27,7 @@
 }
 
 .formContainer {
-    /*background-color: red;*/
-
+    /*background-color: aquamarine;*/
 }
 .formControl {
     /*background-color: coral;*/

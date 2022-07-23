@@ -36,8 +36,10 @@ const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
   onMouseDown={handleMouseDownPassword} */
 
   return (
-    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+    <FormControl variant="outlined">
+      <InputLabel error={hasError} htmlFor="outlined-adornment-password">
+        Password
+      </InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
         required
