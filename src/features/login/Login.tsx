@@ -22,6 +22,7 @@ import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { logIn } from './login-reducer';
 import styles from './Login.module.css';
+import PasswordWithVisibility from './PasswordWithVisibility';
 
 export const Login = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
@@ -98,7 +99,7 @@ export const Login = (): ReturnComponentType => {
                   {formik.touched.email && (
                     <div className={styles.errorMessage}>{formik.errors.email}</div>
                   )}
-                  <TextField
+                  {/* <TextField
                     error={formik.touched.password && !!formik.errors.password}
                     required
                     margin="normal"
@@ -109,6 +110,11 @@ export const Login = (): ReturnComponentType => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     autoComplete="current-password"
+                  /> */}
+                  <PasswordWithVisibility
+                    hasError={formik.touched.password && !!formik.errors.password}
+                    value={formik.values.password}
+                    handleChanging={formik.handleChange}
                   />
                   {formik.touched.password && (
                     <div className={styles.errorMessage}>{formik.errors.password}</div>

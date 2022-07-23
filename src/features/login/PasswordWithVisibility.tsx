@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
@@ -11,39 +11,29 @@ import {
 
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-interface State {
-  amount: string;
-  password: string;
-  weight: string;
-  weightRange: string;
-  showPassword: boolean;
-}
+type PropsType = {
+  hasError: boolean | undefined;
+  value: string;
+  handleChanging: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-const PasswordWithVisibility = (): ReturnComponentType => {
-  const [values, setValues] = React.useState<State>({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
-  });
+const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
+  const { hasError, handleChanging, value } = props;
 
-  const handleChange =
-    (prop: keyof State) =>
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
+    handleChanging(event);
+  }, []);
 
   const handleClickShowPassword = (): void => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  /* const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
   };
+  onMouseDown={handleMouseDownPassword} */
 
   return (
     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
@@ -51,19 +41,19 @@ const PasswordWithVisibility = (): ReturnComponentType => {
       <OutlinedInput
         id="outlined-adornment-password"
         required
-        error
-        type={values.showPassword ? 'text' : 'password'}
-        value={values.password}
-        onChange={handleChange('password')}
+        name="password"
+        error={hasError}
+        type={showPassword ? 'text' : 'password'}
+        value={value}
+        onChange={handleChange}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
               edge="end"
             >
-              {values.showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }
