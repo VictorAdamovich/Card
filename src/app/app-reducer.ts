@@ -16,4 +16,4 @@ export const appAC = () => ({ type: 'APP/TEST' } as const);
 
 export type InitialStateType = {};
 
-type ActionsType = ReturnType<typeof appAC>;
+export type ActionsType = ReturnType<typeof appAC>;

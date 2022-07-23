@@ -1,0 +1,37 @@
+.loginContainer {
+    /*background-color: coral;*/
+}
+
+.paperCont {
+    margin-top: 20px;
+    /*background-color: aquamarine;*/
+}
+
+.title {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.errorMessage {
+    color: red;
+    font-size: smaller;
+}
+
+.inputArea {
+    width: 100%;
+}
+
+.form {
+    /*background-color: #f6f5f6;*/
+}
+
+.formContainer {
+    /*background-color: red;*/
+
+}
+.formControl {
+    /*background-color: coral;*/
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
