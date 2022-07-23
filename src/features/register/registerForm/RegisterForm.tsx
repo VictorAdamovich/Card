@@ -5,7 +5,6 @@ import {
   Button,
   FormControl,
   FormGroup,
-  Grid,
   IconButton,
   InputAdornment,
   TextField,
@@ -22,8 +21,8 @@ export const RegisterForm = (): ReturnComponentType => {
   const handleClickShowConfirmPassword = (): void =>
     setShowConfirmPassword(!showConfirmPassword);
 
-  const handleOnBlurePassword = (): void => setShowPassword(false);
-  const handleOnBlureConfirmPassword = (): void => setShowConfirmPassword(false);
+  const handleOnBlurPassword = (): void => setShowPassword(false);
+  const handleOnBlurConfirmPassword = (): void => setShowConfirmPassword(false);
 
   const formik = useFormik({
     validate: values => {
@@ -57,76 +56,72 @@ export const RegisterForm = (): ReturnComponentType => {
   });
 
   return (
-    <Grid justifyContent="center">
-      <Grid item xs={4}>
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl>
-            <FormGroup>
-              <TextField
-                label="Email"
-                margin="normal"
-                name="email"
-                variant="standard"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-              />
-              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-              <TextField
-                type={showPassword ? 'text' : 'password'}
-                label="Password"
-                margin="normal"
-                variant="standard"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onBlur={handleOnBlurePassword}
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-              <TextField
-                type={showConfirmPassword ? 'text' : 'password'}
-                label="Confirm password"
-                margin="normal"
-                variant="standard"
-                name="confirmPassword"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle confirmPassword visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onBlur={handleOnBlureConfirmPassword}
-                      >
-                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {formik.errors.confirmPassword ? (
-                <div>{formik.errors.confirmPassword}</div>
-              ) : null}
+    <form onSubmit={formik.handleSubmit}>
+      <FormControl>
+        <FormGroup>
+          <TextField
+            label="Email"
+            margin="normal"
+            name="email"
+            variant="standard"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+          />
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+          <TextField
+            type={showPassword ? 'text' : 'password'}
+            label="Password"
+            margin="normal"
+            variant="standard"
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onBlur={handleOnBlurPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+          <TextField
+            type={showConfirmPassword ? 'text' : 'password'}
+            label="Confirm password"
+            margin="normal"
+            variant="standard"
+            name="confirmPassword"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle confirmPassword visibility"
+                    onClick={handleClickShowConfirmPassword}
+                    onBlur={handleOnBlurConfirmPassword}
+                  >
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          {formik.errors.confirmPassword ? (
+            <div>{formik.errors.confirmPassword}</div>
+          ) : null}
 
-              <Button type="submit" variant="contained" color="primary">
-                Login
-              </Button>
-            </FormGroup>
-          </FormControl>
-        </form>
-      </Grid>
-    </Grid>
+          <Button type="submit" variant="contained" color="primary">
+            Login
+          </Button>
+        </FormGroup>
+      </FormControl>
+    </form>
   );
 };
