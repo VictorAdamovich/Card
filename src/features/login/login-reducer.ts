@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { loginAPI, LoginRequestBodyType } from './login-api';
+import { loginAPI } from './login-api';
 
 const initialState = {
   isLoggedIn: false,
@@ -39,15 +39,17 @@ export const logOutAC = () =>
 
 // Thunks
 
-export const LogIn =
-  (requestBody: LoginRequestBodyType) => async (dispatch: Dispatch) => {
-    try {
-      const res = await loginAPI.login(requestBody);
-      dispatch(logInAC());
-      console.log(res.data);
-    } catch (e) {
-      console.log(e);
-    }
+export const logIn =
+  (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    console.log('dispatch to app reducer for start loading');
+    loginAPI
+      .login({ email, password, rememberMe })
+      .then(res => {
+        dispatch(logInAC());
+        console.log(res.data);
+        console.log('dispatch to app reducer for idle');
+      })
+      .catch(res => console.log(res.request.response));
   };
 
 // Types
