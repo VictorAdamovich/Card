@@ -16,12 +16,13 @@ import { RoutesType } from '../types/RoutesType';
 export const Router = (): ReturnComponentType => {
   const routesArray: RoutesType[] = [
     { path: RoutePath.Error404, component: <Error404 /> },
-    { path: RoutePath.Profile, component: <CheckEmail /> },
-    { path: RoutePath.Login, component: <CreateNewPassword /> },
-    { path: RoutePath.Register, component: <ForgotPassword /> },
-    { path: RoutePath.ForgotPassword, component: <Login /> },
-    { path: RoutePath.CheckEmail, component: <Profile /> },
-    { path: RoutePath.CreateNewPassword, component: <Register /> },
+    { path: RoutePath.Profile, component: <Profile /> },
+    { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
+    { path: RoutePath.Register, component: <Register /> },
+    { path: RoutePath.Login, component: <Login /> },
+    { path: RoutePath.CheckEmail, component: <CheckEmail /> },
+    { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
+    { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
   ];
 
   return (

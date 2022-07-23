@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './App.css';
-
 import Router from '../routes/Router';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
