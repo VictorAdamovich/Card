@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux';
 
+import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
+
 import { loginAPI } from './login-api';
 
 const initialState = {
@@ -49,27 +51,36 @@ export const setUserInfo = (payload: any) =>
 
 export const logIn =
   (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
-    console.log('dispatch to app reducer for start loading');
+    dispatch(setAppStatusAC('loading'));
     loginAPI
       .login({ email, password, rememberMe })
       .then(res => {
         dispatch(logInAC());
-        console.log(res.data);
-        console.log('dispatch to app reducer for idle');
+        dispatch(setUserInfo(res.data));
+        dispatch(setAppStatusAC('succeeded'));
       })
-      .catch(res => console.log(res.request.response));
+      .catch(err => {
+        console.log(err);
+        dispatch(setAppSnackbarAC('warning', err.response.data.error));
+        dispatch(setAppStatusAC('failed'));
+      });
   };
 
 export const logOut = () => (dispatch: Dispatch) => {
-  console.log('dispatch to app reducer for start loading');
+  dispatch(setAppStatusAC('loading'));
   loginAPI
     .logout()
     .then(res => {
       dispatch(logOutAC());
       console.log(res.data);
-      console.log('dispatch to app reducer for idle');
+      dispatch(setAppSnackbarAC('success', res.data.info));
+      dispatch(setAppStatusAC('succeeded'));
     })
-    .catch(console.log);
+    .catch(err => {
+      console.log(err);
+      dispatch(setAppSnackbarAC('warning', err.message));
+      dispatch(setAppStatusAC('failed'));
+    });
 };
 
 // Types

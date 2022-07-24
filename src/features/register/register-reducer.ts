@@ -38,7 +38,8 @@ export const register = (email: string, password: string) => (dispatch: Dispatch
       dispatch(setAppSnackbarAC('success', res.statusText));
     })
     .catch(err => {
-      dispatch(setAppSnackbarAC('error', err.message));
+      console.log(err);
+      dispatch(setAppSnackbarAC('error', err.response.data.error));
     })
     .finally(() => {
       dispatch(setAppStatusAC('idle'));

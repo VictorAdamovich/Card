@@ -6,17 +6,15 @@ import Grid from '@mui/material/Grid';
 import { NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line import/order
+import { useAppSelector } from '../../app/store';
 import img from '../../assets/images/checkEmail.svg';
-
-// import { useAppSelector } from '../../app/store';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import LogoArea from '../login/components/LogoArea';
 import styles from '../login/Login.module.css';
 
 export const CheckEmail = (): ReturnComponentType => {
-  // const email = useAppSelector();
-  const email = 'example';
+  const email = useAppSelector(state => state.forgot.email);
 
   return (
     <Grid container justifyContent="center">

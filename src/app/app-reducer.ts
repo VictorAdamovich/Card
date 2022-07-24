@@ -49,14 +49,13 @@ export const setAuthorization = (status: boolean) =>
 // _____________________ Thunks _________________
 
 export const me = () => (dispatch: Dispatch) => {
-  console.log('in me thunk');
   dispatch(setAppStatusAC('loading'));
   loginAPI
     .me()
     .then(res => {
-      console.log('you authirized');
       dispatch(logInAC());
       dispatch(setUserInfo(res.data));
+      dispatch(setAppSnackbarAC('success', 'You are authorized'));
       dispatch(setAppStatusAC('succeeded'));
     })
     .catch(res => {
@@ -65,7 +64,6 @@ export const me = () => (dispatch: Dispatch) => {
       dispatch(setAppStatusAC('failed'));
     })
     .finally(() => {
-      console.log('App init');
       dispatch(setAuthorization(true));
     });
 };

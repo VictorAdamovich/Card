@@ -4,10 +4,11 @@ import { Box, Button, FormControl, Paper } from '@mui/material';
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { minPasswordLength } from '../../common/constants/constants';
+import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import LogoArea from '../login/components/LogoArea';
 import PasswordWithVisibility from '../login/components/PasswordWithVisibility';
@@ -16,7 +17,7 @@ import styles from '../login/Login.module.css';
 import { createNewPassword } from './forgot-reducer';
 
 export const CreateNewPassword = (): ReturnComponentType => {
-  // NEED REDIRECT TO LOGIN AFTER POSITIVE RESPONSE FROM SERVER
+  const isDefinedToken = useAppSelector(state => state.forgot.token);
 
   const dispatch = useAppDispatch();
   const url = useLocation();
@@ -45,6 +46,10 @@ export const CreateNewPassword = (): ReturnComponentType => {
       formik.resetForm();
     },
   });
+
+  if (isDefinedToken) {
+    return <Navigate to={RoutePath.Login} />;
+  }
 
   return (
     <Grid container justifyContent="center">

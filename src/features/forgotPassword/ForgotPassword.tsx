@@ -4,9 +4,9 @@ import { Box, Button, FormControl, Paper, TextField } from '@mui/material';
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import LogoArea from '../login/components/LogoArea';
@@ -16,6 +16,7 @@ import { forgotPassword } from './forgot-reducer';
 
 export const ForgotPassword = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
+  const email = useAppSelector(state => state.forgot.email);
 
   type FormikErrorType = {
     email?: string;
@@ -41,6 +42,10 @@ export const ForgotPassword = (): ReturnComponentType => {
       formik.resetForm();
     },
   });
+
+  if (email) {
+    return <Navigate to={RoutePath.CheckEmail} />;
+  }
 
   return (
     <Grid container justifyContent="center">

@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux';
 
+import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
+
 import { forgotAPI } from './forgot-api';
 
 type InitialStateType = {
@@ -39,15 +41,18 @@ export const setTokenForPasswordRecovery = (token: string) =>
 // ______________________Thunks______________________
 
 export const forgotPassword = (email: string) => (dispatch: Dispatch) => {
-  console.log('dispatch to app reducer for start loading');
+  dispatch(setAppStatusAC('loading'));
   forgotAPI
     .forgot(email)
     .then(res => {
       dispatch(setEmailForPasswordRecovery(email));
-      console.log(res.data);
-      console.log('dispatch to app reducer for idle');
+      dispatch(setAppSnackbarAC('success', res.data.info));
+      dispatch(setAppStatusAC('succeeded'));
     })
-    .catch(res => console.log(res.request.response));
+    .catch(res => {
+      dispatch(setAppSnackbarAC('warning', res.data.message));
+      dispatch(setAppStatusAC('failed'));
+    });
 };
 
 export const createNewPassword =
