@@ -1,9 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
-const instance = axios.create({
-  baseURL: process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
-  withCredentials: true,
-});
+import { instance } from '../../api/config/apiConfig';
 
 export const loginAPI = {
   login(requestBody: LoginRequestBodyType) {
