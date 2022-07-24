@@ -7,16 +7,17 @@ import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
-import { ReturnComponentType } from '../../types/ReturnComponentType';
+import { ReturnComponentType } from '../../../types/ReturnComponentType';
 
 type PropsType = {
   hasError: boolean | undefined;
   value: string;
   handleChanging: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<any, Element>) => void;
 };
 
-const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
-  const { hasError, handleChanging, value } = props;
+const PasswordWithVisibility = React.memo((props: PropsType): ReturnComponentType => {
+  const { hasError, handleChanging, value, onBlur } = props;
 
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
@@ -26,7 +27,7 @@ const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
 
   const handleClickShowPassword = useCallback((): void => {
     setShowPassword(!showPassword);
-  }, []);
+  }, [showPassword]);
 
   return (
     <FormControl variant="outlined">
@@ -39,6 +40,7 @@ const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
         name="password"
         error={hasError}
         type={showPassword ? 'text' : 'password'}
+        onBlur={onBlur}
         value={value}
         onChange={handleChange}
         endAdornment={
@@ -56,6 +58,6 @@ const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
       />
     </FormControl>
   );
-};
+});
 
 export default PasswordWithVisibility;
