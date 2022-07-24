@@ -88,8 +88,8 @@ export const ForgotPassword = (): ReturnComponentType => {
                   >
                     Send Instruction
                   </Button>
-                  <Grid container justifyContent="center">
-                    <Grid item>
+                  <Grid container justifyContent="space-around">
+                    <Grid item xs={12}>
                       <p>Did you remember your password?</p>
                     </Grid>
                     <Grid item>
