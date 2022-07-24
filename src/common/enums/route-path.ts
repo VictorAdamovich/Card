@@ -1,6 +1,6 @@
 export enum RoutePath {
   Error404 = '404',
-  Profile = 'profile',
+  Profile = '/profile',
   Login = '/login',
   Register = '/register',
   ForgotPassword = '/forgotPassword',

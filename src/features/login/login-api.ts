@@ -12,6 +12,9 @@ export const loginAPI = {
   logout() {
     return instance.delete<LogoutResponseType>('auth/me');
   },
+  me() {
+    return instance.post<MeResponseType>('auth/me');
+  },
 };
 
 export type LoginRequestBodyType = {
@@ -41,6 +44,21 @@ type LoginResponseType = {
   tokenDeathTime: number;
   avatar?: string;
   deviceTokens: DeviceTokensItemType[];
+};
+
+type MeResponseType = {
+  _id: string;
+  email: string;
+  rememberMe: boolean;
+  isAdmin: boolean;
+  name: string;
+  verified: boolean;
+  publicCardPacksCount: number;
+  created: Date;
+  updated: Date;
+  __v: number;
+  token: string;
+  tokenDeathTime: number;
 };
 
 type LogoutResponseType = {

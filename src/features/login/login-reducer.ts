@@ -8,6 +8,7 @@ const initialState = {
 
 type initialStateType = {
   isLoggedIn: boolean;
+  userInfo?: any;
 };
 
 export const loginReducer = (
@@ -19,6 +20,8 @@ export const loginReducer = (
       return { ...state, isLoggedIn: action.newStatus };
     case 'login-reducer/LOGOUT':
       return { ...state, isLoggedIn: action.newStatus };
+    case 'login/SET-USER-INFO':
+      return { ...state, userInfo: action.payload };
     default:
       return state;
   }
@@ -35,6 +38,11 @@ export const logOutAC = () =>
   ({
     type: 'login-reducer/LOGOUT',
     newStatus: false,
+  } as const);
+export const setUserInfo = (payload: any) =>
+  ({
+    type: 'login/SET-USER-INFO',
+    payload,
   } as const);
 
 // Thunks
@@ -66,6 +74,7 @@ export const logOut = () => (dispatch: Dispatch) => {
 
 // Types
 
-export type LoginReducerActionsType = LoginAT | LogoutAT;
+export type LoginReducerActionsType = LoginAT | LogoutAT | SetUserInfoAT;
 type LoginAT = ReturnType<typeof logInAC>;
 type LogoutAT = ReturnType<typeof logOutAC>;
+type SetUserInfoAT = ReturnType<typeof setUserInfo>;

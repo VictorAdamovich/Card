@@ -26,3 +26,6 @@ export type AppRootStateType = ReturnType<typeof rootReducer>;
 
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
+// @ts-ignore
+window.state = store.getState();
