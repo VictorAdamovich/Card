@@ -1,8 +1,9 @@
+import { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
 import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
 
-import { registerApi } from './register-api';
+import { LoginErrorType, registerApi } from './register-api';
 
 const initialState = {
   isRegister: false,
@@ -37,8 +38,14 @@ export const register = (email: string, password: string) => (dispatch: Dispatch
       dispatch(registerAC());
       dispatch(setAppSnackbarAC('success', res.statusText));
     })
-    .catch(err => {
-      dispatch(setAppSnackbarAC('error', err.message));
+    .catch((err: AxiosError<LoginErrorType>) => {
+      console.dir(err);
+      dispatch(
+        setAppSnackbarAC(
+          'error',
+          err.response ? err.response?.data.error : 'Some error occurred',
+        ),
+      );
     })
     .finally(() => {
       dispatch(setAppStatusAC('idle'));

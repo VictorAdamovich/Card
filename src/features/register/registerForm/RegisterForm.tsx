@@ -11,13 +11,17 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 
-import { useAppDispatch } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { register } from '../register-reducer';
 
-export const RegisterForm = (): ReturnComponentType => {
+export const RegisterForm = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
+
+  const status = useAppSelector(state => state.app.status);
+  const statusCheck = status === 'loading';
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -105,11 +109,16 @@ export const RegisterForm = (): ReturnComponentType => {
             }}
           />
 
-          <Button type="submit" variant="contained" color="primary">
-            Login
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={statusCheck}
+          >
+            Regist
           </Button>
         </FormGroup>
       </FormControl>
     </form>
   );
-};
+});

@@ -7,7 +7,7 @@ import { ReturnComponentType } from '../../types/ReturnComponentType';
 
 import { RegisterForm } from './registerForm/RegisterForm';
 
-export const Register = (): ReturnComponentType => {
+export const Register = React.memo((): ReturnComponentType => {
   const isRegister = useAppSelector(state => state.register.isRegister);
 
   if (isRegister) {
@@ -21,4 +21,4 @@ export const Register = (): ReturnComponentType => {
       <RegisterForm />
     </div>
   );
-};
+});
