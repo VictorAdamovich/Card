@@ -1,13 +1,11 @@
 import React, { ChangeEvent, useCallback } from 'react';
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import {
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-} from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
@@ -26,14 +24,9 @@ const PasswordWithVisibility = (props: PropsType): ReturnComponentType => {
     handleChanging(event);
   }, []);
 
-  const handleClickShowPassword = (): void => {
+  const handleClickShowPassword = useCallback((): void => {
     setShowPassword(!showPassword);
-  };
-
-  /* const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    event.preventDefault();
-  };
-  onMouseDown={handleMouseDownPassword} */
+  }, []);
 
   return (
     <FormControl variant="outlined">

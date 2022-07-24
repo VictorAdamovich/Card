@@ -99,18 +99,6 @@ export const Login = (): ReturnComponentType => {
                   {formik.touched.email && (
                     <div className={styles.errorMessage}>{formik.errors.email}</div>
                   )}
-                  {/* <TextField
-                    error={formik.touched.password && !!formik.errors.password}
-                    required
-                    margin="normal"
-                    name="password"
-                    type="password"
-                    label="Password"
-                    value={formik.values.password}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    autoComplete="current-password"
-                  /> */}
                   <PasswordWithVisibility
                     hasError={formik.touched.password && !!formik.errors.password}
                     value={formik.values.password}
