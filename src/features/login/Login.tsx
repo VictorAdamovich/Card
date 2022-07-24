@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Avatar,
   Box,
   Button,
   Checkbox,
@@ -9,7 +8,6 @@ import {
   FormControlLabel,
   Paper,
   TextField,
-  Typography,
 } from '@mui/material';
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid';
@@ -17,17 +15,17 @@ import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/store';
+import { minPasswordLength } from '../../common/constants/constants';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
+import LogoArea from './components/LogoArea';
+import PasswordWithVisibility from './components/PasswordWithVisibility';
 import { logIn } from './login-reducer';
 import styles from './Login.module.css';
-import PasswordWithVisibility from './PasswordWithVisibility';
 
 export const Login = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
-
-  const minPasswordLength = 7;
 
   type FormikErrorType = {
     email?: string;
@@ -76,12 +74,7 @@ export const Login = (): ReturnComponentType => {
                   alignItems: 'center',
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} className={styles.title}>
-                  logo will be here
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
+                <LogoArea title="Sign In" />
                 <FormControl className={styles.formControl}>
                   <TextField
                     error={formik.touched.email && !!formik.errors.email}
@@ -99,22 +92,11 @@ export const Login = (): ReturnComponentType => {
                   {formik.touched.email && (
                     <div className={styles.errorMessage}>{formik.errors.email}</div>
                   )}
-                  {/* <TextField
-                    error={formik.touched.password && !!formik.errors.password}
-                    required
-                    margin="normal"
-                    name="password"
-                    type="password"
-                    label="Password"
-                    value={formik.values.password}
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    autoComplete="current-password"
-                  /> */}
                   <PasswordWithVisibility
                     hasError={formik.touched.password && !!formik.errors.password}
                     value={formik.values.password}
                     handleChanging={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   {formik.touched.password && (
                     <div className={styles.errorMessage}>{formik.errors.password}</div>
@@ -138,6 +120,7 @@ export const Login = (): ReturnComponentType => {
                     </Grid>
                   </Grid>
                   <Button
+                    disabled={!!formik.errors.email || !!formik.errors.password}
                     type="submit"
                     fullWidth
                     variant="contained"

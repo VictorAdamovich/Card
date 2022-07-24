@@ -17,9 +17,9 @@ export const Router = (): ReturnComponentType => {
   const routesArray: RoutesType[] = [
     { path: RoutePath.Error404, component: <Error404 /> },
     { path: RoutePath.Profile, component: <Profile /> },
-    { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
-    { path: RoutePath.Register, component: <Register /> },
     { path: RoutePath.Login, component: <Login /> },
+    { path: RoutePath.Register, component: <Register /> },
+    { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
     { path: RoutePath.CheckEmail, component: <CheckEmail /> },
     { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
