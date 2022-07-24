@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Error404 from '../common/components/404NotFound/Error404';
 import { RoutePath } from '../common/enums/route-path';
 import { CheckEmail } from '../features/forgotPassword/CheckEmail';
+import { CreateNewPassword } from '../features/forgotPassword/CreateNewPassword';
 import { ForgotPassword } from '../features/forgotPassword/ForgotPassword';
 import { Login } from '../features/login/Login';
 import { Profile } from '../features/profile/Profile';
@@ -20,7 +21,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.Register, component: <Register /> },
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
     { path: RoutePath.CheckEmail, component: <CheckEmail /> },
-    { path: RoutePath.CreateNewPassword, component: <Register /> },
+    { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
   ];
 
   return (

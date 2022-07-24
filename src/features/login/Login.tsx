@@ -15,6 +15,7 @@ import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/store';
+import { minPasswordLength } from '../../common/constants/constants';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
@@ -25,8 +26,6 @@ import styles from './Login.module.css';
 
 export const Login = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
-
-  const minPasswordLength = 7;
 
   type FormikErrorType = {
     email?: string;

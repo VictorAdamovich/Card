@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { NavLink } from 'react-router-dom';
 
 // eslint-disable-next-line import/order
-import img from '../../assets/checkEmail.svg';
+import img from '../../assets/images/checkEmail.svg';
 
 // import { useAppSelector } from '../../app/store';
 import { RoutePath } from '../../common/enums/route-path';
