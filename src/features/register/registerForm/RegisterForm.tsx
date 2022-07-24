@@ -11,11 +11,13 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 
+import { useAppDispatch } from '../../../app/store';
 import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { registerApi } from '../register-api';
+import { register } from '../register-reducer';
 
 export const RegisterForm = (): ReturnComponentType => {
+  const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -25,6 +27,7 @@ export const RegisterForm = (): ReturnComponentType => {
 
   const handleOnBlurPassword = (): void => setShowPassword(false);
   const handleOnBlurConfirmPassword = (): void => setShowConfirmPassword(false);
+
   const registerForm = useFormik({
     initialValues: {
       email: '',
@@ -33,7 +36,7 @@ export const RegisterForm = (): ReturnComponentType => {
     },
     validationSchema: registerSchema,
     onSubmit: (values, { resetForm }) => {
-      registerApi.createUser(values.email, values.password).then(res => console.log(res));
+      dispatch(register(values.email, values.password));
       resetForm();
     },
   });
@@ -46,11 +49,9 @@ export const RegisterForm = (): ReturnComponentType => {
             label="Email"
             margin="normal"
             variant="standard"
-            name="email"
-            value={registerForm.values.email}
-            onChange={registerForm.handleChange}
             error={registerForm.touched.email && Boolean(registerForm.errors.email)}
             helperText={registerForm.touched.email && registerForm.errors.email}
+            {...registerForm.getFieldProps('email')}
           />
 
           <TextField
@@ -58,9 +59,7 @@ export const RegisterForm = (): ReturnComponentType => {
             label="Password"
             margin="normal"
             variant="standard"
-            name="password"
-            value={registerForm.values.password}
-            onChange={registerForm.handleChange}
+            {...registerForm.getFieldProps('password')}
             error={registerForm.touched.password && Boolean(registerForm.errors.password)}
             helperText={registerForm.touched.password && registerForm.errors.password}
             InputProps={{
@@ -83,9 +82,7 @@ export const RegisterForm = (): ReturnComponentType => {
             label="Confirm password"
             margin="normal"
             variant="standard"
-            name="confirmPassword"
-            value={registerForm.values.confirmPassword}
-            onChange={registerForm.handleChange}
+            {...registerForm.getFieldProps('confirmPassword')}
             error={
               registerForm.touched.confirmPassword &&
               Boolean(registerForm.errors.confirmPassword)

@@ -9,13 +9,11 @@ import { useAppSelector } from '../../../app/store';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  // PLS FIX LATER
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 ));
 
 export const SimpleSnackbar = (): ReturnComponentType => {
-  const snackbarSeverity = useAppSelector(state => state.app.snackbarSeverity);
+  const alertColor = useAppSelector(state => state.app.alertColor);
   const snackbarMessage = useAppSelector(state => state.app.snackbarMessage);
 
   const dispatch = useDispatch();
@@ -24,16 +22,12 @@ export const SimpleSnackbar = (): ReturnComponentType => {
     if (reason === 'clickaway') {
       return;
     }
-    dispatch(setAppSnackbarAC(null, null));
+    dispatch(setAppSnackbarAC('success', ''));
   };
 
   return (
-    <Snackbar
-      open={snackbarSeverity !== null}
-      autoHideDuration={6000}
-      onClose={handleClose}
-    >
-      <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+    <Snackbar open={!!snackbarMessage} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity={alertColor} sx={{ width: '100%' }}>
         {snackbarMessage}
       </Alert>
     </Snackbar>

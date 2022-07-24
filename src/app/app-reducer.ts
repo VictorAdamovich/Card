@@ -1,6 +1,6 @@
 const initialState: InitialStateType = {
-  status: 'idle',
-  snackbarSeverity: null,
+  status: 'idle' as RequestStatusType,
+  alertColor: 'success' as AlertColorType,
   snackbarMessage: '',
 };
 
@@ -14,7 +14,7 @@ export const appReducer = (
     case 'APP/SET-SNACKBAR':
       return {
         ...state,
-        snackbarSeverity: action.snackbarSeverity,
+        alertColor: action.alertColor,
         snackbarMessage: action.snackbarMessage,
       };
     default:
@@ -27,14 +27,11 @@ export const setAppStatusAC = (status: RequestStatusType) =>
     status,
   } as const);
 
-export const setAppSnackbarAC = (
-  snackbarSeverity: SnackbarSeverityType | null,
-  snackbarMessage: string | null,
-) =>
+export const setAppSnackbarAC = (alertColor: AlertColorType, message: string) =>
   ({
     type: 'APP/SET-SNACKBAR',
-    snackbarSeverity,
-    snackbarMessage,
+    alertColor,
+    snackbarMessage: message,
   } as const);
 
 export type ActionsType =
@@ -42,9 +39,9 @@ export type ActionsType =
   | ReturnType<typeof setAppStatusAC>;
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
-export type SnackbarSeverityType = 'success' | 'error' | 'info' | 'warning';
+export type AlertColorType = 'success' | 'error' | 'info' | 'warning';
 export type InitialStateType = {
   status: RequestStatusType;
-  snackbarSeverity: SnackbarSeverityType | null;
-  snackbarMessage: string | null;
+  alertColor: AlertColorType;
+  snackbarMessage: string;
 };
