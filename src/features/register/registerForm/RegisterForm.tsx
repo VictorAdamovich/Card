@@ -11,10 +11,9 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 
+import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { registerApi } from '../register-api';
-
-import { validationsSchema } from './registerFormValidation';
 
 export const RegisterForm = (): ReturnComponentType => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +31,7 @@ export const RegisterForm = (): ReturnComponentType => {
       password: '',
       confirmPassword: '',
     },
-    validationSchema: validationsSchema,
+    validationSchema: registerSchema,
     onSubmit: (values, { resetForm }) => {
       registerApi.createUser(values.email, values.password).then(res => console.log(res));
       resetForm();

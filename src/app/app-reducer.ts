@@ -1,6 +1,7 @@
 const initialState: InitialStateType = {
   status: 'idle',
-  error: null,
+  snackbarSeverity: null,
+  snackbarMessage: '',
 };
 
 export const appReducer = (
@@ -10,8 +11,12 @@ export const appReducer = (
   switch (action.type) {
     case 'APP/SET-STATUS':
       return { ...state, status: action.status };
-    case 'APP/SET-ERROR':
-      return { ...state, error: action.error };
+    case 'APP/SET-SNACKBAR':
+      return {
+        ...state,
+        snackbarSeverity: action.snackbarSeverity,
+        snackbarMessage: action.snackbarMessage,
+      };
     default:
       return { ...state };
   }
@@ -22,18 +27,24 @@ export const setAppStatusAC = (status: RequestStatusType) =>
     status,
   } as const);
 
-export const setAppErrorAC = (error: string | null) =>
+export const setAppSnackbarAC = (
+  snackbarSeverity: SnackbarSeverityType | null,
+  snackbarMessage: string | null,
+) =>
   ({
-    type: 'APP/SET-ERROR',
-    error,
+    type: 'APP/SET-SNACKBAR',
+    snackbarSeverity,
+    snackbarMessage,
   } as const);
 
 export type ActionsType =
-  | ReturnType<typeof setAppErrorAC>
+  | ReturnType<typeof setAppSnackbarAC>
   | ReturnType<typeof setAppStatusAC>;
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
+export type SnackbarSeverityType = 'success' | 'error' | 'info' | 'warning';
 export type InitialStateType = {
   status: RequestStatusType;
-  error: string | null;
+  snackbarSeverity: SnackbarSeverityType | null;
+  snackbarMessage: string | null;
 };

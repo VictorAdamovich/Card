@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
-const minPasswordLength = 7;
+import { minPasswordLength } from '../constants/constants';
 
-export const validationsSchema = yup.object().shape({
+export const registerSchema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Required'),
   password: yup.string().min(minPasswordLength, 'Too Short!').required('Required'),
   confirmPassword: yup

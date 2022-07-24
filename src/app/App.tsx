@@ -5,6 +5,7 @@ import './App.css';
 import { LinearProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+import { SimpleSnackbar } from '../common/components/Snackbar/SimpleSnackbar';
 import { RoutePath } from '../common/enums/route-path';
 import Router from '../routes/Router';
 import { ReturnComponentType } from '../types/ReturnComponentType';
@@ -22,6 +23,7 @@ const App = (): ReturnComponentType => {
         <NavLink to={RoutePath.Login}> 2 </NavLink>
         <NavLink to={RoutePath.Error404}> 3 </NavLink>
       </div>
+      <SimpleSnackbar />
     </div>
   );
 };
