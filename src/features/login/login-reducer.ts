@@ -52,6 +52,18 @@ export const logIn =
       .catch(res => console.log(res.request.response));
   };
 
+export const logOut = () => (dispatch: Dispatch) => {
+  console.log('dispatch to app reducer for start loading');
+  loginAPI
+    .logout()
+    .then(res => {
+      dispatch(logOutAC());
+      console.log(res.data);
+      console.log('dispatch to app reducer for idle');
+    })
+    .catch(console.log);
+};
+
 // Types
 
 export type LoginReducerActionsType = LoginAT | LogoutAT;
