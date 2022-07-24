@@ -4,6 +4,7 @@ import { Box, Button, FormControl, Paper } from '@mui/material';
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
+import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/store';
 import { minPasswordLength } from '../../common/constants/constants';
@@ -12,8 +13,15 @@ import LogoArea from '../login/components/LogoArea';
 import PasswordWithVisibility from '../login/components/PasswordWithVisibility';
 import styles from '../login/Login.module.css';
 
+import { createNewPassword } from './forgot-reducer';
+
 export const CreateNewPassword = (): ReturnComponentType => {
+  // NEED REDIRECT TO LOGIN AFTER POSITIVE RESPONSE FROM SERVER
+
   const dispatch = useAppDispatch();
+  const url = useLocation();
+  const tokenIndex = 2;
+  const token = url.pathname.split('/')[tokenIndex];
 
   type FormikErrorType = {
     email?: string;
@@ -33,7 +41,7 @@ export const CreateNewPassword = (): ReturnComponentType => {
       return errors;
     },
     onSubmit: () => {
-      dispatch({ type: 'any' });
+      dispatch(createNewPassword(formik.values.password, token));
       formik.resetForm();
     },
   });

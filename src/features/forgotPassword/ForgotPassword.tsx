@@ -12,6 +12,8 @@ import { ReturnComponentType } from '../../types/ReturnComponentType';
 import LogoArea from '../login/components/LogoArea';
 import styles from '../login/Login.module.css';
 
+import { forgotPassword } from './forgot-reducer';
+
 export const ForgotPassword = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
 
@@ -35,7 +37,7 @@ export const ForgotPassword = (): ReturnComponentType => {
       return errors;
     },
     onSubmit: () => {
-      dispatch({ type: 'any' });
+      dispatch(forgotPassword(formik.values.email));
       formik.resetForm();
     },
   });
