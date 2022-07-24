@@ -12,9 +12,9 @@ import {
 import Container from '@mui/material/Container/Container';
 import Grid from '@mui/material/Grid';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/store';
 import { minPasswordLength } from '../../common/constants/constants';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
@@ -26,6 +26,7 @@ import styles from './Login.module.css';
 
 export const Login = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
 
   type FormikErrorType = {
     email?: string;
@@ -58,6 +59,10 @@ export const Login = (): ReturnComponentType => {
       formik.resetForm();
     },
   });
+
+  if (isLoggedIn) {
+    return <Navigate to={RoutePath.Profile} />;
+  }
   return (
     <Grid container justifyContent="center">
       <Grid item xs={12} sm={6} className={styles.loginContainer}>
