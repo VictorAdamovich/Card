@@ -22,8 +22,7 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const status = useAppSelector(state => state.app.status);
-  const statusCheck = status === 'loading';
+  const appStatus = useAppSelector(state => state.app.status);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -49,6 +48,11 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
       resetForm();
     },
   });
+
+  const checkButtonStatus =
+    appStatus === 'loading' ||
+    !!registerForm.errors.email ||
+    !!registerForm.errors.password;
 
   return (
     <form onSubmit={registerForm.handleSubmit}>
@@ -119,7 +123,7 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
             type="submit"
             variant="contained"
             color="primary"
-            disabled={statusCheck}
+            disabled={checkButtonStatus}
           >
             Regist
           </Button>
