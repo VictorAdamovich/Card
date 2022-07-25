@@ -66,6 +66,7 @@ export const me = () => (dispatch: Dispatch) => {
     })
     .finally(() => {
       console.log('App init');
+      dispatch(setAppStatusAC('idle'));
       dispatch(setAuthorization(true));
     });
 };
