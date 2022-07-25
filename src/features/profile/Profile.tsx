@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormLabel,
   Grid,
+  Paper,
   TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
@@ -30,7 +31,7 @@ export const Profile = (): ReturnComponentType => {
   };
   const formik = useFormik({
     initialValues: {
-      nickName: '',
+      nickName: userInfo.name,
     },
     validate: values => {
       const errors: FormikErrorType = {};
@@ -51,44 +52,42 @@ export const Profile = (): ReturnComponentType => {
   }
   return (
     <Grid container justifyContent="space-around">
-      <div>
-        <h2>Profile</h2>
-        <button type="button" onClick={logoutCB}>
-          LOGOUT
-        </button>
-      </div>
-      <form onSubmit={formik.handleSubmit}>
-        <FormControl>
-          <FormLabel>
-            <h2>Personal information</h2>
-          </FormLabel>
-          <FormGroup>
-            <TextField
-              margin="normal"
-              label="Nickname"
-              defaultValue={userInfo.name}
-              {...formik.getFieldProps('nickName')}
-            />
-            <div style={{ color: 'red' }}>{formik.errors.nickName}</div>
-            <TextField
-              margin="normal"
-              label="Email"
-              value={userInfo.email}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <Grid>
-              <Button variant="outlined" color="primary">
-                Cancel
-              </Button>
-              <Button type="submit" variant="contained" color="primary">
-                Save
-              </Button>
-            </Grid>
-          </FormGroup>
-        </FormControl>
-      </form>
+      <Paper elevation={12}>
+        <form onSubmit={formik.handleSubmit}>
+          <FormControl>
+            <FormLabel>
+              <h2>Personal information</h2>
+            </FormLabel>
+            <FormGroup>
+              <TextField
+                margin="normal"
+                label="Nickname"
+                {...formik.getFieldProps('nickName')}
+              />
+              <div style={{ color: 'red' }}>{formik.errors.nickName}</div>
+              <TextField
+                margin="normal"
+                label="Email"
+                value={userInfo.email}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+              <Grid>
+                <Button variant="outlined" color="error">
+                  Cancel
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                  Save
+                </Button>
+                <Button onClick={logoutCB} variant="contained" color="primary">
+                  Logout
+                </Button>
+              </Grid>
+            </FormGroup>
+          </FormControl>
+        </form>
+      </Paper>
     </Grid>
   );
 };
