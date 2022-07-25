@@ -26,3 +26,5 @@ link</a>
     return instance.post('auth/set-new-password', data);
   },
 };
+
+// NEED RESPONSE TYPES FOR THIS REQUESTS BELOW
