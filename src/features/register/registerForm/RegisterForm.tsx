@@ -10,14 +10,21 @@ import {
   TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { RoutePath } from '../../../common/enums/route-path';
 import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { register } from '../register-reducer';
 
-export const RegisterForm = (): ReturnComponentType => {
+export const RegisterForm = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const status = useAppSelector(state => state.app.status);
+  const statusCheck = status === 'loading';
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -27,6 +34,8 @@ export const RegisterForm = (): ReturnComponentType => {
 
   const handleOnBlurPassword = (): void => setShowPassword(false);
   const handleOnBlurConfirmPassword = (): void => setShowConfirmPassword(false);
+
+  const handleClickCancelRegister = (): void => navigate(RoutePath.Login);
 
   const registerForm = useFormik({
     initialValues: {
@@ -104,12 +113,18 @@ export const RegisterForm = (): ReturnComponentType => {
               ),
             }}
           />
+          <Button onClick={handleClickCancelRegister}>Cancel</Button>
 
-          <Button type="submit" variant="contained" color="primary">
-            Login
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={statusCheck}
+          >
+            Regist
           </Button>
         </FormGroup>
       </FormControl>
     </form>
   );
-};
+});

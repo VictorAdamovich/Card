@@ -56,14 +56,13 @@ export const me = () => (dispatch: Dispatch) => {
       dispatch(logInAC());
       dispatch(setUserInfo(res.data));
       dispatch(setAppSnackbarAC('success', 'You are authorized'));
-      dispatch(setAppStatusAC('succeeded'));
     })
     .catch(res => {
       dispatch(setAppSnackbarAC('warning', res.response.data.error));
-      dispatch(setAppStatusAC('failed'));
     })
     .finally(() => {
       dispatch(setInitialization(true));
+      dispatch(setAppStatusAC('idle'));
     });
 };
 

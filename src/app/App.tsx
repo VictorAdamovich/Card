@@ -3,10 +3,9 @@ import React, { useEffect } from 'react';
 import './App.css';
 
 import { CircularProgress, LinearProgress } from '@mui/material';
-import { NavLink } from 'react-router-dom';
 
+import { NaviForDev } from '../common/components/NAVI_FOR_DEV/NAVI_FOR_DEV';
 import { SimpleSnackbar } from '../common/components/Snackbar/SimpleSnackbar';
-import { RoutePath } from '../common/enums/route-path';
 import Router from '../routes/Router';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
@@ -32,12 +31,8 @@ const App = (): ReturnComponentType => {
   return (
     <div className="App">
       {status === 'loading' && <LinearProgress />}
+      <NaviForDev />
       <Router />
-      <div>
-        <NavLink to={RoutePath.ForgotPassword}> 1 </NavLink>
-        <NavLink to={RoutePath.Login}> 2 </NavLink>
-        <NavLink to={RoutePath.Error404}> 3 </NavLink>
-      </div>
       <SimpleSnackbar />
     </div>
   );

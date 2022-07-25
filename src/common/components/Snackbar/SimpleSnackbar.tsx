@@ -22,7 +22,7 @@ export const SimpleSnackbar = (): ReturnComponentType => {
     if (reason === 'clickaway') {
       return;
     }
-    dispatch(setAppSnackbarAC('success', ''));
+    dispatch(setAppSnackbarAC(alertColor, ''));
   };
 
   return (
