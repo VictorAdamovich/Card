@@ -19,7 +19,7 @@ export const Register = React.memo((): ReturnComponentType => {
 
   return (
     <Paper className={style.paper} elevation={12}>
-      <h2>Register</h2>
+      <h2>It-incubator</h2>
       <h3>SingUp</h3>
       <RegisterForm />
     </Paper>

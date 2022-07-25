@@ -15,3 +15,11 @@ export const loginSchema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Required'),
   password: yup.string().min(minPasswordLength, 'Too Short!').required('Required'),
 });
+
+export const forgotSchema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Required'),
+});
+
+export const createNewPasswordSchema = yup.object().shape({
+  password: yup.string().min(minPasswordLength, 'Too Short!').required('Required'),
+});
