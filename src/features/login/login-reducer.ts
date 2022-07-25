@@ -6,11 +6,12 @@ import { loginAPI } from './login-api';
 
 const initialState = {
   isLoggedIn: false,
+  userInfo: { name: '' },
 } as const;
 
 type initialStateType = {
   isLoggedIn: boolean;
-  userInfo?: any;
+  userInfo: UserInfoType;
 };
 
 export const loginReducer = (
@@ -23,7 +24,7 @@ export const loginReducer = (
     case 'login-reducer/LOGOUT':
       return { ...state, isLoggedIn: action.newStatus };
     case 'login/SET-USER-INFO':
-      return { ...state, userInfo: action.payload };
+      return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
     default:
       return state;
   }
@@ -41,11 +42,17 @@ export const logOutAC = () =>
     type: 'login-reducer/LOGOUT',
     newStatus: false,
   } as const);
-export const setUserInfo = (payload: any) =>
+export const setUserInfo = (payload: UserInfoType) =>
   ({
     type: 'login/SET-USER-INFO',
     payload,
   } as const);
+
+type UserInfoType = {
+  name: string;
+  email?: string;
+  avatar?: string;
+};
 
 // Thunks
 
@@ -56,11 +63,10 @@ export const logIn =
       .login({ email, password, rememberMe })
       .then(res => {
         dispatch(logInAC());
-        dispatch(setUserInfo(res.data));
         dispatch(setAppStatusAC('succeeded'));
+        dispatch(setUserInfo({ email: res.data.email, name: res.data.name }));
       })
       .catch(err => {
-        console.log(err);
         dispatch(setAppSnackbarAC('warning', err.response.data.error));
         dispatch(setAppStatusAC('failed'));
       });
@@ -72,15 +78,19 @@ export const logOut = () => (dispatch: Dispatch) => {
     .logout()
     .then(res => {
       dispatch(logOutAC());
-      console.log(res.data);
       dispatch(setAppSnackbarAC('success', res.data.info));
       dispatch(setAppStatusAC('succeeded'));
     })
     .catch(err => {
-      console.log(err);
       dispatch(setAppSnackbarAC('warning', err.message));
       dispatch(setAppStatusAC('failed'));
     });
+};
+
+export const updateUserInfoTC = (data: UserInfoType) => (dispatch: Dispatch) => {
+  loginAPI.updateUserInfo({ name: data.name, avatar: data.avatar }).then(() => {
+    dispatch(setUserInfo({ ...data }));
+  });
 };
 
 // Types

@@ -15,6 +15,9 @@ export const loginAPI = {
   me() {
     return instance.post<MeResponseType>('auth/me');
   },
+  updateUserInfo(data: { name: string; avatar?: string }) {
+    return instance.put<UpdateUserInfoResponseType>('auth/me', data);
+  },
 };
 
 export type LoginRequestBodyType = {
@@ -59,8 +62,15 @@ type MeResponseType = {
   __v: number;
   token: string;
   tokenDeathTime: number;
+  avatar?: string;
 };
 
 type LogoutResponseType = {
   info: string;
+};
+
+type UpdateUserInfoResponseType = {
+  token: string;
+  tokenDeathTime: number;
+  updatedUser: MeResponseType;
 };
