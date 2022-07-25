@@ -46,6 +46,7 @@ export const setAuthorization = (status: boolean) =>
     type: 'APP/SET-INITIALIZATION',
     status,
   } as const);
+
 // _____________________ Thunks _________________
 
 export const me = () => (dispatch: Dispatch) => {

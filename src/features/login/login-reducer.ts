@@ -4,11 +4,12 @@ import { loginAPI } from './login-api';
 
 const initialState = {
   isLoggedIn: false,
+  userInfo: { name: '' },
 } as const;
 
 type initialStateType = {
   isLoggedIn: boolean;
-  userInfo?: any;
+  userInfo: UserInfoType;
 };
 
 export const loginReducer = (
@@ -21,7 +22,7 @@ export const loginReducer = (
     case 'login-reducer/LOGOUT':
       return { ...state, isLoggedIn: action.newStatus };
     case 'login/SET-USER-INFO':
-      return { ...state, userInfo: action.payload };
+      return { ...state, userInfo: { ...state.userInfo, ...action.payload } };
     default:
       return state;
   }
@@ -39,11 +40,17 @@ export const logOutAC = () =>
     type: 'login-reducer/LOGOUT',
     newStatus: false,
   } as const);
-export const setUserInfo = (payload: any) =>
+export const setUserInfo = (payload: UserInfoType) =>
   ({
     type: 'login/SET-USER-INFO',
     payload,
   } as const);
+
+type UserInfoType = {
+  name: string;
+  email?: string;
+  avatar?: string;
+};
 
 // Thunks
 
@@ -54,6 +61,7 @@ export const logIn =
       .login({ email, password, rememberMe })
       .then(res => {
         dispatch(logInAC());
+        dispatch(setUserInfo({ email: res.data.email, name: res.data.name }));
         console.log(res.data);
         console.log('dispatch to app reducer for idle');
       })
@@ -70,6 +78,12 @@ export const logOut = () => (dispatch: Dispatch) => {
       console.log('dispatch to app reducer for idle');
     })
     .catch(console.log);
+};
+
+export const updateUserInfoTC = (data: UserInfoType) => (dispatch: Dispatch) => {
+  loginAPI.updateUserInfo({ name: data.name, avatar: data.avatar }).then(() => {
+    dispatch(setUserInfo({ ...data }));
+  });
 };
 
 // Types
