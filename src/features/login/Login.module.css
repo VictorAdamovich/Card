@@ -1,37 +1,8 @@
-.loginContainer {
-    /*background-color: coral;*/
-}
-
-.paperCont {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-}
-
-.title {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.errorMessage {
-    color: red;
-    font-size: smaller;
-}
-
-.inputArea {
-    width: 100%;
-}
-
-.form {
-    /*background-color: #f6f5f6;*/
-}
-
-.formContainer {
-    /*background-color: aquamarine;*/
-}
-.formControl {
-    /*background-color: coral;*/
+.paper{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    align-items: center;
+    margin: 10px auto;
+    max-width: 413px;
+    padding: 25px;
 }

@@ -10,3 +10,8 @@ export const registerSchema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required('Required'),
 });
+
+export const loginSchema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Required'),
+  password: yup.string().min(minPasswordLength, 'Too Short!').required('Required'),
+});

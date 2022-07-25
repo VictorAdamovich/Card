@@ -7,11 +7,11 @@ import { useFormik } from 'formik';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../app/store';
+import PasswordWithVisibility from '../../common/components/PasswordWithVisibility/PasswordWithVisibility';
 import { minPasswordLength } from '../../common/constants/constants';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import LogoArea from '../login/components/LogoArea';
-import PasswordWithVisibility from '../login/components/PasswordWithVisibility';
 import styles from '../login/Login.module.css';
 
 import { createNewPassword } from './forgot-reducer';
