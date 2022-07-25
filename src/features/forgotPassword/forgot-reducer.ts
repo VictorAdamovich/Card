@@ -57,15 +57,18 @@ export const forgotPassword = (email: string) => (dispatch: Dispatch) => {
 
 export const createNewPassword =
   (password: string, token: string) => (dispatch: Dispatch) => {
-    console.log('dispatch to app reducer for start loading');
+    dispatch(setAppStatusAC('loading'));
     forgotAPI
       .createNewPassword(password, token)
       .then(res => {
         dispatch(setTokenForPasswordRecovery(token));
-        console.log(res.data);
-        console.log('dispatch to app reducer for idle');
+        dispatch(setAppSnackbarAC('success', res.data.info));
+        dispatch(setAppStatusAC('succeeded'));
       })
-      .catch(res => console.log(res.request.response));
+      .catch(res => {
+        dispatch(setAppSnackbarAC('warning', res.data.message));
+        dispatch(setAppStatusAC('failed'));
+      });
   };
 
 // _________________________TYPES______________
