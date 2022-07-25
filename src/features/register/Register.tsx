@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../app/store';
-import { FormWrapper } from '../../common/components/FormWrapper/FormWrapper';
+import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 

@@ -4,8 +4,8 @@ import './App.css';
 
 import { CircularProgress, LinearProgress } from '@mui/material';
 
-import { NaviForDev } from '../common/components/NAVI_FOR_DEV/NAVI_FOR_DEV';
-import { SimpleSnackbar } from '../common/components/Snackbar/SimpleSnackbar';
+import { NaviForDev } from '../common/components/_NAVI_FOR_DEV/NAVI_FOR_DEV';
+import { SimpleSnackbar } from '../common/components/simpleSnackbar/SimpleSnackbar';
 import Router from '../routes/Router';
 import { ReturnComponentType } from '../types/ReturnComponentType';
 
@@ -17,7 +17,6 @@ const App = (): ReturnComponentType => {
   const isInit = useAppSelector(state => state.app.isInit);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log('APP Start');
     dispatch(me());
   }, []);
 

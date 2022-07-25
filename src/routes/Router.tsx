@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import Error404 from '../common/components/404NotFound/Error404';
+import Error404 from '../common/components/error404/Error404';
 import { RoutePath } from '../common/enums/route-path';
 import { CheckEmail } from '../features/forgotPassword/CheckEmail';
 import { CreateNewPassword } from '../features/forgotPassword/CreateNewPassword';
