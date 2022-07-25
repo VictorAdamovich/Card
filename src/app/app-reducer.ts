@@ -41,7 +41,7 @@ export const setAppSnackbarAC = (alertColor: AlertColorType, message: string) =>
     alertColor,
     snackbarMessage: message,
   } as const);
-export const setAuthorization = (status: boolean) =>
+export const setInitialization = (status: boolean) =>
   ({
     type: 'APP/SET-INITIALIZATION',
     status,
@@ -59,19 +59,18 @@ export const me = () => (dispatch: Dispatch) => {
       dispatch(setAppStatusAC('succeeded'));
     })
     .catch(res => {
-      console.log(res.response.data.error);
       dispatch(setAppSnackbarAC('warning', res.response.data.error));
       dispatch(setAppStatusAC('failed'));
     })
     .finally(() => {
-      dispatch(setAuthorization(true));
+      dispatch(setInitialization(true));
     });
 };
 
 export type ActionsType =
   | ReturnType<typeof setAppSnackbarAC>
   | ReturnType<typeof setAppStatusAC>
-  | ReturnType<typeof setAuthorization>;
+  | ReturnType<typeof setInitialization>;
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
 export type AlertColorType = 'success' | 'error' | 'info' | 'warning';
