@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { useAppDispatch } from '../../../app/store';
 import { forgotSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import styles from '../../login/Login.module.css';
 import { forgotPassword } from '../forgot-reducer';
 
 export const ForgotPasswordForm = (): ReturnComponentType => {
@@ -24,8 +23,8 @@ export const ForgotPasswordForm = (): ReturnComponentType => {
   });
 
   return (
-    <form onSubmit={forgotPasswordForm.handleSubmit} className={styles.form}>
-      <FormControl className={styles.formControl}>
+    <form onSubmit={forgotPasswordForm.handleSubmit}>
+      <FormControl>
         <TextField
           label="Email"
           margin="normal"

@@ -18,7 +18,6 @@ import { RoutePath } from '../../../common/enums/route-path';
 import { loginSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { logIn } from '../login-reducer';
-import styles from '../Login.module.css';
 
 export const LoginForm = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
@@ -54,7 +53,7 @@ export const LoginForm = (): ReturnComponentType => {
 
   return (
     <div>
-      <form onSubmit={loginForm.handleSubmit} className={styles.form}>
+      <form onSubmit={loginForm.handleSubmit}>
         <FormControl>
           <TextField
             label="Email"

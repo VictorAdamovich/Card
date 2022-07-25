@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Paper } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../app/store';
+import { FormWrapper } from '../../common/components/FormWrapper/FormWrapper';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 
-import style from './register.module.css';
 import { RegisterForm } from './registerForm/RegisterForm';
 
 export const Register = React.memo((): ReturnComponentType => {
@@ -18,10 +17,10 @@ export const Register = React.memo((): ReturnComponentType => {
   }
 
   return (
-    <Paper className={style.paper} elevation={12}>
+    <FormWrapper>
       <h2>It-incubator</h2>
       <h3>SingUp</h3>
       <RegisterForm />
-    </Paper>
+    </FormWrapper>
   );
 });

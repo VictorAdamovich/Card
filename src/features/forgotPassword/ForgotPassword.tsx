@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Button, Paper } from '@mui/material';
+import { Button } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../app/store';
+import { FormWrapper } from '../../common/components/FormWrapper/FormWrapper';
 import { RoutePath } from '../../common/enums/route-path';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
-import styles from '../login/Login.module.css';
 
 import { ForgotPasswordForm } from './forgotPasswordForm/forgotPasswordForm';
 
@@ -21,12 +21,12 @@ export const ForgotPassword = (): ReturnComponentType => {
   }
 
   return (
-    <Paper className={styles.paper} elevation={12}>
+    <FormWrapper>
       <h2>It-incubator</h2>
       <h3>Forgot your password ?</h3>
       <ForgotPasswordForm />
       <h4>Did you remember your password?</h4>
       <Button onClick={handleClickCancelRegister}>Try logging in</Button>
-    </Paper>
+    </FormWrapper>
   );
 };

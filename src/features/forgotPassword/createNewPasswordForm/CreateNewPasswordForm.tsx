@@ -14,7 +14,6 @@ import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { createNewPasswordSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import styles from '../../login/Login.module.css';
 import { createNewPassword } from '../forgot-reducer';
 
 export const CreateNewPasswordForm = (): ReturnComponentType => {
@@ -44,7 +43,7 @@ export const CreateNewPasswordForm = (): ReturnComponentType => {
     appStatus === 'loading' || !!createNewPasswordForm.errors.password;
 
   return (
-    <form onSubmit={createNewPasswordForm.handleSubmit} className={styles.form}>
+    <form onSubmit={createNewPasswordForm.handleSubmit}>
       <FormControl>
         <TextField
           type={showPassword ? 'text' : 'password'}
