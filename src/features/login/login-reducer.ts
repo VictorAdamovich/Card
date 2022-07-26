@@ -88,9 +88,17 @@ export const logOut = () => (dispatch: Dispatch) => {
 };
 
 export const updateUserInfoTC = (data: UserInfoType) => (dispatch: Dispatch) => {
-  loginAPI.updateUserInfo({ name: data.name, avatar: data.avatar }).then(() => {
-    dispatch(setUserInfo({ ...data }));
-  });
+  dispatch(setAppStatusAC('loading'));
+  loginAPI
+    .updateUserInfo({ name: data.name, avatar: data.avatar })
+    .then(() => {
+      dispatch(setUserInfo({ ...data }));
+      dispatch(setAppStatusAC('succeeded'));
+    })
+    .catch(err => {
+      dispatch(setAppSnackbarAC('warning', err.message));
+      dispatch(setAppStatusAC('failed'));
+    });
 };
 
 // Types
