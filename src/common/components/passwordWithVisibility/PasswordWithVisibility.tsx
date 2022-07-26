@@ -1,20 +1,21 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormControl, IconButton, InputAdornment, TextField } from '@mui/material';
+import { FieldInputProps } from 'formik';
 
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 
 type PropsType = {
-  name: string;
-  error: any;
-  value: string;
-  helperText: any;
-  handleChanging: (e: ChangeEvent<HTMLInputElement>) => void;
+  error: boolean | undefined;
+  helperText: string | false | undefined;
+  formikFieldProps: FieldInputProps<any>;
 };
 
 export const PasswordWithVisibility = React.memo(
   (props: PropsType): ReturnComponentType => {
+    const { error, helperText, formikFieldProps } = props;
+
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = (): void => setShowPassword(!showPassword);
@@ -22,15 +23,13 @@ export const PasswordWithVisibility = React.memo(
     return (
       <FormControl>
         <TextField
-          type={showPassword ? 'text' : 'password'}
-          label="Password"
-          margin="normal"
           variant="standard"
-          name={props.name}
-          value={props.value}
-          error={props.error}
-          helperText={props.helperText}
-          onChange={props.handleChanging}
+          margin="normal"
+          label="Password"
+          type={showPassword ? 'text' : 'password'}
+          {...formikFieldProps}
+          error={error}
+          helperText={helperText}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
