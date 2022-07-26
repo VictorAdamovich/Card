@@ -7,11 +7,10 @@ import {
 } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 
-import { forgotReducer } from '../features/forgotPassword/forgot-reducer';
-import { loginReducer } from '../features/login/login-reducer';
-import { registerReducer } from '../features/register/register-reducer';
-
-import { appReducer } from './app-reducer';
+import { appReducer } from 'app/app-reducer';
+import { forgotReducer } from 'features/forgotPassword/forgot-reducer';
+import { loginReducer } from 'features/login/login-reducer';
+import { registerReducer } from 'features/register/register-reducer';
 
 const rootReducer = combineReducers({
   app: appReducer,

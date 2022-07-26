@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Navigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../app/store';
-import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
-import { RoutePath } from '../../common/enums/route-path';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
 import { CreateNewPasswordForm } from './createNewPasswordForm/CreateNewPasswordForm';
+
+import { useAppSelector } from 'app/store';
+import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
+import { RoutePath } from 'common/enums/route-path';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CreateNewPassword = (): ReturnComponentType => {
   const isDefinedToken = useAppSelector(state => state.forgot.token);

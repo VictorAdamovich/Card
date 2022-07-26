@@ -1,8 +1,7 @@
 import { Dispatch } from 'redux';
 
-import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
-
-import { forgotAPI } from './forgot-api';
+import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { forgotAPI } from 'features/forgotPassword/forgot-api';
 
 type InitialStateType = {
   email?: string;

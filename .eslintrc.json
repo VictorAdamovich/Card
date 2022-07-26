@@ -23,7 +23,6 @@
     "react-hooks",
     "@typescript-eslint"
   ],
-
   "rules": {
     "no-shadow": "off",
     "no-undef": "off",
@@ -131,7 +130,7 @@
     "import/resolver": {
       "node": {
         "paths": [
-          "src"
+          "./src"
         ],
         "extensions": [
           ".js",

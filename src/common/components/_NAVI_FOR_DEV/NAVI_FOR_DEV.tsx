@@ -3,8 +3,8 @@ import React from 'react';
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { RoutePath } from '../../enums/route-path';
+import { RoutePath } from 'common/enums/route-path';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const NaviForDev = (): ReturnComponentType => (
   <div>

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
-import { loginAPI } from '../features/login/login-api';
-import { logInAC, setUserInfo } from '../features/login/login-reducer';
+import { loginAPI } from 'features/login/login-api';
+import { logInAC, setUserInfo } from 'features/login/login-reducer';
 
 const initialState: InitialStateType = {
   status: 'idle' as RequestStatusType,

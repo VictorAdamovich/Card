@@ -3,11 +3,10 @@ import React from 'react';
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
-import { register } from '../register-reducer';
-
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { PasswordWithVisibility } from 'common/components/passwordWithVisibility/PasswordWithVisibility';
 import { registerSchema } from 'common/validation/formValidation';
+import { register } from 'features/register/register-reducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const RegisterForm = React.memo((): ReturnComponentType => {

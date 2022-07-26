@@ -3,12 +3,12 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../app/store';
-import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
-import { RoutePath } from '../../common/enums/route-path';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
 import { LoginForm } from './loginForm/LoginForm';
+
+import { useAppSelector } from 'app/store';
+import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
+import { RoutePath } from 'common/enums/route-path';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Login = (): ReturnComponentType => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);

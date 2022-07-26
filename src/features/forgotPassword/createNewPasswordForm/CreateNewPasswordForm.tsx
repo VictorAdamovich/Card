@@ -5,11 +5,11 @@ import FormControl from '@mui/material/FormControl';
 import { useFormik } from 'formik';
 import { useLocation } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
-import { createNewPasswordSchema } from '../../../common/validation/formValidation';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { createNewPassword } from '../forgot-reducer';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { PasswordWithVisibility } from 'common/components/passwordWithVisibility/PasswordWithVisibility';
+import { createNewPasswordSchema } from 'common/validation/formValidation';
+import { createNewPassword } from 'features/forgotPassword/forgot-reducer';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const CreateNewPasswordForm = (): ReturnComponentType => {
   const dispatch = useAppDispatch();

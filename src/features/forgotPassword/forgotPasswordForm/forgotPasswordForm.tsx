@@ -3,10 +3,10 @@ import React from 'react';
 import { Button, FormControl, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
-import { useAppDispatch } from '../../../app/store';
-import { forgotSchema } from '../../../common/validation/formValidation';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-import { forgotPassword } from '../forgot-reducer';
+import { useAppDispatch } from 'app/store';
+import { forgotSchema } from 'common/validation/formValidation';
+import { forgotPassword } from 'features/forgotPassword/forgot-reducer';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const ForgotPasswordForm = (): ReturnComponentType => {
   const dispatch = useAppDispatch();

@@ -1,9 +1,8 @@
 import { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
-import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
-
-import { LoginErrorType, registerApi } from './register-api';
+import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { LoginErrorType, registerApi } from 'features/register/register-api';
 
 const initialState = {
   isRegister: false,

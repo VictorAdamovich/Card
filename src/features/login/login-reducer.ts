@@ -1,8 +1,7 @@
 import { Dispatch } from 'redux';
 
-import { setAppSnackbarAC, setAppStatusAC } from '../../app/app-reducer';
-
-import { loginAPI } from './login-api';
+import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { loginAPI } from 'features/login/login-api';
 
 const initialState = {
   isLoggedIn: false,

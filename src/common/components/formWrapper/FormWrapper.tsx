@@ -2,9 +2,8 @@ import React from 'react';
 
 import { Paper } from '@mui/material';
 
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
-
-import style from './FormWrapper.module.css';
+import style from 'common/components/formWrapper/FormWrapper.module.css';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const FormWrapper = React.memo(
   (props: PropsType): ReturnComponentType => (

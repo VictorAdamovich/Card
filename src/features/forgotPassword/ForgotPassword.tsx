@@ -3,12 +3,12 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../app/store';
-import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
-import { RoutePath } from '../../common/enums/route-path';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
 import { ForgotPasswordForm } from './forgotPasswordForm/forgotPasswordForm';
+
+import { useAppSelector } from 'app/store';
+import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
+import { RoutePath } from 'common/enums/route-path';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const ForgotPassword = (): ReturnComponentType => {
   const email = useAppSelector(state => state.forgot.email);

@@ -11,13 +11,14 @@ import {
 import { useFormik } from 'formik';
 import { Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../app/store';
 import img from '../../assets/images/ava-img.jpg';
-import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
-import { RoutePath } from '../../common/enums/route-path';
-import { changeNickNameSchema } from '../../common/validation/formValidation';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
 import { logOut, updateUserInfoTC } from '../login/login-reducer';
+
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
+import { RoutePath } from 'common/enums/route-path';
+import { changeNickNameSchema } from 'common/validation/formValidation';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Profile = (): ReturnComponentType => {
   const dispatch = useAppDispatch();

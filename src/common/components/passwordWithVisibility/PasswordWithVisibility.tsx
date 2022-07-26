@@ -4,7 +4,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormControl, IconButton, InputAdornment, TextField } from '@mui/material';
 import { FieldInputProps } from 'formik';
 
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type PropsType = {
   error: boolean | undefined;

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { instance } from '../../api/config/apiConfig';
+import { instance } from 'api/config/apiConfig';
 
 export const loginAPI = {
   login(requestBody: LoginRequestBodyType) {

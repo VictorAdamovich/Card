@@ -10,22 +10,18 @@ import {
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../../app/store';
-import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
-import { RoutePath } from '../../../common/enums/route-path';
-import { loginSchema } from '../../../common/validation/formValidation';
-import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { logIn } from '../login-reducer';
+
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { PasswordWithVisibility } from 'common/components/passwordWithVisibility/PasswordWithVisibility';
+import { RoutePath } from 'common/enums/route-path';
+import { loginSchema } from 'common/validation/formValidation';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const LoginForm = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
 
   const appStatus = useAppSelector(state => state.app.status);
-
-  /* const [showPassword, setShowPassword] = useState(false); */
-
-  /* const handleClickShowPassword = (): void => setShowPassword(!showPassword);
-  const handleOnBlurPassword = (): void => setShowPassword(false); */
 
   const loginForm = useFormik({
     initialValues: {
