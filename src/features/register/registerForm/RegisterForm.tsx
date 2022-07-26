@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import {
-  Button,
-  FormControl,
-  FormGroup,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@mui/material';
+import { Button, FormControl, FormGroup, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
 import { RoutePath } from '../../../common/enums/route-path';
 import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
@@ -23,16 +16,6 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
   const navigate = useNavigate();
 
   const appStatus = useAppSelector(state => state.app.status);
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const handleClickShowPassword = (): void => setShowPassword(!showPassword);
-  const handleClickShowConfirmPassword = (): void =>
-    setShowConfirmPassword(!showConfirmPassword);
-
-  const handleOnBlurPassword = (): void => setShowPassword(false);
-  const handleOnBlurConfirmPassword = (): void => setShowConfirmPassword(false);
 
   const handleClickCancelRegister = (): void => navigate(RoutePath.Login);
 
@@ -67,35 +50,13 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
             {...registerForm.getFieldProps('email')}
           />
 
-          <TextField
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            margin="normal"
-            variant="standard"
-            {...registerForm.getFieldProps('password')}
+          <PasswordWithVisibility
             error={registerForm.touched.password && Boolean(registerForm.errors.password)}
             helperText={registerForm.touched.password && registerForm.errors.password}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onBlur={handleOnBlurPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+            formikFieldProps={registerForm.getFieldProps('password')}
           />
 
-          <TextField
-            type={showConfirmPassword ? 'text' : 'password'}
-            label="Confirm password"
-            margin="normal"
-            variant="standard"
-            {...registerForm.getFieldProps('confirmPassword')}
+          <PasswordWithVisibility
             error={
               registerForm.touched.confirmPassword &&
               Boolean(registerForm.errors.confirmPassword)
@@ -103,20 +64,9 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
             helperText={
               registerForm.touched.confirmPassword && registerForm.errors.confirmPassword
             }
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle confirmPassword visibility"
-                    onClick={handleClickShowConfirmPassword}
-                    onBlur={handleOnBlurConfirmPassword}
-                  >
-                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+            formikFieldProps={registerForm.getFieldProps('confirmPassword')}
           />
+
           <Button onClick={handleClickCancelRegister}>Cancel</Button>
 
           <Button
@@ -125,7 +75,7 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
             color="primary"
             disabled={checkButtonStatus}
           >
-            Regist
+            Register
           </Button>
         </FormGroup>
       </FormControl>

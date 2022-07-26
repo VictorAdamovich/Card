@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
 import { createNewPasswordSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { createNewPassword } from '../forgot-reducer';
@@ -72,6 +73,17 @@ export const CreateNewPasswordForm = (): ReturnComponentType => {
               </InputAdornment>
             ),
           }}
+        />
+        <PasswordWithVisibility
+          error={
+            createNewPasswordForm.touched.password &&
+            Boolean(createNewPasswordForm.errors.password)
+          }
+          helperText={
+            createNewPasswordForm.touched.password &&
+            createNewPasswordForm.errors.password
+          }
+          formikFieldProps={createNewPasswordForm.getFieldProps('password')}
         />
 
         <p>Create new password and we will send you further instructions to email</p>
