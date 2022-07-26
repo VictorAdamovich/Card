@@ -3,12 +3,11 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../app/store';
-import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
-import { RoutePath } from '../../common/enums/route-path';
-import { ReturnComponentType } from '../../types/ReturnComponentType';
-
-import { RegisterForm } from './registerForm/RegisterForm';
+import { useAppSelector } from 'app/store';
+import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
+import { RoutePath } from 'common/enums/route-path';
+import { RegisterForm } from 'features/register/registerForm/RegisterForm';
+import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Register = React.memo((): ReturnComponentType => {
   const isRegister = useAppSelector(state => state.register.isRegister);
