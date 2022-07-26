@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../app/store';
 import img from '../../assets/images/ava-img.jpg';
 import { FormWrapper } from '../../common/components/formWrapper/FormWrapper';
 import { RoutePath } from '../../common/enums/route-path';
+import { changeNickNameSchema } from '../../common/validation/formValidation';
 import { ReturnComponentType } from '../../types/ReturnComponentType';
 import { logOut, updateUserInfoTC } from '../login/login-reducer';
 
@@ -29,24 +30,12 @@ export const Profile = (): ReturnComponentType => {
   };
   const isDisabled = appStatus === 'loading';
 
-  type FormikErrorType = {
-    nickName?: string;
-  };
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       nickName: userInfo.name,
     },
-    validate: values => {
-      const errors: FormikErrorType = {};
-      const minLength = 3;
-      if (!values.nickName) {
-        errors.nickName = 'Required';
-      } else if (values.nickName.length < minLength) {
-        errors.nickName = 'Invalid nick name, input more than 2 symbols';
-      }
-      return errors;
-    },
+    validationSchema: changeNickNameSchema,
     onSubmit: values => {
       dispatch(updateUserInfoTC({ name: values.nickName }));
     },

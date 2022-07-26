@@ -2,22 +2,17 @@ import React from 'react';
 
 import { Button, FormControl, FormGroup, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
 import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
-import { RoutePath } from '../../../common/enums/route-path';
 import { registerSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
 import { register } from '../register-reducer';
 
 export const RegisterForm = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const appStatus = useAppSelector(state => state.app.status);
-
-  const handleClickCancelRegister = (): void => navigate(RoutePath.Login);
 
   const registerForm = useFormik({
     initialValues: {
@@ -66,8 +61,6 @@ export const RegisterForm = React.memo((): ReturnComponentType => {
             }
             formikFieldProps={registerForm.getFieldProps('confirmPassword')}
           />
-
-          <Button onClick={handleClickCancelRegister}>Cancel</Button>
 
           <Button
             type="submit"
