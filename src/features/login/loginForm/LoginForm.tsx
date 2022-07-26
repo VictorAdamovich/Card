@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Button,
   Checkbox,
   FormControl,
   FormControlLabel,
-  IconButton,
-  InputAdornment,
   TextField,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../app/store';
+import { PasswordWithVisibility } from '../../../common/components/passwordWithVisibility/PasswordWithVisibility';
 import { RoutePath } from '../../../common/enums/route-path';
 import { loginSchema } from '../../../common/validation/formValidation';
 import { ReturnComponentType } from '../../../types/ReturnComponentType';
@@ -24,10 +22,10 @@ export const LoginForm = (): ReturnComponentType => {
 
   const appStatus = useAppSelector(state => state.app.status);
 
-  const [showPassword, setShowPassword] = useState(false);
+  /* const [showPassword, setShowPassword] = useState(false); */
 
-  const handleClickShowPassword = (): void => setShowPassword(!showPassword);
-  const handleOnBlurPassword = (): void => setShowPassword(false);
+  /* const handleClickShowPassword = (): void => setShowPassword(!showPassword);
+  const handleOnBlurPassword = (): void => setShowPassword(false); */
 
   const loginForm = useFormik({
     initialValues: {
@@ -63,28 +61,10 @@ export const LoginForm = (): ReturnComponentType => {
             helperText={loginForm.touched.email && loginForm.errors.email}
             {...loginForm.getFieldProps('email')}
           />
-
-          <TextField
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            margin="normal"
-            variant="standard"
-            {...loginForm.getFieldProps('password')}
+          <PasswordWithVisibility
             error={loginForm.touched.password && Boolean(loginForm.errors.password)}
             helperText={loginForm.touched.password && loginForm.errors.password}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onBlur={handleOnBlurPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
+            formikFieldProps={loginForm.getFieldProps('password')}
           />
           <FormControlLabel
             control={
