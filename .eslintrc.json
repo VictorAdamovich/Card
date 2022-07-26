@@ -23,8 +23,10 @@
     "react-hooks",
     "@typescript-eslint"
   ],
+
   "rules": {
     "no-shadow": "off",
+    "no-undef": "off",
     "no-alert": "error",
     "no-debugger": "error",
     "no-plusplus": "error",

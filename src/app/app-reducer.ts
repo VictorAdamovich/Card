@@ -56,7 +56,7 @@ export const me = () => (dispatch: Dispatch) => {
     .then(res => {
       dispatch(logInAC());
       dispatch(setUserInfo(res.data));
-      dispatch(setAppSnackbarAC('success', 'You are authorized'));
+      dispatch(setAppSnackbarAC('info', 'You are authorized'));
     })
     .catch(res => {
       dispatch(setAppSnackbarAC('warning', res.response.data.error));

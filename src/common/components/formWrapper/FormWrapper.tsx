@@ -13,7 +13,7 @@ export const FormWrapper = React.memo(
     </Paper>
   ),
 );
-// PSL ADD TYPE LATE
+
 type PropsType = {
-  children: any;
+  children: JSX.Element | JSX.Element[];
 };
