@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import {
-  Button,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@mui/material';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
 import { useFormik } from 'formik';
 import { useLocation } from 'react-router-dom';
 
@@ -25,10 +19,6 @@ export const CreateNewPasswordForm = (): ReturnComponentType => {
 
   const appStatus = useAppSelector(state => state.app.status);
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = (): void => setShowPassword(!showPassword);
-  const handleOnBlurPassword = (): void => setShowPassword(false);
   const createNewPasswordForm = useFormik({
     initialValues: {
       password: '',
@@ -46,34 +36,6 @@ export const CreateNewPasswordForm = (): ReturnComponentType => {
   return (
     <form onSubmit={createNewPasswordForm.handleSubmit}>
       <FormControl>
-        <TextField
-          type={showPassword ? 'text' : 'password'}
-          label="Password"
-          margin="normal"
-          variant="standard"
-          {...createNewPasswordForm.getFieldProps('password')}
-          error={
-            createNewPasswordForm.touched.password &&
-            Boolean(createNewPasswordForm.errors.password)
-          }
-          helperText={
-            createNewPasswordForm.touched.password &&
-            createNewPasswordForm.errors.password
-          }
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onBlur={handleOnBlurPassword}
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
         <PasswordWithVisibility
           error={
             createNewPasswordForm.touched.password &&
