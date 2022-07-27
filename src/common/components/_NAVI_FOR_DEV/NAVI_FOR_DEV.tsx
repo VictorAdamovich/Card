@@ -8,9 +8,11 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const NaviForDev = (): ReturnComponentType => (
   <div>
-    <AppBar style={{ background: '#EBE0E9' }} position="static">
+    <AppBar style={{ background: '#fff' }} position="static">
       <Toolbar style={{ justifyContent: 'space-around' }}>
-        <Typography variant="h5">It-incubator</Typography>
+        <Typography style={{ color: 'black' }} variant="h5">
+          It-incubator
+        </Typography>
         <Box>
           <NavLink to={RoutePath.Error404}>404 </NavLink>-
           <NavLink to={RoutePath.Profile}> Profile </NavLink>-

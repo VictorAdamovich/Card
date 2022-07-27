@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { handleServerNetworkError } from 'common/utils/error-utils';
 import { forgotAPI } from 'features/forgotPassword/forgot-api';
 
 type InitialStateType = {
@@ -46,11 +47,12 @@ export const forgotPassword = (email: string) => (dispatch: Dispatch) => {
     .then(res => {
       dispatch(setEmailForPasswordRecovery(email));
       dispatch(setAppSnackbarAC('success', res.data.info));
-      dispatch(setAppStatusAC('succeeded'));
     })
     .catch(res => {
-      dispatch(setAppSnackbarAC('warning', res.data.message));
-      dispatch(setAppStatusAC('failed'));
+      handleServerNetworkError(res.data.message, dispatch);
+    })
+    .finally(() => {
+      dispatch(setAppStatusAC('idle'));
     });
 };
 

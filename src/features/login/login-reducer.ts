@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { handleServerNetworkError } from 'common/utils/error-utils';
 import { loginAPI } from 'features/login/login-api';
 
 const initialState = {
@@ -66,8 +67,10 @@ export const logIn =
         dispatch(setUserInfo({ email: res.data.email, name: res.data.name }));
       })
       .catch(err => {
-        dispatch(setAppSnackbarAC('warning', err.response.data.error));
-        dispatch(setAppStatusAC('failed'));
+        handleServerNetworkError(err.response.data.error || err.message, dispatch);
+      })
+      .finally(() => {
+        dispatch(setAppStatusAC('idle'));
       });
   };
 
@@ -81,8 +84,10 @@ export const logOut = () => (dispatch: Dispatch) => {
       dispatch(setAppStatusAC('succeeded'));
     })
     .catch(err => {
-      dispatch(setAppSnackbarAC('warning', err.message));
-      dispatch(setAppStatusAC('failed'));
+      handleServerNetworkError(err.message, dispatch);
+    })
+    .finally(() => {
+      dispatch(setAppStatusAC('idle'));
     });
 };
 
@@ -95,8 +100,10 @@ export const updateUserInfoTC = (data: UserInfoType) => (dispatch: Dispatch) => 
       dispatch(setAppStatusAC('succeeded'));
     })
     .catch(err => {
-      dispatch(setAppSnackbarAC('warning', err.message));
-      dispatch(setAppStatusAC('failed'));
+      handleServerNetworkError(err.message, dispatch);
+    })
+    .finally(() => {
+      dispatch(setAppStatusAC('idle'));
     });
 };
 

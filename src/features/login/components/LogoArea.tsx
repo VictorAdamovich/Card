@@ -9,7 +9,7 @@ type PropsType = {
   title: string;
 };
 
-const LogoArea = (props: PropsType): ReturnComponentType => {
+export const LogoArea = (props: PropsType): ReturnComponentType => {
   const { title } = props;
   return (
     <>
@@ -20,5 +20,3 @@ const LogoArea = (props: PropsType): ReturnComponentType => {
     </>
   );
 };
-
-export default LogoArea;

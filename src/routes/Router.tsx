@@ -2,16 +2,17 @@ import React from 'react';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import Error404 from '../common/components/error404/Error404';
-import { RoutePath } from '../common/enums/route-path';
-import { CheckEmail } from '../features/forgotPassword/CheckEmail';
-import { CreateNewPassword } from '../features/forgotPassword/CreateNewPassword';
-import { ForgotPassword } from '../features/forgotPassword/ForgotPassword';
-import { Login } from '../features/login/Login';
-import { Profile } from '../features/profile/Profile';
-import { Register } from '../features/register/Register';
-import { ReturnComponentType } from '../types/ReturnComponentType';
-import { RoutesType } from '../types/RoutesType';
+import { NaviForDev } from 'common/components/_NAVI_FOR_DEV/NAVI_FOR_DEV';
+import Error404 from 'common/components/error404/Error404';
+import { RoutePath } from 'common/enums/route-path';
+import { CheckEmail } from 'features/forgotPassword/CheckEmail';
+import { CreateNewPassword } from 'features/forgotPassword/CreateNewPassword';
+import { ForgotPassword } from 'features/forgotPassword/ForgotPassword';
+import { Login } from 'features/login/Login';
+import { Profile } from 'features/profile/Profile';
+import { Register } from 'features/register/Register';
+import { ReturnComponentType } from 'types/ReturnComponentType';
+import { RoutesType } from 'types/RoutesType';
 
 export const Router = (): ReturnComponentType => {
   const routesArray: RoutesType[] = [
@@ -26,15 +27,18 @@ export const Router = (): ReturnComponentType => {
   ];
 
   return (
-    <Routes>
-      {routesArray.map(item => (
-        <Route key={item.path} path={item.path} element={item.component} />
-      ))}
-      <Route path="/" element={<Navigate to={RoutePath.Login} />} />
-      <Route path="/For-friday" element={<Navigate to={RoutePath.Login} />} />
-      <Route path="*" element={<Navigate to={RoutePath.Error404} />} />
-      <Route path={RoutePath.Error404} element={<Error404 />} />
-    </Routes>
+    <>
+      <NaviForDev />
+      <Routes>
+        {routesArray.map(item => (
+          <Route key={item.path} path={item.path} element={item.component} />
+        ))}
+        <Route path="/" element={<Navigate to={RoutePath.Login} />} />
+        <Route path="/For-friday" element={<Navigate to={RoutePath.Login} />} />
+        <Route path="*" element={<Navigate to={RoutePath.Error404} />} />
+        <Route path={RoutePath.Error404} element={<Error404 />} />
+      </Routes>
+    </>
   );
 };
 
