@@ -2,6 +2,7 @@ import { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { handleServerNetworkError } from 'common/utils/error-utils';
 import { LoginErrorType, registerApi } from 'features/register/register-api';
 
 const initialState = {
@@ -35,14 +36,12 @@ export const register = (email: string, password: string) => (dispatch: Dispatch
     .createUser(email, password)
     .then(res => {
       dispatch(registerAC());
-      dispatch(setAppSnackbarAC('success', res.statusText));
+      dispatch(setAppSnackbarAC('success', `${res.statusText}(${email})`));
     })
     .catch((err: AxiosError<LoginErrorType>) => {
-      dispatch(
-        setAppSnackbarAC(
-          'error',
-          err.response ? err.response?.data.error : 'Some error occurred',
-        ),
+      handleServerNetworkError(
+        err.response ? err.response?.data.error : err.message,
+        dispatch,
       );
     })
     .finally(() => {

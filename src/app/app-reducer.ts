@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 
+import { handleServerNetworkError } from 'common/utils/error-utils';
 import { loginAPI } from 'features/login/login-api';
 import { logInAC, setUserInfo } from 'features/login/login-reducer';
 
@@ -59,7 +60,7 @@ export const me = () => (dispatch: Dispatch) => {
       dispatch(setAppSnackbarAC('info', 'You are authorized'));
     })
     .catch(res => {
-      dispatch(setAppSnackbarAC('warning', res.response.data.error));
+      handleServerNetworkError(res.response.data.error, dispatch);
     })
     .finally(() => {
       dispatch(setInitialization(true));
