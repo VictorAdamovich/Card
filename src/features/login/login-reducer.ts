@@ -47,7 +47,7 @@ export const setUserInfo = (payload: UserInfoType) =>
     payload,
   } as const);
 
-type UserInfoType = {
+export type UserInfoType = {
   name: string;
   email?: string;
   avatar?: string;

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { minNickNameLength, minPasswordLength } from '../constants/constants';
+import { minPasswordLength } from '../constants/constants';
 
 export const registerSchema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Required'),
@@ -22,8 +22,4 @@ export const forgotSchema = yup.object().shape({
 
 export const createNewPasswordSchema = yup.object().shape({
   password: yup.string().min(minPasswordLength, 'Too Short!').required('Required'),
-});
-
-export const changeNickNameSchema = yup.object().shape({
-  nickName: yup.string().min(minNickNameLength, 'Too Short!').required('Required'),
 });
