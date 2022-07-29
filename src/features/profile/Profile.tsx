@@ -31,7 +31,7 @@ export const Profile = (): ReturnComponentType => {
   }
   return (
     <FormWrapper>
-      <h2>It-incubator</h2>
+      <h2>IT-incubator</h2>
       <div>
         <img src={img} alt="avatar" width="200px" />
       </div>
