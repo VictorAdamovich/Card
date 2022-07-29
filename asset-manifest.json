@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/For-friday/static/css/main.b814ad61.css",
-    "main.js": "/For-friday/static/js/main.43fab9a6.js",
+    "main.css": "/For-friday/static/css/main.f8ed0438.css",
+    "main.js": "/For-friday/static/js/main.ef0deca3.js",
     "static/js/787.28cb0dcd.chunk.js": "/For-friday/static/js/787.28cb0dcd.chunk.js",
     "static/media/ava-img.jpg": "/For-friday/static/media/ava-img.ba4b6727f293f7f0032e.jpg",
-    "static/media/404.svg": "/For-friday/static/media/404.f26b506f65343dfc245b0e141dbfbcc1.svg",
+    "static/media/404.svg": "/For-friday/static/media/404.d1e1632e390ff2517b662985bf2e997b.svg",
     "index.html": "/For-friday/index.html",
-    "main.b814ad61.css.map": "/For-friday/static/css/main.b814ad61.css.map",
-    "main.43fab9a6.js.map": "/For-friday/static/js/main.43fab9a6.js.map",
+    "main.f8ed0438.css.map": "/For-friday/static/css/main.f8ed0438.css.map",
+    "main.ef0deca3.js.map": "/For-friday/static/js/main.ef0deca3.js.map",
     "787.28cb0dcd.chunk.js.map": "/For-friday/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b814ad61.css",
-    "static/js/main.43fab9a6.js"
+    "static/css/main.f8ed0438.css",
+    "static/js/main.ef0deca3.js"
   ]
 }
