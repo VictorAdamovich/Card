@@ -44,40 +44,61 @@ const setCardPacksAC = (payload: FetchPacksResponseType) =>
   } as const);
 // ___________________Thunks_____________________
 
-export const fetchCardPacks = (): AppThunk => dispatch => {
-  dispatch(setAppStatusAC('loading'));
-  packsAPI
-    .fetchPacks({})
-    .then(res => {
-      const {
-        cardPacks,
-        page,
-        pageCount,
-        cardPacksTotalCount,
-        minCardsCount,
-        maxCardsCount,
-      } = res.data; // забираю через деструктурирование только то что мне надо для стейта
-
-      dispatch(
-        setCardPacksAC({
+export const fetchCardPacks =
+  (params: FetchPacksParamsType): AppThunk =>
+  dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    packsAPI
+      .fetchPacks(params)
+      .then(res => {
+        const {
           cardPacks,
           page,
           pageCount,
           cardPacksTotalCount,
           minCardsCount,
           maxCardsCount,
-        }),
-      );
-      dispatch(setAppStatusAC('succeeded'));
-      dispatch(setAppSnackbarAC('success', res.statusText));
-    })
-    .catch(err => {
-      handleServerNetworkError(err.message, dispatch);
-    })
-    .finally(() => {
-      dispatch(setAppStatusAC('idle'));
-    });
-};
+        } = res.data; // забираю через деструктурирование только то что мне надо для стейта
+
+        dispatch(
+          setCardPacksAC({
+            cardPacks,
+            page,
+            pageCount,
+            cardPacksTotalCount,
+            minCardsCount,
+            maxCardsCount,
+          }),
+        );
+        dispatch(setAppStatusAC('succeeded'));
+        dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
+      })
+      .catch(err => {
+        handleServerNetworkError(err.message, dispatch);
+      })
+      .finally(() => {
+        dispatch(setAppStatusAC('idle'));
+      });
+  };
+
+export const createNewPack =
+  (packName: string /* deckCover?: string */): AppThunk =>
+  (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'));
+    packsAPI
+      .createPack(packName)
+      .then(res => {
+        const params = getState().packs.paramsForFetchPacks;
+        dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
+        dispatch(fetchCardPacks(params));
+      })
+      .catch(err => {
+        handleServerNetworkError(err.message, dispatch);
+      })
+      .finally(() => {
+        dispatch(setAppStatusAC('idle'));
+      });
+  };
 
 // __________________Types_______________________
 
