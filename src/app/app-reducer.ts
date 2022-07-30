@@ -13,7 +13,7 @@ const initialState: InitialStateType = {
 
 export const appReducer = (
   state: InitialStateType = initialState,
-  action: ActionsType,
+  action: AppActionsType,
 ): InitialStateType => {
   switch (action.type) {
     case 'APP/SET-STATUS':
@@ -68,7 +68,7 @@ export const me = () => (dispatch: Dispatch) => {
     });
 };
 
-export type ActionsType =
+export type AppActionsType =
   | ReturnType<typeof setAppSnackbarAC>
   | ReturnType<typeof setAppStatusAC>
   | ReturnType<typeof setInitialization>;

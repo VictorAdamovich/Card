@@ -5,23 +5,41 @@ import {
   combineReducers,
   legacy_createStore as createStore,
 } from 'redux';
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
-import { appReducer } from 'app/app-reducer';
-import { forgotReducer } from 'features/forgotPassword/forgot-reducer';
-import { loginReducer } from 'features/login/login-reducer';
-import { registerReducer } from 'features/register/register-reducer';
+import { AppActionsType, appReducer } from 'app/app-reducer';
+import { ForgotActionsType, forgotReducer } from 'features/forgotPassword/forgot-reducer';
+import { loginReducer, LoginReducerActionsType } from 'features/login/login-reducer';
+import { PacksActionType, packsReducer } from 'features/packs/packs-reducer';
+import {
+  registerReducer,
+  RegisterReducerActionsType,
+} from 'features/register/register-reducer';
 
 const rootReducer = combineReducers({
   app: appReducer,
   login: loginReducer,
   register: registerReducer,
   forgot: forgotReducer,
+  packs: packsReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 type AppDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>;
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  AppRootStateType,
+  unknown,
+  RootActionsType // AppRootActionsType
+>;
+type RootActionsType =
+  | PacksActionType
+  | AppActionsType
+  | ForgotActionsType
+  | LoginReducerActionsType
+  | RegisterReducerActionsType;
 
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 

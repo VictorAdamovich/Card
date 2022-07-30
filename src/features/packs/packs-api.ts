@@ -42,7 +42,7 @@ export const packsAPI = {
   },
 };
 
-type FetchPacksParamsType = {
+export type FetchPacksParamsType = {
   user_id?: string;
   packName?: string;
   min?: number;
@@ -52,7 +52,7 @@ type FetchPacksParamsType = {
   pageCount?: number;
 };
 
-type CardPackType = {
+export type CardPackType = {
   _id: string; // CardPack id (id колоды карточек)
   user_id: string; // (id юзера создавшего колоду)
   user_name: string; // имя юзера создавшего колоду
@@ -71,7 +71,7 @@ type CardPackType = {
   // "__v": 0,
 };
 
-type FetchPacksResponseType = {
+export type FetchPacksResponseType = {
   cardPacks: CardPackType[];
   page: number;
   pageCount: number;
