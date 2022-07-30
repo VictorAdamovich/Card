@@ -99,6 +99,43 @@ export const createNewPack =
         dispatch(setAppStatusAC('idle'));
       });
   };
+export const deletePack =
+  (packId: string): AppThunk =>
+  (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'));
+    packsAPI
+      .deletePack(packId)
+      .then(res => {
+        const params = getState().packs.paramsForFetchPacks;
+        dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
+        dispatch(fetchCardPacks(params));
+      })
+      .catch(err => {
+        handleServerNetworkError(err.message, dispatch);
+      })
+      .finally(() => {
+        dispatch(setAppStatusAC('idle'));
+      });
+  };
+
+export const updatePack =
+  (packId: string, newPackName: string): AppThunk =>
+  (dispatch, getState) => {
+    dispatch(setAppStatusAC('loading'));
+    packsAPI
+      .updatePack(packId, newPackName)
+      .then(res => {
+        const params = getState().packs.paramsForFetchPacks;
+        dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
+        dispatch(fetchCardPacks(params));
+      })
+      .catch(err => {
+        handleServerNetworkError(err.message, dispatch);
+      })
+      .finally(() => {
+        dispatch(setAppStatusAC('idle'));
+      });
+  };
 
 // __________________Types_______________________
 
