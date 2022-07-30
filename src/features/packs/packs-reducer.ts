@@ -1,5 +1,6 @@
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
+// import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import {
   FetchPacksParamsType,
@@ -7,7 +8,7 @@ import {
   packsAPI,
 } from 'features/packs/packs-api';
 
-const initialState = {
+const initialState: InitialStateType = {
   cardPacks: [],
   page: 1,
   pageCount: 4,
@@ -15,9 +16,11 @@ const initialState = {
   minCardsCount: 0,
   maxCardsCount: 0,
   paramsForFetchPacks: {},
+  isOnlyMyPacks: false,
 };
 type InitialStateType = FetchPacksResponseType & {
   paramsForFetchPacks: FetchPacksParamsType;
+  isOnlyMyPacks: boolean;
 };
 
 export const packsReducer = (
