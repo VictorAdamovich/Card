@@ -9,6 +9,7 @@ import { CheckEmail } from 'features/forgotPassword/CheckEmail';
 import { CreateNewPassword } from 'features/forgotPassword/CreateNewPassword';
 import { ForgotPassword } from 'features/forgotPassword/ForgotPassword';
 import { Login } from 'features/login/Login';
+import { Packs } from 'features/packs/Packs';
 import { Profile } from 'features/profile/Profile';
 import { Register } from 'features/register/Register';
 import { ReturnComponentType } from 'types/ReturnComponentType';
@@ -24,6 +25,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.CheckEmail, component: <CheckEmail /> },
     { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
+    { path: RoutePath.Packs, component: <Packs /> },
   ];
 
   return (

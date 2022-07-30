@@ -6,4 +6,5 @@ export enum RoutePath {
   ForgotPassword = '/forgotPassword',
   CheckEmail = '/checkEmail',
   CreateNewPassword = '/createNewPassword/*',
+  Packs = '/packs',
 }

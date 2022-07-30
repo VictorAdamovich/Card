@@ -41,6 +41,7 @@ const App = (): ReturnComponentType => {
         <NavLink to={RoutePath.ForgotPassword}> ForgotPassword </NavLink>-
         <NavLink to={RoutePath.CheckEmail}> CheckEmail </NavLink>-
         <NavLink to={RoutePath.CreateNewPassword}>CreateNewPassword </NavLink>-
+        <NavLink to={RoutePath.Packs}>Packs </NavLink>-
       </Box>
     </div>
   );
