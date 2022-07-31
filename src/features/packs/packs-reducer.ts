@@ -14,7 +14,9 @@ const initialState: InitialStateType = {
   pageCount: 4,
   cardPacksTotalCount: 1,
   minCardsCount: 0,
-  maxCardsCount: 0,
+  maxCardsCount: 1000,
+  min: 0,
+  max: 1000,
   paramsForFetchPacks: {},
   isOnlyMyPacks: false,
   searchValue: '',
@@ -23,6 +25,8 @@ type InitialStateType = FetchPacksResponseType & {
   paramsForFetchPacks: FetchPacksParamsType;
   isOnlyMyPacks: boolean;
   searchValue: string;
+  min: number;
+  max: number;
 };
 
 export const packsReducer = (
@@ -35,15 +39,17 @@ export const packsReducer = (
         ...state,
         ...action.payload,
       };
-    case 'packs/SET-SEARCH-VALUE':
-      return {
-        ...state,
-        ...action.payload,
-      };
     case 'packs/SET-IS-ONLY-MY-PACKS':
       return {
         ...state,
         isOnlyMyPacks: action.flag,
+      };
+    case 'packs/SET-SEARCH-VALUE':
+    case 'packs/SET-MIN-MAX-FILTER-VALUES':
+    case 'packs/SET-MIN-MAX-CARDS-COUNTS-VALUES':
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;
@@ -70,6 +76,24 @@ export const setIsOnlyMyPacksAC = (flag: boolean) =>
     type: 'packs/SET-IS-ONLY-MY-PACKS',
     flag,
   } as const);
+
+export const setMinMaxCardsCountAC = (minCardsCount: number, maxCardsCount: number) =>
+  ({
+    type: 'packs/SET-MIN-MAX-CARDS-COUNTS-VALUES',
+    payload: {
+      minCardsCount,
+      maxCardsCount,
+    },
+  } as const);
+
+export const setMinMaxFilterValueAC = (min: number, max: number) =>
+  ({
+    type: 'packs/SET-MIN-MAX-FILTER-VALUES',
+    payload: {
+      min,
+      max,
+    },
+  } as const);
 // ___________________Thunks_____________________
 
 export const fetchCardPacks =
@@ -79,24 +103,7 @@ export const fetchCardPacks =
     packsAPI
       .fetchPacks(params)
       .then(res => {
-        const {
-          cardPacks,
-          page,
-          pageCount,
-          cardPacksTotalCount,
-          minCardsCount,
-          maxCardsCount,
-        } = res.data; // забираю через деструктурирование только то что мне надо для стейта
-        dispatch(
-          setCardPacksAC({
-            cardPacks,
-            page,
-            pageCount,
-            cardPacksTotalCount,
-            minCardsCount,
-            maxCardsCount,
-          }),
-        );
+        dispatch(setCardPacksAC(res.data));
         dispatch(setAppStatusAC('succeeded'));
         dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
       })
@@ -166,7 +173,15 @@ export const updatePack =
 
 // __________________Types_______________________
 
-export type PacksActionType = SetCardPacksAT | SetSearchValueAT | SetIsOnlyMyPacksAT;
+export type PacksActionType =
+  | SetMinMaxCardsCountAT
+  | SetCardPacksAT
+  | SetSearchValueAT
+  | SetIsOnlyMyPacksAT
+  | SetMinMaxFilterValueAT;
+
 type SetCardPacksAT = ReturnType<typeof setCardPacksAC>;
 type SetSearchValueAT = ReturnType<typeof setSearchValueAC>;
 type SetIsOnlyMyPacksAT = ReturnType<typeof setIsOnlyMyPacksAC>;
+type SetMinMaxFilterValueAT = ReturnType<typeof setMinMaxFilterValueAC>;
+type SetMinMaxCardsCountAT = ReturnType<typeof setMinMaxCardsCountAC>;

@@ -3,13 +3,16 @@ import React, { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { TitleArea } from 'common/components/titleArea/TitleArea';
 import { MyAllPacksArea } from 'features/packs/components/MyAllPacksArea';
+import { NumberOfCardsFilterArea } from 'features/packs/components/NumberOfCardsFilterArea';
 import { SearchArea } from 'features/packs/components/SearchArea';
 import { createNewPack, fetchCardPacks } from 'features/packs/packs-reducer';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export const Packs = (): ReturnComponentType => {
+export const Packs = React.memo((): ReturnComponentType => {
   const packs = useAppSelector(state => state.packs.cardPacks);
+  // const statePacks = useAppSelector(state => state.packs);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,12 +30,15 @@ export const Packs = (): ReturnComponentType => {
         <SearchArea />
 
         <MyAllPacksArea />
-        <div className={styles.filterAreaBlock}>
-          <div>Number of cards</div>
-          <div>Number of cards</div>
-        </div>
+
+        <NumberOfCardsFilterArea />
       </div>
       <div>
+        {/* <div>{statePacks.minCardsCount}</div>
+        <div>{statePacks.maxCardsCount}</div>
+        <div>{statePacks.cardPacksTotalCount}</div>
+        <div>{statePacks.min}</div>
+        <div>{statePacks.max}</div> */}
         table area
         <div>
           {packs.map(el => (
@@ -44,4 +50,4 @@ export const Packs = (): ReturnComponentType => {
       <div>pagination</div>
     </div>
   );
-};
+});
