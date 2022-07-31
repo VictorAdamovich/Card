@@ -1,58 +1,46 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
-// import { useAppDispatch } from 'app/store';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import TextField from '@mui/material/TextField';
-
-import { AddNewPackName } from 'common/components/modal/AddNewPackName';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { TitleArea } from 'common/components/titleArea/TitleArea';
+import { MyAllPacksArea } from 'features/packs/components/MyAllPacksArea';
+import { SearchArea } from 'features/packs/components/SearchArea';
+import { createNewPack, fetchCardPacks } from 'features/packs/packs-reducer';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Packs = (): ReturnComponentType => {
-  // const dispatch = useAppDispatch();
+  const packs = useAppSelector(state => state.packs.cardPacks);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCardPacks({}));
+  }, []);
 
   const handleAddNewPack = useCallback((value: string): void => {
-    //  dispatch Thunk for addNewPack
-    // dispatch({ type: 'adasd' });
-    console.log(value);
+    dispatch(createNewPack(value));
   }, []);
   return (
     <div className={styles.packsWrapper}>
-      <div className={styles.titleArea}>
-        <div>Packs list</div>
-        <AddNewPackName addNewPackName={handleAddNewPack} />
-      </div>
+      <TitleArea title="Packs list" buttonTitle="pack" addNewName={handleAddNewPack} />
 
       <div className={styles.filterArea}>
-        <div className={styles.filterAreaBlock}>
-          <div>Search</div>
-          <TextField
-            size="small"
-            sx={{ width: '463px', marginTop: '8px' }}
-            style={{ padding: '0' }}
-            id="outlined-search"
-            placeholder="Search field"
-            type="search"
-          />
-        </div>
-        <div className={styles.filterAreaBlock}>
-          <div>Show packs cards</div>
-          <ButtonGroup variant="outlined" aria-label="outlined button group">
-            <Button sx={{ width: '98px', height: '39,98px', marginTop: '8px' }}>
-              My
-            </Button>
-            <Button sx={{ width: '98px', height: '39,98px', marginTop: '8px' }}>
-              All
-            </Button>
-          </ButtonGroup>
-        </div>
+        <SearchArea />
+
+        <MyAllPacksArea />
         <div className={styles.filterAreaBlock}>
           <div>Number of cards</div>
           <div>Number of cards</div>
         </div>
       </div>
-      <div>table area</div>
+      <div>
+        table area
+        <div>
+          {packs.map(el => (
+            // eslint-disable-next-line no-underscore-dangle
+            <div key={el._id}>{el.name}</div>
+          ))}
+        </div>
+      </div>
       <div>pagination</div>
     </div>
   );

@@ -4,20 +4,22 @@ import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import { loginAPI } from 'features/login/login-api';
 
-const initialState = {
+const initialState: InitialStateType = {
   isLoggedIn: false,
-  userInfo: { name: '' },
-} as const;
+  userInfo: {
+    name: '',
+  },
+};
 
-type initialStateType = {
+type InitialStateType = {
   isLoggedIn: boolean;
   userInfo: UserInfoType;
 };
 
 export const loginReducer = (
-  state: initialStateType = initialState,
+  state: InitialStateType = initialState,
   action: LoginReducerActionsType,
-): initialStateType => {
+): InitialStateType => {
   switch (action.type) {
     case 'login-reducer/LOGIN':
       return { ...state, isLoggedIn: action.newStatus };
@@ -52,6 +54,7 @@ export type UserInfoType = {
   name: string;
   email?: string;
   avatar?: string;
+  id?: string;
 };
 
 // Thunks
@@ -64,7 +67,15 @@ export const logIn =
       .then(res => {
         dispatch(logInAC());
         dispatch(setAppStatusAC('succeeded'));
-        dispatch(setUserInfo({ email: res.data.email, name: res.data.name }));
+        dispatch(
+          setUserInfo({
+            email: res.data.email,
+            name: res.data.name,
+            avatar: res.data.avatar,
+            // eslint-disable-next-line
+            id: res.data['_id'],
+          }),
+        );
       })
       .catch(err => {
         handleServerNetworkError(err.response.data.error || err.message, dispatch);

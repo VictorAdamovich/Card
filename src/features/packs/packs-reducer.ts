@@ -17,10 +17,12 @@ const initialState: InitialStateType = {
   maxCardsCount: 0,
   paramsForFetchPacks: {},
   isOnlyMyPacks: false,
+  searchValue: '',
 };
 type InitialStateType = FetchPacksResponseType & {
   paramsForFetchPacks: FetchPacksParamsType;
   isOnlyMyPacks: boolean;
+  searchValue: string;
 };
 
 export const packsReducer = (
@@ -33,6 +35,16 @@ export const packsReducer = (
         ...state,
         ...action.payload,
       };
+    case 'packs/SET-SEARCH-VALUE':
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case 'packs/SET-IS-ONLY-MY-PACKS':
+      return {
+        ...state,
+        isOnlyMyPacks: action.flag,
+      };
     default:
       return state;
   }
@@ -44,6 +56,19 @@ const setCardPacksAC = (payload: FetchPacksResponseType) =>
   ({
     type: 'packs/SET-CARD-PACKS',
     payload,
+  } as const);
+
+export const setSearchValueAC = (value: string) =>
+  ({
+    type: 'packs/SET-SEARCH-VALUE',
+    payload: {
+      searchValue: value,
+    },
+  } as const);
+export const setIsOnlyMyPacksAC = (flag: boolean) =>
+  ({
+    type: 'packs/SET-IS-ONLY-MY-PACKS',
+    flag,
   } as const);
 // ___________________Thunks_____________________
 
@@ -62,7 +87,6 @@ export const fetchCardPacks =
           minCardsCount,
           maxCardsCount,
         } = res.data; // забираю через деструктурирование только то что мне надо для стейта
-
         dispatch(
           setCardPacksAC({
             cardPacks,
@@ -142,5 +166,7 @@ export const updatePack =
 
 // __________________Types_______________________
 
-export type PacksActionType = SetCardPacksAT;
+export type PacksActionType = SetCardPacksAT | SetSearchValueAT | SetIsOnlyMyPacksAT;
 type SetCardPacksAT = ReturnType<typeof setCardPacksAC>;
+type SetSearchValueAT = ReturnType<typeof setSearchValueAC>;
+type SetIsOnlyMyPacksAT = ReturnType<typeof setIsOnlyMyPacksAC>;

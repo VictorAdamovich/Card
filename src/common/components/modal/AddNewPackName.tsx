@@ -1,11 +1,3 @@
-/*
-import React from 'react';
-
-import { ReturnComponentType } from 'types/ReturnComponentType';
-
-export const AddNewPackName = (): ReturnComponentType => <div />;
-*/
-
 import * as React from 'react';
 import { useCallback } from 'react';
 
@@ -20,12 +12,13 @@ import TextField from '@mui/material/TextField';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type AddNewPackNamePropsType = {
+  buttonTitle: string;
   addNewPackName: (value: string) => void;
 };
 
 export const AddNewPackName = React.memo(
   (props: AddNewPackNamePropsType): ReturnComponentType => {
-    const { addNewPackName } = props;
+    const { addNewPackName, buttonTitle } = props;
 
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState('');
@@ -38,14 +31,14 @@ export const AddNewPackName = React.memo(
       setOpen(false);
     }, []);
 
-    const handleAddNewPack = (): void => {
+    const handleAddNewName = (): void => {
       setOpen(false);
       addNewPackName(value);
     };
     return (
       <div>
         <Button variant="contained" onClick={handleClickOpen}>
-          Add new pack
+          Add new {buttonTitle}
         </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Add new pack</DialogTitle>
@@ -67,7 +60,7 @@ export const AddNewPackName = React.memo(
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleAddNewPack}>Add new pack name</Button>
+            <Button onClick={handleAddNewName}>Add new {buttonTitle} name</Button>
           </DialogActions>
         </Dialog>
       </div>
