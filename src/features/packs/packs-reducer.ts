@@ -20,6 +20,7 @@ const initialState: InitialStateType = {
   paramsForFetchPacks: {},
   isOnlyMyPacks: false,
   searchValue: '',
+  sortFlag: false,
 };
 type InitialStateType = FetchPacksResponseType & {
   paramsForFetchPacks: FetchPacksParamsType;
@@ -27,6 +28,7 @@ type InitialStateType = FetchPacksResponseType & {
   searchValue: string;
   min: number;
   max: number;
+  sortFlag: boolean;
 };
 
 export const packsReducer = (
@@ -34,19 +36,20 @@ export const packsReducer = (
   action: PacksActionType,
 ): InitialStateType => {
   switch (action.type) {
-    case 'packs/SET-CARD-PACKS':
-      return {
-        ...state,
-        ...action.payload,
-      };
     case 'packs/SET-IS-ONLY-MY-PACKS':
       return {
         ...state,
         isOnlyMyPacks: action.flag,
       };
+    case 'packs/SET-SORT-FLAG':
+      return {
+        ...state,
+        sortFlag: !state.sortFlag,
+      };
     case 'packs/SET-SEARCH-VALUE':
     case 'packs/SET-MIN-MAX-FILTER-VALUES':
     case 'packs/SET-MIN-MAX-CARDS-COUNTS-VALUES':
+    case 'packs/SET-CARD-PACKS':
       return {
         ...state,
         ...action.payload,
@@ -93,6 +96,11 @@ export const setMinMaxFilterValueAC = (min: number, max: number) =>
       min,
       max,
     },
+  } as const);
+
+export const setSortFlagAC = () =>
+  ({
+    type: 'packs/SET-SORT-FLAG',
   } as const);
 // ___________________Thunks_____________________
 
@@ -174,6 +182,7 @@ export const updatePack =
 // __________________Types_______________________
 
 export type PacksActionType =
+  | SetSortFlagAT
   | SetMinMaxCardsCountAT
   | SetCardPacksAT
   | SetSearchValueAT
@@ -185,3 +194,4 @@ type SetSearchValueAT = ReturnType<typeof setSearchValueAC>;
 type SetIsOnlyMyPacksAT = ReturnType<typeof setIsOnlyMyPacksAC>;
 type SetMinMaxFilterValueAT = ReturnType<typeof setMinMaxFilterValueAC>;
 type SetMinMaxCardsCountAT = ReturnType<typeof setMinMaxCardsCountAC>;
+type SetSortFlagAT = ReturnType<typeof setSortFlagAC>;
