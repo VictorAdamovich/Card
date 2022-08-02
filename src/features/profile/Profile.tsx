@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
@@ -23,11 +23,13 @@ export const Profile = (): ReturnComponentType => {
   const logoutCB = (): void => {
     dispatch(logOut());
   };
-  const saveChangesHandler = (newValue: string): void => {
-    dispatch(updateUserInfoTC({ name: newValue }));
-  };
+  const saveChangesHandler = useCallback(
+    (newValue: string): void => {
+      dispatch(updateUserInfoTC({ name: newValue }));
+    },
+    [dispatch],
+  );
   const isDisabled = appStatus === 'loading';
-  const avatar = userInfo.avatar ? userInfo.avatar : defaultImage;
 
   if (!isLoggedIn) {
     return <Navigate to={RoutePath.Login} />;
@@ -46,7 +48,11 @@ export const Profile = (): ReturnComponentType => {
           />
         }
       >
-        <Avatar alt="User" src={avatar} sx={{ width: 150, height: 150 }} />
+        <Avatar
+          alt="User"
+          src={userInfo.avatar || defaultImage}
+          sx={{ width: 150, height: 150 }}
+        />
       </Badge>
       <Grid container xs={12} justifyContent="center">
         <FormControl>

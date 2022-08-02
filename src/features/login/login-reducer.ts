@@ -6,10 +6,7 @@ import { loginAPI } from 'features/login/login-api';
 
 const initialState = {
   isLoggedIn: false,
-  userInfo: {
-    name: '',
-    avatar: '',
-  },
+  userInfo: { name: '', avatar: '' },
 } as const;
 
 type initialStateType = {
