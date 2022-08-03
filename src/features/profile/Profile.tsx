@@ -6,10 +6,10 @@ import { Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import img from 'assets/images/ava-img.jpg';
+import { EditableSpan } from 'common/components/editableSpan/EditableSpan';
 import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
 import { RoutePath } from 'common/enums/route-path';
 import { logOut, updateUserInfoTC } from 'features/login/login-reducer';
-import { EditableSpan } from 'features/profile/EditableSpan';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Profile = (): ReturnComponentType => {
