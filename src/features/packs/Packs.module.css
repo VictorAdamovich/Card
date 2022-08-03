@@ -2,14 +2,13 @@
     max-width: 1008px;
     height: 100%;
     margin: 0 auto;
-    background-color: gray;
 }
 
 .filterArea {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
     margin-bottom: 24px;
 }
 
@@ -18,5 +17,4 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 20px;
-    background-color: white;
 }

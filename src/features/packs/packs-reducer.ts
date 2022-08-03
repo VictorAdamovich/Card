@@ -50,6 +50,8 @@ export const packsReducer = (
     case 'packs/SET-MIN-MAX-FILTER-VALUES':
     case 'packs/SET-MIN-MAX-CARDS-COUNTS-VALUES':
     case 'packs/SET-CARD-PACKS':
+    case 'packs/SET-PAGE-NUMBER':
+    case 'packs/SET-PAGE-COUNT-NUMBER':
       return {
         ...state,
         ...action.payload,
@@ -101,6 +103,22 @@ export const setMinMaxFilterValueAC = (min: number, max: number) =>
 export const setSortFlagAC = () =>
   ({
     type: 'packs/SET-SORT-FLAG',
+  } as const);
+
+export const setPageNumber = (page: number) =>
+  ({
+    type: 'packs/SET-PAGE-NUMBER',
+    payload: {
+      page,
+    },
+  } as const);
+
+export const setPageCountNumber = (pageCount: number) =>
+  ({
+    type: 'packs/SET-PAGE-COUNT-NUMBER',
+    payload: {
+      pageCount,
+    },
   } as const);
 // ___________________Thunks_____________________
 
@@ -187,7 +205,9 @@ export type PacksActionType =
   | SetCardPacksAT
   | SetSearchValueAT
   | SetIsOnlyMyPacksAT
-  | SetMinMaxFilterValueAT;
+  | SetMinMaxFilterValueAT
+  | SetPageCountNumberAT
+  | SetPageNumberAT;
 
 type SetCardPacksAT = ReturnType<typeof setCardPacksAC>;
 type SetSearchValueAT = ReturnType<typeof setSearchValueAC>;
@@ -195,3 +215,5 @@ type SetIsOnlyMyPacksAT = ReturnType<typeof setIsOnlyMyPacksAC>;
 type SetMinMaxFilterValueAT = ReturnType<typeof setMinMaxFilterValueAC>;
 type SetMinMaxCardsCountAT = ReturnType<typeof setMinMaxCardsCountAC>;
 type SetSortFlagAT = ReturnType<typeof setSortFlagAC>;
+type SetPageNumberAT = ReturnType<typeof setPageNumber>;
+type SetPageCountNumberAT = ReturnType<typeof setPageCountNumber>;

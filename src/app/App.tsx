@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import './App.css';
 
-import { Box, CircularProgress, LinearProgress } from '@mui/material';
+import { CircularProgress, LinearProgress } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import { me } from './app-reducer';
@@ -33,7 +33,7 @@ const App = (): ReturnComponentType => {
       {status === 'loading' && <LinearProgress />}
       <Router />
       <SimpleSnackbar />
-      <Box>
+      <div style={{ height: '60px' }}>
         <NavLink to={RoutePath.Error404}>404 </NavLink>-
         <NavLink to={RoutePath.Profile}> Profile </NavLink>-
         <NavLink to={RoutePath.Login}> Login </NavLink>-
@@ -42,7 +42,7 @@ const App = (): ReturnComponentType => {
         <NavLink to={RoutePath.CheckEmail}> CheckEmail </NavLink>-
         <NavLink to={RoutePath.CreateNewPassword}>CreateNewPassword </NavLink>-
         <NavLink to={RoutePath.Packs}>Packs </NavLink>-
-      </Box>
+      </div>
     </div>
   );
 };

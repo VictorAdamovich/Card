@@ -4,10 +4,7 @@ import TextField from '@mui/material/TextField';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import useDebounce from 'common/hooks/useDebounce';
-import {
-  fetchCardPacks,
-  setSearchValueAC /* setSearchValueAC */,
-} from 'features/packs/packs-reducer';
+import { fetchCardPacks, setSearchValueAC } from 'features/packs/packs-reducer';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 

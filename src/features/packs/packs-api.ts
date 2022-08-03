@@ -52,6 +52,18 @@ export type FetchPacksParamsType = {
   pageCount?: number;
 };
 
+export const testPack: CardPackType = {
+  _id: 'kdflsn',
+  updated: '2022-07-30T18:23:57.858Z',
+  name: 'TestPack',
+  cardsCount: 12,
+  user_id: 'asdasdasfa',
+  user_name: 'TestUser',
+  deckCover: '',
+  grade: 2,
+  shots: 2,
+};
+
 export type CardPackType = {
   _id: string; // CardPack id (id колоды карточек)
   user_id: string; // (id юзера создавшего колоду)
