@@ -16,7 +16,7 @@ import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Packs = React.memo((): ReturnComponentType => {
-  // const packs = useAppSelector(state => state.packs.cardPacks);
+  const packs = useAppSelector(state => state.packs.cardPacks);
   const page = useAppSelector(state => state.packs.page);
   const pageCount = useAppSelector(state => state.packs.pageCount);
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount);
@@ -53,8 +53,7 @@ export const Packs = React.memo((): ReturnComponentType => {
     <div className={styles.packsWrapper}>
       <TitleArea title="Packs list" buttonTitle="pack" addNewName={handleAddNewPack} />
       <FilterArea />
-      {/* packs={packs} */}
-      <TableArea />
+      <TableArea packs={packs} />
       <Pagination
         page={page}
         pageCount={pageCount}

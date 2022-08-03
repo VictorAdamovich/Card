@@ -20,12 +20,11 @@ export const ItemsNumberSelect = React.memo((props: ItemsNumberSelectProps) => {
         changePageCount(+e.target.value);
       }}
     >
-      <MenuItem value={3}>4</MenuItem>
+      <MenuItem value={4}>4</MenuItem>
       <MenuItem value={6}>6</MenuItem>
-      <MenuItem value={9}>8</MenuItem>
-      <MenuItem value={9}>10</MenuItem>
-      <MenuItem value={9}>12</MenuItem>
-      <MenuItem value={9}>20</MenuItem>
+      <MenuItem value={8}>8</MenuItem>
+      <MenuItem value={10}>10</MenuItem>
+      <MenuItem value={12}>12</MenuItem>
     </Select>
   );
 });
