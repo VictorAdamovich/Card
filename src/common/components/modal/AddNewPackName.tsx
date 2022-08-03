@@ -34,6 +34,7 @@ export const AddNewPackName = React.memo(
     const handleAddNewName = (): void => {
       setOpen(false);
       addNewPackName(value);
+      setValue('');
     };
     return (
       <div>
