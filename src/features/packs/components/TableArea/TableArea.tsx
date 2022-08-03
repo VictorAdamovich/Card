@@ -11,10 +11,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { Row } from 'features/packs/components/TableArea/components/Row';
 import { CardPackType } from 'features/packs/packs-api';
-import { fetchCardPacks, setSortFlagAC } from 'features/packs/packs-reducer';
+import { setSortFlagAC } from 'features/packs/packs-reducer';
 
 type TableAreaPropsType = {
   packs: CardPackType[];
@@ -29,11 +28,11 @@ export const TableArea = React.memo((props: TableAreaPropsType): React.ReactElem
 
   const sort = (): void => {
     dispatch(setSortFlagAC());
-    if (sortFlag) {
-      dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.up }));
+    /* if (sortFlag) {
+      // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.up }));
     } else {
-      dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.down }));
-    }
+      // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.down }));
+    } */
   };
   return (
     <TableContainer component={Paper}>

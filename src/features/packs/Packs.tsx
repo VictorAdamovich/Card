@@ -4,6 +4,7 @@ import { Pagination } from './components/Pagination/Pagination';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { TitleArea } from 'common/components/titleArea/TitleArea';
+import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { FilterArea } from 'features/packs/components/FilterArea/FilterArea';
 import { TableArea } from 'features/packs/components/TableArea/TableArea';
 import {
@@ -20,6 +21,9 @@ export const Packs = React.memo((): ReturnComponentType => {
   const page = useAppSelector(state => state.packs.page);
   const pageCount = useAppSelector(state => state.packs.pageCount);
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount);
+  const sortFlag = useAppSelector(state => state.packs.sortFlag);
+  const myAll = useAppSelector(state => state.packs.isOnlyMyPacks);
+  const id = useAppSelector(state => state.login.userInfo._id);
 
   const dispatch = useAppDispatch();
 
@@ -30,8 +34,10 @@ export const Packs = React.memo((): ReturnComponentType => {
 
   // запрос по страницам с колодами, выполняется при взаимодействии с пагинацией
   useEffect(() => {
-    dispatch(fetchCardPacks({ page, pageCount }));
-  }, [page, pageCount]);
+    const sort = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+    const userId = myAll ? id : '';
+    dispatch(fetchCardPacks({ page, pageCount, sortPacks: sort, user_id: userId }));
+  }, [page, pageCount, sortFlag, myAll]);
 
   // ________________________колбэк для добавления колоды_____________________
   const handleAddNewPack = useCallback((value: string): void => {

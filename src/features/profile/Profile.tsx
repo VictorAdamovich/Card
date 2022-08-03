@@ -17,12 +17,13 @@ export const Profile = (): ReturnComponentType => {
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
   const userInfo = useAppSelector(state => state.login.userInfo);
   const appStatus = useAppSelector(state => state.app.status);
+  const _id = useAppSelector(state => state.login.userInfo._id);
 
   const logoutCB = (): void => {
     dispatch(logOut());
   };
   const saveChangesHandler = (newValue: string): void => {
-    dispatch(updateUserInfoTC({ name: newValue }));
+    dispatch(updateUserInfoTC({ name: newValue, _id }));
   };
   const isDisabled = appStatus === 'loading';
 

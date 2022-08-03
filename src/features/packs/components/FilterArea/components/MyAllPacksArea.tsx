@@ -4,23 +4,23 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { fetchCardPacks, setIsOnlyMyPacksAC } from 'features/packs/packs-reducer';
+import { setIsOnlyMyPacksAC } from 'features/packs/packs-reducer';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const MyAllPacksArea = React.memo((): ReturnComponentType => {
   const isOnlyMyPacks = useAppSelector(state => state.packs.isOnlyMyPacks);
-  const userId = useAppSelector(state => state.login.userInfo.id);
+  // const userId = useAppSelector(state => state.login.userInfo._id);
   const dispatch = useAppDispatch();
 
   const fetchMyCardsPack = (): void => {
     dispatch(setIsOnlyMyPacksAC(true));
-    dispatch(fetchCardPacks({ user_id: userId }));
+    // dispatch(fetchCardPacks({ user_id: userId }));
   };
 
   const fetchAllCardsPack = (): void => {
     dispatch(setIsOnlyMyPacksAC(false));
-    dispatch(fetchCardPacks({}));
+    // dispatch(fetchCardPacks({}));
   };
 
   const variant = isOnlyMyPacks ? 'contained' : 'outlined';

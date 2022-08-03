@@ -8,6 +8,7 @@ const initialState: InitialStateType = {
   isLoggedIn: false,
   userInfo: {
     name: '',
+    _id: '',
   },
 };
 
@@ -54,7 +55,7 @@ export type UserInfoType = {
   name: string;
   email?: string;
   avatar?: string;
-  id?: string;
+  _id: string;
 };
 
 // Thunks
@@ -73,7 +74,7 @@ export const logIn =
             name: res.data.name,
             avatar: res.data.avatar,
             // eslint-disable-next-line
-            id: res.data['_id'],
+            _id: res.data._id,
           }),
         );
       })
