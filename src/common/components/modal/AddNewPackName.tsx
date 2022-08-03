@@ -42,10 +42,10 @@ export const AddNewPackName = React.memo(
           Add new {buttonTitle}
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Add new pack</DialogTitle>
+          <DialogTitle>Add new {buttonTitle}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              For adding new pack you should add name of new pack.
+              For adding new {buttonTitle} you should add name of new {buttonTitle}.
             </DialogContentText>
             <TextField
               autoFocus

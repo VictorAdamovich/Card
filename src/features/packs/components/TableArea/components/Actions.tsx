@@ -25,9 +25,11 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
       <IconButton>
         <School />
       </IconButton>
-      <IconButton>
-        <Edit />
-      </IconButton>
+      {canUserChangingPack && (
+        <IconButton>
+          <Edit />
+        </IconButton>
+      )}
       {canUserChangingPack && (
         <IconButton onClick={() => dispatch(deletePack(packId))}>
           <Delete />
