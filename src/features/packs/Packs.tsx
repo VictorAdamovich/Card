@@ -34,9 +34,9 @@ export const Packs = React.memo((): ReturnComponentType => {
 
   // запрос по страницам с колодами, выполняется при взаимодействии с пагинацией
   useEffect(() => {
-    const sort = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+    const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
     const userId = myAll ? id : '';
-    dispatch(fetchCardPacks({ page, pageCount, sortPacks: sort, user_id: userId }));
+    dispatch(fetchCardPacks({ page, pageCount, sortPacks, user_id: userId }));
   }, [page, pageCount, sortFlag, myAll]);
 
   // ________________________колбэк для добавления колоды_____________________

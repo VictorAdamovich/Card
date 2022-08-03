@@ -3,7 +3,8 @@ import React from 'react';
 import { Delete, Edit, School } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 
-import { useAppSelector } from 'app/store';
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { deletePack } from 'features/packs/packs-reducer';
 
 type ActionsPropsType = {
   packId: string;
@@ -13,14 +14,14 @@ type ActionsPropsType = {
 export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const { userId, packId } = props;
 
+  const dispatch = useAppDispatch();
+
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
 
   const canUserChangingPack = userId === currentUserId;
-  const a = packId ? '' : '';
 
   return (
     <div>
-      {a}
       <IconButton>
         <School />
       </IconButton>
@@ -28,7 +29,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
         <Edit />
       </IconButton>
       {canUserChangingPack && (
-        <IconButton>
+        <IconButton onClick={() => dispatch(deletePack(packId))}>
           <Delete />
         </IconButton>
       )}

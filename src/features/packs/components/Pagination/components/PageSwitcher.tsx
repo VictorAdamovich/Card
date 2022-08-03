@@ -13,7 +13,7 @@ export const PageSwitcher = React.memo(
   (props: PageSwitcherPropsType): React.ReactElement => {
     const { page, changePage, pageCount, totalCount } = props;
 
-    const countOfPages = Math.round(totalCount / pageCount);
+    const countOfPages = Math.ceil(totalCount / pageCount);
 
     const pageChange = (event: React.ChangeEvent<unknown>, value: number): void => {
       changePage(value);

@@ -1,6 +1,7 @@
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
 // import { SortPacksFlag } from 'common/enums/sort-packs-flag';
+import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import {
   FetchPacksParamsType,
@@ -148,7 +149,13 @@ export const createNewPack =
     packsAPI
       .createPack(packName)
       .then(res => {
-        const params = getState().packs.paramsForFetchPacks;
+        // const params = getState().packs.paramsForFetchPacks;
+        const { packs, login } = getState();
+        const { isOnlyMyPacks, page, pageCount, sortFlag } = packs;
+        const { _id } = login.userInfo;
+        const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+        const userId = isOnlyMyPacks ? _id : '';
+        const params = { page, pageCount, sortPacks, user_id: userId };
         dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
         dispatch(fetchCardPacks(params));
       })
@@ -166,7 +173,13 @@ export const deletePack =
     packsAPI
       .deletePack(packId)
       .then(res => {
-        const params = getState().packs.paramsForFetchPacks;
+        // const params = getState().packs.paramsForFetchPacks;
+        const { packs, login } = getState();
+        const { isOnlyMyPacks, page, pageCount, sortFlag } = packs;
+        const { _id } = login.userInfo;
+        const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+        const userId = isOnlyMyPacks ? _id : '';
+        const params = { page, pageCount, sortPacks, user_id: userId };
         dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
         dispatch(fetchCardPacks(params));
       })
@@ -185,7 +198,13 @@ export const updatePack =
     packsAPI
       .updatePack(packId, newPackName)
       .then(res => {
-        const params = getState().packs.paramsForFetchPacks;
+        // const params = getState().packs.paramsForFetchPacks;
+        const { packs, login } = getState();
+        const { isOnlyMyPacks, page, pageCount, sortFlag } = packs;
+        const { _id } = login.userInfo;
+        const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+        const userId = isOnlyMyPacks ? _id : '';
+        const params = { page, pageCount, sortPacks, user_id: userId };
         dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
         dispatch(fetchCardPacks(params));
       })
