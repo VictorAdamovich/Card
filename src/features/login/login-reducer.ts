@@ -8,6 +8,7 @@ const initialState: InitialStateType = {
   isLoggedIn: false,
   userInfo: {
     name: '',
+    avatar: '',
     _id: '',
   },
 };

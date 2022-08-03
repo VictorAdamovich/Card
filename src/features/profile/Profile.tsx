@@ -1,11 +1,13 @@
 import React from 'react';
 
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Box, Button, FormControl, FormLabel, Grid } from '@mui/material';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import { Badge, Box, Button, FormControl, FormLabel, Grid } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import { Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import img from 'assets/images/ava-img.jpg';
+import defaultImage from 'assets/images/ava-img.jpg';
 import { EditableSpan } from 'common/components/editableSpan/EditableSpan';
 import { FormWrapper } from 'common/components/formWrapper/FormWrapper';
 import { RoutePath } from 'common/enums/route-path';
@@ -22,6 +24,7 @@ export const Profile = (): ReturnComponentType => {
   const logoutCB = (): void => {
     dispatch(logOut());
   };
+
   const saveChangesHandler = (newValue: string): void => {
     dispatch(updateUserInfoTC({ name: newValue, _id }));
   };
@@ -30,12 +33,26 @@ export const Profile = (): ReturnComponentType => {
   if (!isLoggedIn) {
     return <Navigate to={RoutePath.Login} />;
   }
+
   return (
     <FormWrapper>
-      <h2>IT-incubator</h2>
-      <div>
-        <img src={img} alt="avatar" width="200px" />
-      </div>
+      <h2>It-incubator</h2>
+      <Badge
+        overlap="circular"
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        badgeContent={
+          <PhotoCameraIcon
+            color="disabled"
+            onClick={() => console.log('Set New Avatar')}
+          />
+        }
+      >
+        <Avatar
+          alt="User"
+          src={userInfo.avatar || defaultImage}
+          sx={{ width: 150, height: 150 }}
+        />
+      </Badge>
       <Grid container xs={12} justifyContent="center">
         <FormControl>
           <FormLabel>
