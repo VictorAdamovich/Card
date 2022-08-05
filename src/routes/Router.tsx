@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { NaviForDev } from 'common/components/_NAVI_FOR_DEV/NAVI_FOR_DEV';
 import Error404 from 'common/components/error404/Error404';
 import { RoutePath } from 'common/enums/route-path';
+import { Cards } from 'features/cards/Cards';
 import { CheckEmail } from 'features/forgotPassword/CheckEmail';
 import { CreateNewPassword } from 'features/forgotPassword/CreateNewPassword';
 import { ForgotPassword } from 'features/forgotPassword/ForgotPassword';
@@ -26,6 +27,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.CreateNewPassword, component: <CreateNewPassword /> },
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
     { path: RoutePath.Packs, component: <Packs /> },
+    { path: RoutePath.Cards, component: <Cards /> },
   ];
 
   return (
