@@ -24,6 +24,18 @@ export const cardsAPI = {
       },
     });
   },
+  deleteCard(cardId: string) {
+    return instance.delete(`cards/card?id=${cardId}`);
+  },
+  updateCard(updateCardParams: UpdateCardParamsType) {
+    return instance.put(`cards/card`, {
+      card: {
+        _id: updateCardParams.cardId,
+        question: updateCardParams.question,
+        answer: updateCardParams.answer,
+      },
+    });
+  },
 };
 
 export type GetCardsParamsType = {
@@ -67,4 +79,9 @@ export type CardsType = {
   created: string;
   updated: string;
   _id: string;
+};
+export type UpdateCardParamsType = {
+  cardId: string;
+  question?: string;
+  answer?: string;
 };

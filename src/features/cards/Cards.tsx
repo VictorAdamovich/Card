@@ -3,11 +3,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { TitleArea } from 'common/components/titleArea/TitleArea';
 import { createPackCardTC } from 'features/cards/cards-reducer';
 import { CardsSearchArea } from 'features/cards/components/cardsSearchArea/CardsSearchArea';
 import { CardsTableArea } from 'features/cards/components/cardsTableArea/CardsTableArea';
-import { EmptyPackPage } from 'features/cards/components/EmptyPackPage/EmptyPackPage';
+import { CardsTitleArea } from 'features/cards/components/cardsTitleArea/CardsTitleArea';
+import { EmptyPackPage } from 'features/cards/components/emptyPackPage/EmptyPackPage';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -20,16 +20,16 @@ export const Cards = (): ReturnComponentType => {
   const currentPack = packs.find(p => p._id === packId);
   const packName = currentPack ? currentPack.name : 'Pack Name';
 
-  const handleAddNewCard = (value: string): void => {
-    dispatch(createPackCardTC({ cardsPack_id: packId, question: value }));
+  const handleAddNewCard = (question: string, answer: string): void => {
+    dispatch(createPackCardTC({ cardsPack_id: packId, question, answer }));
   };
 
   return (
     <div className={styles.packsWrapper}>
-      <TitleArea title={packName} buttonTitle="card" addNewName={handleAddNewCard} />
+      <CardsTitleArea title={packName} addNewCard={handleAddNewCard} />
       <CardsSearchArea />
       {cards.length === empty ? (
-        <EmptyPackPage addNewName={handleAddNewCard} />
+        <EmptyPackPage addNewCard={handleAddNewCard} />
       ) : (
         <CardsTableArea cards={cards} />
       )}

@@ -15,8 +15,9 @@ const initialState: InitialStateType = {
   page: 1,
   pageCount: 4,
   packUserId: '',
+  sortFlag: false,
 };
-type InitialStateType = GetCardsResponseType;
+type InitialStateType = GetCardsResponseType & { sortFlag: boolean };
 
 export const cardsReducer = (
   state: InitialStateType = initialState,
@@ -25,6 +26,11 @@ export const cardsReducer = (
   switch (action.type) {
     case 'cards/SET-CARDS':
       return { ...state, ...action.payload };
+    case 'cards/SET-SORT-FLAG':
+      return {
+        ...state,
+        sortFlag: !state.sortFlag,
+      };
     default:
       return state;
   }
@@ -35,8 +41,16 @@ const setCardPacksAC = (payload: GetCardsResponseType) =>
     payload,
   } as const);
 
-export type CardsActionsType = ReturnType<typeof setCardPacksAC>;
+export const setCardsSortFlagAC = () =>
+  ({
+    type: 'cards/SET-SORT-FLAG',
+  } as const);
 
+export type CardsActionsType =
+  | ReturnType<typeof setCardPacksAC>
+  | ReturnType<typeof setCardsSortFlagAC>;
+
+// ____________________Thunks_______________________
 export const setPackCardsTC =
   (params: GetCardsParamsType): AppThunk =>
   async dispatch => {
@@ -50,8 +64,20 @@ export const createPackCardTC =
   (params: CreateCardParamsType): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
-    // eslint-disable-next-line no-debugger
-    debugger;
     await cardsAPI.createCard(params);
     dispatch(setPackCardsTC({ cardsPack_id: params.cardsPack_id }));
+  };
+export const deletePackCardTC =
+  (packId: string, cardId: string): AppThunk =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    await cardsAPI.deleteCard(cardId);
+    dispatch(setPackCardsTC({ cardsPack_id: packId }));
+  };
+export const updatePackCardTC =
+  (packId: string, cardId: string, question?: string, answer?: string): AppThunk =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    await cardsAPI.updateCard({ cardId, question, answer });
+    dispatch(setPackCardsTC({ cardsPack_id: packId }));
   };

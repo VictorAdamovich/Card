@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ArrowDropDownOutlined } from '@mui/icons-material';
+import { ArrowDropDownOutlined, ArrowDropUpOutlined } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -10,7 +10,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import { useAppDispatch, useAppSelector } from 'app/store';
 import { CardsType } from 'features/cards/cards-api';
+import { setCardsSortFlagAC } from 'features/cards/cards-reducer';
 import { CardRow } from 'features/cards/components/cardsTableArea/components/CardRow';
 
 type CardsTableAreaPropsType = {
@@ -18,21 +20,19 @@ type CardsTableAreaPropsType = {
 };
 
 export const CardsTableArea = React.memo(
-  (props: CardsTableAreaPropsType): React.ReactElement => {
-    const { cards } = props;
-    //
-    // const dispatch = useAppDispatch();
-    //
-    // const sortFlag = useAppSelector(state => state.packs.sortFlag);
+  ({ cards }: CardsTableAreaPropsType): React.ReactElement => {
+    const sortFlag = useAppSelector(state => state.packCards.sortFlag);
+    const dispatch = useAppDispatch();
 
-    // const sort = (): void => {
-    //   dispatch(setSortFlagAC());
-    /* if (sortFlag) {
+    const sort = (): void => {
+      dispatch(setCardsSortFlagAC());
+      /* if (sortFlag) {
             // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.up }));
           } else {
             // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.down }));
           } */
-    // };
+    };
+
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -43,13 +43,12 @@ export const CardsTableArea = React.memo(
               <TableCell>
                 Last Updated{'  '}
                 <IconButton
-                  // onClick={sort}
+                  onClick={sort}
                   color="primary"
                   aria-label="upload picture"
                   component="label"
                 >
-                  {/* {sortFlag ? <ArrowDropUpOutlined /> */}
-                  <ArrowDropDownOutlined />
+                  {sortFlag ? <ArrowDropUpOutlined /> : <ArrowDropDownOutlined />}
                 </IconButton>
               </TableCell>
               <TableCell>Grade</TableCell>
