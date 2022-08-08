@@ -3,16 +3,7 @@ import { instance } from 'api/config/apiConfig';
 export const cardsAPI = {
   getCards(URLParams: GetCardsParamsType) {
     return instance.get<GetCardsResponseType>('cards/card', {
-      params: {
-        cardAnswer: URLParams.cardAnswer,
-        cardQuestion: URLParams.cardQuestion,
-        cardsPack_id: URLParams.cardsPack_id,
-        min: URLParams.min,
-        max: URLParams.max,
-        sortCards: URLParams.sortCards,
-        page: URLParams.page,
-        pageCount: URLParams.pageCount,
-      },
+      params: { ...URLParams },
     });
   },
   createCard(params: CreateCardParamsType) {

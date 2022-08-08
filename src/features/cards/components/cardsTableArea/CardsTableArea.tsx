@@ -21,16 +21,11 @@ type CardsTableAreaPropsType = {
 
 export const CardsTableArea = React.memo(
   ({ cards }: CardsTableAreaPropsType): React.ReactElement => {
-    const sortFlag = useAppSelector(state => state.packCards.sortFlag);
     const dispatch = useAppDispatch();
+    const sortFlag = useAppSelector(state => state.packCards.sortFlag);
 
     const sort = (): void => {
       dispatch(setCardsSortFlagAC());
-      /* if (sortFlag) {
-            // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.up }));
-          } else {
-            // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.down }));
-          } */
     };
 
     return (
@@ -42,12 +37,7 @@ export const CardsTableArea = React.memo(
               <TableCell>Answer</TableCell>
               <TableCell>
                 Last Updated{'  '}
-                <IconButton
-                  onClick={sort}
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
+                <IconButton onClick={sort} color="primary">
                   {sortFlag ? <ArrowDropUpOutlined /> : <ArrowDropDownOutlined />}
                 </IconButton>
               </TableCell>

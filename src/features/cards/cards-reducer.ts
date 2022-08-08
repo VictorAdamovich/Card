@@ -15,15 +15,19 @@ const initialState: InitialStateType = {
   page: 1,
   pageCount: 4,
   packUserId: '',
+  searchValue: '',
   sortFlag: false,
 };
-type InitialStateType = GetCardsResponseType & { sortFlag: boolean };
+type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
 
 export const cardsReducer = (
   state: InitialStateType = initialState,
   action: CardsActionsType,
 ): InitialStateType => {
   switch (action.type) {
+    case 'cards/SET-SEARCH-VALUE':
+    case 'cards/SET-PAGE-NUMBER':
+    case 'cards/SET-PAGE-COUNT-NUMBER':
     case 'cards/SET-CARDS':
       return { ...state, ...action.payload };
     case 'cards/SET-SORT-FLAG':
@@ -35,12 +39,36 @@ export const cardsReducer = (
       return state;
   }
 };
-const setCardPacksAC = (payload: GetCardsResponseType) =>
+
+// ______________________Actions____________________________
+export const setCardPacksAC = (payload: GetCardsResponseType) =>
   ({
     type: 'cards/SET-CARDS',
     payload,
   } as const);
 
+export const setCardsSearchValueAC = (value: string) =>
+  ({
+    type: 'cards/SET-SEARCH-VALUE',
+    payload: {
+      searchValue: value,
+    },
+  } as const);
+
+export const setCardPageNumberAC = (page: number) =>
+  ({
+    type: 'cards/SET-PAGE-NUMBER',
+    payload: {
+      page,
+    },
+  } as const);
+export const setCardPageCountNumberAC = (pageCount: number) =>
+  ({
+    type: 'cards/SET-PAGE-COUNT-NUMBER',
+    payload: {
+      pageCount,
+    },
+  } as const);
 export const setCardsSortFlagAC = () =>
   ({
     type: 'cards/SET-SORT-FLAG',
@@ -48,7 +76,10 @@ export const setCardsSortFlagAC = () =>
 
 export type CardsActionsType =
   | ReturnType<typeof setCardPacksAC>
-  | ReturnType<typeof setCardsSortFlagAC>;
+  | ReturnType<typeof setCardPageNumberAC>
+  | ReturnType<typeof setCardPageCountNumberAC>
+  | ReturnType<typeof setCardsSortFlagAC>
+  | ReturnType<typeof setCardsSearchValueAC>;
 
 // ____________________Thunks_______________________
 export const setPackCardsTC =

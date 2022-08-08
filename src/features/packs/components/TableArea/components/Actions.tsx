@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { RoutePath } from 'common/enums/route-path';
-import { setPackCardsTC } from 'features/cards/cards-reducer';
 import { deletePack } from 'features/packs/packs-reducer';
 
 type ActionsPropsType = {
@@ -24,7 +23,6 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const canUserChangingPack = userId === currentUserId;
 
   const handleClickOpenPackCards = (): void => {
-    dispatch(setPackCardsTC({ cardsPack_id: packId }));
     navigate(`${RoutePath.Packs}/${packId}/cards`);
   };
 
