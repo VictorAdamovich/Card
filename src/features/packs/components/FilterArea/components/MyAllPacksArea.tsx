@@ -10,17 +10,15 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const MyAllPacksArea = React.memo((): ReturnComponentType => {
   const isOnlyMyPacks = useAppSelector(state => state.packs.isOnlyMyPacks);
-  // const userId = useAppSelector(state => state.login.userInfo._id);
+
   const dispatch = useAppDispatch();
 
   const fetchMyCardsPack = (): void => {
     dispatch(setIsOnlyMyPacksAC(true));
-    // dispatch(fetchCardPacks({ user_id: userId }));
   };
 
   const fetchAllCardsPack = (): void => {
     dispatch(setIsOnlyMyPacksAC(false));
-    // dispatch(fetchCardPacks({}));
   };
 
   const variant = isOnlyMyPacks ? 'contained' : 'outlined';

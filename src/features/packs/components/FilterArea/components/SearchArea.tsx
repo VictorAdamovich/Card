@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import TextField from '@mui/material/TextField';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import useDebounce from 'common/hooks/useDebounce';
-import { fetchCardPacks, setSearchValueAC } from 'features/packs/packs-reducer';
+import { setSearchValueAC } from 'features/packs/packs-reducer';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -12,15 +11,6 @@ export const SearchArea = React.memo((): ReturnComponentType => {
   const searchValue = useAppSelector(state => state.packs.searchValue);
 
   const dispatch = useAppDispatch();
-
-  const delay = 1000;
-  const debouncedValue = useDebounce<string | undefined>(searchValue, delay);
-
-  useEffect(() => {
-    if (searchValue !== '') {
-      dispatch(fetchCardPacks({ packName: debouncedValue }));
-    }
-  }, [debouncedValue]);
 
   const handleOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

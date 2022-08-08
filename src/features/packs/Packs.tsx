@@ -5,6 +5,7 @@ import { Pagination } from './components/Pagination/Pagination';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { TitleArea } from 'common/components/titleArea/TitleArea';
 import { SortPacksFlag } from 'common/enums/sort-packs-flag';
+import useDebounce from 'common/hooks/useDebounce';
 import { FilterArea } from 'features/packs/components/FilterArea/FilterArea';
 import { TableArea } from 'features/packs/components/TableArea/TableArea';
 import {
@@ -24,8 +25,14 @@ export const Packs = React.memo((): ReturnComponentType => {
   const sortFlag = useAppSelector(state => state.packs.sortFlag);
   const myAll = useAppSelector(state => state.packs.isOnlyMyPacks);
   const id = useAppSelector(state => state.login.userInfo._id);
+  const searchValue = useAppSelector(state => state.packs.searchValue);
+  const min = useAppSelector(state => state.packs.min);
+  const max = useAppSelector(state => state.packs.max);
 
   const dispatch = useAppDispatch();
+
+  const delay = 1000;
+  const debouncedValue = useDebounce<string | undefined>(searchValue, delay);
 
   // первый запрос на получение колод
   useEffect(() => {
@@ -36,8 +43,18 @@ export const Packs = React.memo((): ReturnComponentType => {
   useEffect(() => {
     const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
     const userId = myAll ? id : '';
-    dispatch(fetchCardPacks({ page, pageCount, sortPacks, user_id: userId }));
-  }, [page, pageCount, sortFlag, myAll]);
+    dispatch(
+      fetchCardPacks({
+        page,
+        pageCount,
+        sortPacks,
+        user_id: userId,
+        packName: debouncedValue,
+        min,
+        max,
+      }),
+    );
+  }, [page, pageCount, sortFlag, myAll, debouncedValue, min, max]);
 
   // ________________________колбэк для добавления колоды_____________________
   const handleAddNewPack = useCallback((value: string): void => {
