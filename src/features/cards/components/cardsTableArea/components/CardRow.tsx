@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Rating } from '@mui/material';
+import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
@@ -29,17 +29,18 @@ export const CardRow = React.memo((props: RowPropsType) => {
       <TableCell>{question}</TableCell>
       <TableCell>{answer}</TableCell>
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
-      <TableCell style={{ display: 'flex' }}>
-        <Rating
-          style={{ alignItems: 'center' }}
-          name="read-only"
-          value={grade}
-          readOnly
-        />
-        {canUserChangingPack && (
-          // eslint-disable-next-line camelcase
-          <CardActions packId={cardsPack_id} cardId={_id} />
-        )}
+      <TableCell>
+        <Box style={{ display: 'flex' }}>
+          <Rating
+            style={{ alignItems: 'center' }}
+            name="read-only"
+            value={grade}
+            readOnly
+          />
+
+          {/* eslint-disable-next-line camelcase */}
+          {canUserChangingPack && <CardActions packId={cardsPack_id} cardId={_id} />}
+        </Box>
       </TableCell>
     </TableRow>
   );

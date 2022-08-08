@@ -1,5 +1,6 @@
 import { setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
+import { handleServerNetworkError } from 'common/utils/error-utils';
 import {
   cardsAPI,
   CreateCardParamsType,
@@ -18,7 +19,6 @@ const initialState: InitialStateType = {
   searchValue: '',
   sortFlag: false,
 };
-type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
 
 export const cardsReducer = (
   state: InitialStateType = initialState,
@@ -46,7 +46,6 @@ export const setCardPacksAC = (payload: GetCardsResponseType) =>
     type: 'cards/SET-CARDS',
     payload,
   } as const);
-
 export const setCardsSearchValueAC = (value: string) =>
   ({
     type: 'cards/SET-SEARCH-VALUE',
@@ -54,7 +53,6 @@ export const setCardsSearchValueAC = (value: string) =>
       searchValue: value,
     },
   } as const);
-
 export const setCardPageNumberAC = (page: number) =>
   ({
     type: 'cards/SET-PAGE-NUMBER',
@@ -74,6 +72,7 @@ export const setCardsSortFlagAC = () =>
     type: 'cards/SET-SORT-FLAG',
   } as const);
 
+// ______________________Types_______________________________
 export type CardsActionsType =
   | ReturnType<typeof setCardPacksAC>
   | ReturnType<typeof setCardPageNumberAC>
@@ -81,16 +80,23 @@ export type CardsActionsType =
   | ReturnType<typeof setCardsSortFlagAC>
   | ReturnType<typeof setCardsSearchValueAC>;
 
-// ____________________Thunks_______________________
+type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
+
+// ______________________Thunks_____________________________
 export const setPackCardsTC =
   (params: GetCardsParamsType): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
     const response = await cardsAPI.getCards(params);
-    dispatch(setCardPacksAC(response.data));
-    dispatch(setAppStatusAC('succeeded'));
+    try {
+      dispatch(setCardPacksAC(response.data));
+      dispatch(setAppStatusAC('succeeded'));
+    } catch (err: any) {
+      handleServerNetworkError(err.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
-
 export const createPackCardTC =
   (params: CreateCardParamsType): AppThunk =>
   async dispatch => {

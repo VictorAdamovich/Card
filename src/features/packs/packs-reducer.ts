@@ -1,6 +1,5 @@
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
-// import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import {
@@ -69,7 +68,6 @@ const setCardPacksAC = (payload: FetchPacksResponseType) =>
     type: 'packs/SET-CARD-PACKS',
     payload,
   } as const);
-
 export const setSearchValueAC = (value: string) =>
   ({
     type: 'packs/SET-SEARCH-VALUE',
@@ -82,7 +80,6 @@ export const setIsOnlyMyPacksAC = (flag: boolean) =>
     type: 'packs/SET-IS-ONLY-MY-PACKS',
     flag,
   } as const);
-
 export const setMinMaxCardsCountAC = (minCardsCount: number, maxCardsCount: number) =>
   ({
     type: 'packs/SET-MIN-MAX-CARDS-COUNTS-VALUES',

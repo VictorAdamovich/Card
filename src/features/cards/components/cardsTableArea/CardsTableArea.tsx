@@ -33,15 +33,15 @@ export const CardsTableArea = React.memo(
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow sx={{ bgcolor: '#EFEFEF' }}>
-              <TableCell>Question</TableCell>
-              <TableCell>Answer</TableCell>
-              <TableCell>
+              <TableCell style={{ minWidth: 235 }}>Question</TableCell>
+              <TableCell style={{ minWidth: 235 }}>Answer</TableCell>
+              <TableCell style={{ minWidth: 130 }}>
                 Last Updated{'  '}
                 <IconButton onClick={sort} color="primary">
                   {sortFlag ? <ArrowDropUpOutlined /> : <ArrowDropDownOutlined />}
                 </IconButton>
               </TableCell>
-              <TableCell>Grade</TableCell>
+              <TableCell style={{ minWidth: 100 }}>Grade</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
