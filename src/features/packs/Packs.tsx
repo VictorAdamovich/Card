@@ -4,8 +4,8 @@ import { Pagination } from './components/Pagination/Pagination';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { TitleArea } from 'common/components/titleArea/TitleArea';
-import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import useDebounce from 'common/hooks/useDebounce';
+import { sortOne, sortZero } from 'common/utils/refetchPacks-utills';
 import { FilterArea } from 'features/packs/components/FilterArea/FilterArea';
 import { TableArea } from 'features/packs/components/TableArea/TableArea';
 import {
@@ -23,6 +23,7 @@ export const Packs = React.memo((): ReturnComponentType => {
   const pageCount = useAppSelector(state => state.packs.pageCount);
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount);
   const sortFlag = useAppSelector(state => state.packs.sortFlag);
+  const sortChoice = useAppSelector(state => state.packs.sortChoice);
   const myAll = useAppSelector(state => state.packs.isOnlyMyPacks);
   const id = useAppSelector(state => state.login.userInfo._id);
   const searchValue = useAppSelector(state => state.packs.searchValue);
@@ -34,14 +35,9 @@ export const Packs = React.memo((): ReturnComponentType => {
   const delay = 1000;
   const debouncedValue = useDebounce<string | undefined>(searchValue, delay);
 
-  // первый запрос на получение колод
-  useEffect(() => {
-    dispatch(fetchCardPacks({}));
-  }, []);
-
   // запрос по страницам с колодами, выполняется при взаимодействии с пагинацией
   useEffect(() => {
-    const sortPacks = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+    const sortPacks = `${sortFlag ? sortOne : sortZero}${sortChoice}`;
     const userId = myAll ? id : '';
     dispatch(
       fetchCardPacks({
@@ -54,7 +50,7 @@ export const Packs = React.memo((): ReturnComponentType => {
         max,
       }),
     );
-  }, [page, pageCount, sortFlag, myAll, debouncedValue, min, max]);
+  }, [page, pageCount, sortFlag, myAll, debouncedValue, min, max, sortChoice]);
 
   // ________________________колбэк для добавления колоды_____________________
   const handleAddNewPack = useCallback((value: string): void => {
@@ -63,15 +59,13 @@ export const Packs = React.memo((): ReturnComponentType => {
 
   // _______________________ колбэки для пагинации ____________________
   const changePageCount = useCallback((value: number): void => {
-    //  dispatch Action forChanging pageCount value
     dispatch(setPageCountNumber(value));
   }, []);
 
   const changePage = useCallback((value: number): void => {
-    //  dispatch Action for Changing page number
     dispatch(setPageNumber(value));
   }, []);
-  // ____________________________________________________________________
+
   return (
     <div className={styles.packsWrapper}>
       <TitleArea title="Packs list" buttonTitle="pack" addNewName={handleAddNewPack} />

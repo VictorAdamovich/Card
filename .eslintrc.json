@@ -32,7 +32,7 @@
     "no-debugger": "error",
     "no-plusplus": "error",
     "no-unused-vars": "off",
-    "no-magic-numbers": "off",
+    "no-magic-numbers": "warn",
     "default-param-last": "off",
     "no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",

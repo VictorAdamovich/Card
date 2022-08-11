@@ -1,7 +1,4 @@
-// import { AxiosResponse } from 'axios';
-
 import { instance } from 'api/config/apiConfig';
-import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 
 export const packsAPI = {
   fetchPacks(URLParams: FetchPacksParamsType) {
@@ -47,21 +44,9 @@ export type FetchPacksParamsType = {
   packName?: string;
   min?: number;
   max?: number;
-  sortPacks?: SortPacksFlag;
+  sortPacks?: string;
   page?: number;
   pageCount?: number;
-};
-
-export const testPack: CardPackType = {
-  _id: 'kdflsn',
-  updated: '2022-07-30T18:23:57.858Z',
-  name: 'TestPack',
-  cardsCount: 12,
-  user_id: 'asdasdasfa',
-  user_name: 'TestUser',
-  deckCover: '',
-  grade: 2,
-  shots: 2,
 };
 
 export type CardPackType = {
@@ -91,86 +76,3 @@ export type FetchPacksResponseType = {
   minCardsCount: number;
   maxCardsCount: number;
 };
-
-/* const response = {
-  cardPacks: [
-    {
-      _id: '62e570c51c90be4f10b2554c',
-      user_id: '62dfe5868cf0b21258ba4d48',
-      user_name: 'goro_goro',
-      private: false,
-      name: '???',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 3,
-      type: 'pack',
-      rating: 0,
-      created: '2022-07-30T17:56:21.656Z',
-      updated: '2022-07-30T18:23:57.858Z',
-      more_id: '62dfe5868cf0b21258ba4d48',
-      __v: 0,
-      deckCover: null,
-    },
-    {
-      _id: '62e576d61c90be4f10b25553',
-      user_id: '62dfe5868cf0b21258ba4d48',
-      user_name: 'goro_goro',
-      private: false,
-      name: 'Test paaaack',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 0,
-      type: 'pack',
-      rating: 0,
-      created: '2022-07-30T18:22:14.362Z',
-      updated: '2022-07-30T18:22:14.362Z',
-      more_id: '62dfe5868cf0b21258ba4d48',
-      __v: 0,
-    },
-    {
-      _id: '62dfff9be72dee3114c2b040',
-      user_id: '62d1802ef949c92acc6966d5',
-      user_name: '12qqqq3@mail.ru',
-      private: false,
-      name: 'privet pipli',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 0,
-      type: 'pack',
-      rating: 0,
-      created: '2022-07-26T14:52:11.039Z',
-      updated: '2022-07-30T16:35:37.000Z',
-      more_id: '62d1802ef949c92acc6966d5',
-      __v: 0,
-      deckCover: null,
-    },
-    {
-      _id: '62e553f1455f1700048948f4',
-      user_id: '62dc16eac8a755525c13f6a6',
-      user_name: 'Ilya',
-      private: false,
-      name: 'create new cool pack',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      deckCover: '',
-      cardsCount: 0,
-      type: 'pack',
-      rating: 0,
-      created: '2022-07-30T15:53:21.304Z',
-      updated: '2022-07-30T15:53:21.304Z',
-      more_id: '62dc16eac8a755525c13f6a6',
-      __v: 0,
-    },
-  ],
-  page: 1,
-  pageCount: 4,
-  cardPacksTotalCount: 5833,
-  minCardsCount: 0,
-  maxCardsCount: 110,
-  token: '01fd3640-103b-11ed-a3f9-5f6681b6de52',
-  tokenDeathTime: 1659218914085,
-}; */
