@@ -7,8 +7,8 @@ import { SortPacksFlag } from 'common/enums/sort-packs-flag';
 import useDebounce from 'common/hooks/useDebounce';
 import {
   createPackCardTC,
-  setCardPageCountNumberAC,
-  setCardPageNumberAC,
+  setCardsPageCountNumberAC,
+  setCardsPageNumberAC,
   setPackCardsTC,
 } from 'features/cards/cards-reducer';
 import { CardsSearchArea } from 'features/cards/components/cardsSearchArea/CardsSearchArea';
@@ -41,11 +41,11 @@ export const Cards = React.memo((): ReturnComponentType => {
 
   const changePage = useCallback((value: number): void => {
     //  dispatch Action for Changing page number
-    dispatch(setCardPageNumberAC(value));
+    dispatch(setCardsPageNumberAC(value));
   }, []);
   const changePageCount = useCallback((value: number): void => {
     //  dispatch Action forChanging pageCount value
-    dispatch(setCardPageCountNumberAC(value));
+    dispatch(setCardsPageCountNumberAC(value));
   }, []);
 
   useEffect(() => {

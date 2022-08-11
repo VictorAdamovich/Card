@@ -6,6 +6,7 @@ import { NaviForDev } from 'common/components/_NAVI_FOR_DEV/NAVI_FOR_DEV';
 import Error404 from 'common/components/error404/Error404';
 import { RoutePath } from 'common/enums/route-path';
 import { Cards } from 'features/cards/Cards';
+import { CardQuestionForm } from 'features/cards/components/cardsTableArea/components/CardQuestionForm';
 import { CheckEmail } from 'features/forgotPassword/CheckEmail';
 import { CreateNewPassword } from 'features/forgotPassword/CreateNewPassword';
 import { ForgotPassword } from 'features/forgotPassword/ForgotPassword';
@@ -28,6 +29,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
     { path: RoutePath.Packs, component: <Packs /> },
     { path: RoutePath.Cards, component: <Cards /> },
+    { path: RoutePath.CardQuestion, component: <CardQuestionForm /> },
   ];
 
   return (

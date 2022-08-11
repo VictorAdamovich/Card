@@ -35,13 +35,20 @@ export const cardsReducer = (
         ...state,
         sortFlag: !state.sortFlag,
       };
+    case 'cards/SET-CARD-GRADE':
+      return {
+        ...state,
+        cards: state.cards.map(card =>
+          card._id === action.cardId ? { ...card, grade: action.grade } : card,
+        ),
+      };
     default:
       return state;
   }
 };
 
 // ______________________Actions____________________________
-export const setCardPacksAC = (payload: GetCardsResponseType) =>
+export const setPackCardsAC = (payload: GetCardsResponseType) =>
   ({
     type: 'cards/SET-CARDS',
     payload,
@@ -53,14 +60,14 @@ export const setCardsSearchValueAC = (value: string) =>
       searchValue: value,
     },
   } as const);
-export const setCardPageNumberAC = (page: number) =>
+export const setCardsPageNumberAC = (page: number) =>
   ({
     type: 'cards/SET-PAGE-NUMBER',
     payload: {
       page,
     },
   } as const);
-export const setCardPageCountNumberAC = (pageCount: number) =>
+export const setCardsPageCountNumberAC = (pageCount: number) =>
   ({
     type: 'cards/SET-PAGE-COUNT-NUMBER',
     payload: {
@@ -71,13 +78,16 @@ export const setCardsSortFlagAC = () =>
   ({
     type: 'cards/SET-SORT-FLAG',
   } as const);
+export const setCardGradeAC = (grade: number, cardId: string) =>
+  ({ type: 'cards/SET-CARD-GRADE', grade, cardId } as const);
 
 // ______________________Types_______________________________
 export type CardsActionsType =
-  | ReturnType<typeof setCardPacksAC>
-  | ReturnType<typeof setCardPageNumberAC>
-  | ReturnType<typeof setCardPageCountNumberAC>
+  | ReturnType<typeof setPackCardsAC>
+  | ReturnType<typeof setCardsPageNumberAC>
+  | ReturnType<typeof setCardsPageCountNumberAC>
   | ReturnType<typeof setCardsSortFlagAC>
+  | ReturnType<typeof setCardGradeAC>
   | ReturnType<typeof setCardsSearchValueAC>;
 
 type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
@@ -89,7 +99,7 @@ export const setPackCardsTC =
     dispatch(setAppStatusAC('loading'));
     const response = await cardsAPI.getCards(params);
     try {
-      dispatch(setCardPacksAC(response.data));
+      dispatch(setPackCardsAC(response.data));
       dispatch(setAppStatusAC('succeeded'));
     } catch (err: any) {
       handleServerNetworkError(err.message, dispatch);
@@ -102,19 +112,43 @@ export const createPackCardTC =
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.createCard(params);
-    dispatch(setPackCardsTC({ cardsPack_id: params.cardsPack_id }));
+    try {
+      dispatch(setPackCardsTC({ cardsPack_id: params.cardsPack_id }));
+    } catch (err: any) {
+      handleServerNetworkError(err.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 export const deletePackCardTC =
   (packId: string, cardId: string): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.deleteCard(cardId);
-    dispatch(setPackCardsTC({ cardsPack_id: packId }));
+    try {
+      dispatch(setPackCardsTC({ cardsPack_id: packId }));
+    } catch (err: any) {
+      handleServerNetworkError(err.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 export const updatePackCardTC =
   (packId: string, cardId: string, question?: string, answer?: string): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.updateCard({ cardId, question, answer });
-    dispatch(setPackCardsTC({ cardsPack_id: packId }));
+    try {
+      dispatch(setPackCardsTC({ cardsPack_id: packId }));
+    } catch (err: any) {
+      handleServerNetworkError(err.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
+  };
+export const updateCardGradeTC =
+  (grade: number, cardId: string): AppThunk =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'));
+    await cardsAPI.updateCardGrade({ grade, card_id: cardId });
   };

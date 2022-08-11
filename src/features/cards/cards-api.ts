@@ -8,11 +8,7 @@ export const cardsAPI = {
   },
   createCard(params: CreateCardParamsType) {
     return instance.post('cards/card', {
-      card: {
-        cardsPack_id: params.cardsPack_id,
-        question: params.question,
-        answer: params.answer,
-      },
+      card: { ...params },
     });
   },
   deleteCard(cardId: string) {
@@ -20,15 +16,15 @@ export const cardsAPI = {
   },
   updateCard(updateCardParams: UpdateCardParamsType) {
     return instance.put(`cards/card`, {
-      card: {
-        _id: updateCardParams.cardId,
-        question: updateCardParams.question,
-        answer: updateCardParams.answer,
-      },
+      card: { ...updateCardParams },
     });
+  },
+  updateCardGrade(data: GradeCardParamsType) {
+    return instance.put(`cards/grade`, data);
   },
 };
 
+// ________________________Types____________________________
 export type GetCardsParamsType = {
   cardAnswer?: string;
   cardQuestion?: string;
@@ -50,7 +46,6 @@ export type CreateCardParamsType = {
   questionVideo?: string;
   answerVideo?: string;
 };
-
 export type GetCardsResponseType = {
   cards: CardsType[];
   cardsTotalCount: number;
@@ -76,3 +71,4 @@ export type UpdateCardParamsType = {
   question?: string;
   answer?: string;
 };
+export type GradeCardParamsType = { grade: number; card_id: string };

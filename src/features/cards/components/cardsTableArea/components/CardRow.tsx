@@ -3,8 +3,10 @@ import React from 'react';
 import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/store';
+import { RoutePath } from 'common/enums/route-path';
 import { CardsType } from 'features/cards/cards-api';
 import { CardActions } from 'features/cards/components/cardsTableArea/components/CardActions';
 
@@ -14,19 +16,25 @@ type RowPropsType = {
 
 export const CardRow = React.memo((props: RowPropsType) => {
   const { item } = props;
-
   // eslint-disable-next-line camelcase
   const { _id, question, answer, updated, grade, cardsPack_id } = item;
+
+  const navigate = useNavigate();
 
   const startSlice = 0;
   const endSlice = 20;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
-  const canUserChangingPack = item.user_id === currentUserId;
+  const canUserChangingCard = item.user_id === currentUserId;
+
+  const onClickQuestionCardHandler = (): void => {
+    // eslint-disable-next-line camelcase
+    navigate(`${RoutePath.Packs}/${cardsPack_id}/cards/${_id}`);
+  };
 
   return (
     <TableRow key={_id}>
-      <TableCell>{question}</TableCell>
+      <TableCell onDoubleClick={onClickQuestionCardHandler}>{question}</TableCell>
       <TableCell>{answer}</TableCell>
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
       <TableCell>
@@ -37,9 +45,8 @@ export const CardRow = React.memo((props: RowPropsType) => {
             value={grade}
             readOnly
           />
-
           {/* eslint-disable-next-line camelcase */}
-          {canUserChangingPack && <CardActions packId={cardsPack_id} cardId={_id} />}
+          {canUserChangingCard && <CardActions packId={cardsPack_id} cardId={_id} />}
         </Box>
       </TableCell>
     </TableRow>
