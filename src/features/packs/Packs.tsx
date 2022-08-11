@@ -9,7 +9,7 @@ import { sortOne, sortZero } from 'common/utils/refetchPacks-utills';
 import { FilterArea } from 'features/packs/components/FilterArea/FilterArea';
 import { TableArea } from 'features/packs/components/TableArea/TableArea';
 import {
-  createNewPack,
+  /* createNewPack, */
   fetchCardPacks,
   setPageCountNumber,
   setPageNumber,
@@ -53,9 +53,9 @@ export const Packs = React.memo((): ReturnComponentType => {
   }, [page, pageCount, sortFlag, myAll, debouncedValue, min, max, sortChoice]);
 
   // ________________________колбэк для добавления колоды_____________________
-  const handleAddNewPack = useCallback((value: string): void => {
+  /* const handleAddNewPack = useCallback((value: string): void => {
     dispatch(createNewPack(value));
-  }, []);
+  }, []); */
 
   // _______________________ колбэки для пагинации ____________________
   const changePageCount = useCallback((value: number): void => {
@@ -68,7 +68,7 @@ export const Packs = React.memo((): ReturnComponentType => {
 
   return (
     <div className={styles.packsWrapper}>
-      <TitleArea title="Packs list" buttonTitle="pack" addNewName={handleAddNewPack} />
+      <TitleArea title="Packs list" />
       <FilterArea />
       <TableArea packs={packs} />
       <Pagination

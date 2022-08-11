@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import error404img from 'assets/images/404.svg';
 import style from 'common/components/error404/error404.module.css';
+import { AddNewPackButton } from 'common/components/modal/AddNewPack/AddNewPackButton';
+import { AddNewPackModal } from 'common/components/modal/AddNewPack/AddNewPackModal';
+import { CustomModal } from 'common/components/modal/CustomModal';
 import { RoutePath } from 'common/enums/route-path';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -14,6 +17,7 @@ const Error404 = (): ReturnComponentType => {
 
   return (
     <div className={style.error_box}>
+      <CustomModal modalChild={AddNewPackModal} buttonChild={AddNewPackButton} />
       <div>
         <h2 className={style.error_title}>O KURWA!</h2>
         <p className={style.error_message}>Sorry! Page not found!</p>
