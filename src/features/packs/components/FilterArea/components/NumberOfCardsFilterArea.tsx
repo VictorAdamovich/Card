@@ -34,7 +34,6 @@ export const NumberOfCardsFilterArea = React.memo((): ReturnComponentType => {
     <div className={styles.filterAreaBlock}>
       <div>Number of cards</div>
       <Box sx={{ width: 250 }}>
-        <div>{min}</div>
         <Slider
           getAriaLabel={() => 'Packs count range'}
           value={values}
@@ -48,7 +47,6 @@ export const NumberOfCardsFilterArea = React.memo((): ReturnComponentType => {
           onChangeCommitted={handleChange}
           valueLabelDisplay="auto"
         />
-        <div>{max}</div>
       </Box>
     </div>
   );

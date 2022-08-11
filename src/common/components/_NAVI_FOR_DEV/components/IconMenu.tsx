@@ -15,7 +15,7 @@ import { RoutePath } from 'common/enums/route-path';
 import { logOut } from 'features/login/login-reducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile', 'Packs', 'Logout'];
 
 export const IconMenu = (): ReturnComponentType => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -33,6 +33,9 @@ export const IconMenu = (): ReturnComponentType => {
     setAnchorElUser(null);
     if (title === 'Profile') {
       navigate(RoutePath.Profile);
+    }
+    if (title === 'Packs') {
+      navigate(RoutePath.Packs);
     }
     if (title === 'Logout') {
       dispatch(logOut());

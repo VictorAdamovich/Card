@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+
 import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
 import { handleServerNetworkError } from 'common/utils/error-utils';
@@ -17,14 +19,12 @@ const initialState: InitialStateType = {
   maxCardsCount: 1000,
   min: 0,
   max: 1000,
-  paramsForFetchPacks: {},
   isOnlyMyPacks: false,
   searchValue: '',
   sortFlag: false,
   sortChoice: 'updated',
 };
 type InitialStateType = FetchPacksResponseType & {
-  paramsForFetchPacks: FetchPacksParamsType;
   isOnlyMyPacks: boolean;
   searchValue: string;
   min: number;
@@ -135,71 +135,63 @@ export const setPageCountNumber = (pageCount: number) =>
 
 export const fetchCardPacks =
   (params: FetchPacksParamsType): AppThunk =>
-  dispatch => {
-    dispatch(setAppStatusAC('loading'));
-    packsAPI
-      .fetchPacks(params)
-      .then(res => {
-        dispatch(setCardPacksAC(res.data));
-        dispatch(setAppStatusAC('succeeded'));
-        dispatch(setAppSnackbarAC('success', res.statusText)); // check what is status text
-      })
-      .catch(err => {
-        handleServerNetworkError(err.message, dispatch);
-      })
-      .finally(() => {
-        dispatch(setAppStatusAC('idle'));
-      });
+  async dispatch => {
+    try {
+      dispatch(setAppStatusAC('loading'));
+      const res = await packsAPI.fetchPacks(params);
+      dispatch(setCardPacksAC(res.data));
+      dispatch(setAppStatusAC('succeeded'));
+      dispatch(setAppSnackbarAC('success', res.statusText));
+    } catch (err) {
+      const error = err as Error | AxiosError<{ error: string }>;
+      handleServerNetworkError(error.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 
 export const createNewPack =
   (packName: string /* deckCover?: string */): AppThunk =>
-  (dispatch, getState) => {
-    dispatch(setAppStatusAC('loading'));
-    packsAPI
-      .createPack(packName)
-      .then(res => {
-        handleFetchPacks(dispatch, getState(), res.statusText);
-      })
-      .catch(err => {
-        handleServerNetworkError(err.message, dispatch);
-      })
-      .finally(() => {
-        dispatch(setAppStatusAC('idle'));
-      });
+  async (dispatch, getState) => {
+    try {
+      dispatch(setAppStatusAC('loading'));
+      const res = await packsAPI.createPack(packName);
+      handleFetchPacks(dispatch, getState(), res.statusText);
+    } catch (e) {
+      const error = e as Error | AxiosError<{ error: string }>;
+      handleServerNetworkError(error.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 export const deletePack =
   (packId: string): AppThunk =>
-  (dispatch, getState) => {
-    dispatch(setAppStatusAC('loading'));
-    packsAPI
-      .deletePack(packId)
-      .then(res => {
-        handleFetchPacks(dispatch, getState(), res.statusText);
-      })
-      .catch(err => {
-        handleServerNetworkError(err.message, dispatch);
-      })
-      .finally(() => {
-        dispatch(setAppStatusAC('idle'));
-      });
+  async (dispatch, getState) => {
+    try {
+      dispatch(setAppStatusAC('loading'));
+      const res = await packsAPI.deletePack(packId);
+      handleFetchPacks(dispatch, getState(), res.statusText);
+    } catch (e) {
+      const error = e as Error | AxiosError<{ error: string }>;
+      handleServerNetworkError(error.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 
 export const updatePack =
   (packId: string, newPackName: string): AppThunk =>
-  (dispatch, getState) => {
-    dispatch(setAppStatusAC('loading'));
-    packsAPI
-      .updatePack(packId, newPackName)
-      .then(res => {
-        handleFetchPacks(dispatch, getState(), res.statusText);
-      })
-      .catch(err => {
-        handleServerNetworkError(err.message, dispatch);
-      })
-      .finally(() => {
-        dispatch(setAppStatusAC('idle'));
-      });
+  async (dispatch, getState) => {
+    try {
+      dispatch(setAppStatusAC('loading'));
+      const res = await packsAPI.updatePack(packId, newPackName);
+      handleFetchPacks(dispatch, getState(), res.statusText);
+    } catch (e) {
+      const error = e as Error | AxiosError<{ error: string }>;
+      handleServerNetworkError(error.message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };
 
 // __________________Types_______________________
