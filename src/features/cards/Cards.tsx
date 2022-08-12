@@ -3,13 +3,12 @@ import React, { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
-import { SortPacksFlag } from 'common/enums/sortFlags';
 import useDebounce from 'common/hooks/useDebounce';
 import {
   createPackCardTC,
+  getPackCardsTC,
   setCardsPageCountNumberAC,
   setCardsPageNumberAC,
-  getPackCardsTC,
 } from 'features/cards/cards-reducer';
 import { CardsSearchArea } from 'features/cards/components/cardsSearchArea/CardsSearchArea';
 import { CardsTableArea } from 'features/cards/components/cardsTableArea/CardsTableArea';
@@ -47,9 +46,10 @@ export const Cards = React.memo((): ReturnComponentType => {
     //  dispatch Action forChanging pageCount value
     dispatch(setCardsPageCountNumberAC(value));
   }, []);
-
+  const sortOne = 1;
+  const sortZero = 0;
   useEffect(() => {
-    const sortCards = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
+    const sortCards = `${sortFlag ? sortOne : sortZero}updated`;
     dispatch(
       getPackCardsTC({
         cardsPack_id: packId,
