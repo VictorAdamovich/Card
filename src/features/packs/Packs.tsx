@@ -9,7 +9,6 @@ import { sortOne, sortZero } from 'common/utils/refetchPacks-utills';
 import { FilterArea } from 'features/packs/components/FilterArea/FilterArea';
 import { TableArea } from 'features/packs/components/TableArea/TableArea';
 import {
-  /* createNewPack, */
   fetchCardPacks,
   setPageCountNumber,
   setPageNumber,

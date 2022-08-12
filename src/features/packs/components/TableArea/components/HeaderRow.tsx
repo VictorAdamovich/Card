@@ -5,6 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
+import styles from './HeaderRow.module.css';
+
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { setSortChoiceAC, setSortFlagAC } from 'features/packs/packs-reducer';
 
@@ -22,7 +24,7 @@ export const HeaderRow = (): ReactElement => {
   };
   return (
     <TableRow sx={{ bgcolor: '#EFEFEF' }}>
-      <TableCell onClick={() => sortChoiceHandler('name')}>
+      <TableCell className={styles.clickable} onClick={() => sortChoiceHandler('name')}>
         Name{'  '}
         {sortChoice === 'name' && (
           <IconButton
@@ -35,7 +37,10 @@ export const HeaderRow = (): ReactElement => {
           </IconButton>
         )}
       </TableCell>
-      <TableCell onClick={() => sortChoiceHandler('cardsCount')}>
+      <TableCell
+        className={styles.clickable}
+        onClick={() => sortChoiceHandler('cardsCount')}
+      >
         Cards{'  '}
         {sortChoice === 'cardsCount' && (
           <IconButton
@@ -48,7 +53,10 @@ export const HeaderRow = (): ReactElement => {
           </IconButton>
         )}
       </TableCell>
-      <TableCell onClick={() => sortChoiceHandler('updated')}>
+      <TableCell
+        className={styles.clickable}
+        onClick={() => sortChoiceHandler('updated')}
+      >
         Last Updated{'  '}
         {sortChoice === 'updated' && (
           <IconButton

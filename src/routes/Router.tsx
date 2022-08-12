@@ -38,7 +38,7 @@ export const Router = (): ReturnComponentType => {
           <Route key={item.path} path={item.path} element={item.component} />
         ))}
         <Route path="/" element={<Navigate to={RoutePath.Login} />} />
-        <Route path="/For-friday" element={<Navigate to={RoutePath.Login} />} />
+        <Route path="/Card" element={<Navigate to={RoutePath.Login} />} />
         <Route path="*" element={<Navigate to={RoutePath.Error404} />} />
         <Route path={RoutePath.Error404} element={<Error404 />} />
       </Routes>

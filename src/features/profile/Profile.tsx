@@ -4,7 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Badge, Box, Button, FormControl, FormLabel, Grid } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
 import defaultImage from 'assets/images/ava-img.jpg';
@@ -16,10 +16,13 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export const Profile = (): ReturnComponentType => {
   const dispatch = useAppDispatch();
+
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn);
   const userInfo = useAppSelector(state => state.login.userInfo);
   const appStatus = useAppSelector(state => state.app.status);
   const _id = useAppSelector(state => state.login.userInfo._id);
+
+  const navigate = useNavigate();
 
   const logoutCB = (): void => {
     dispatch(logOut());
@@ -75,6 +78,14 @@ export const Profile = (): ReturnComponentType => {
               disabled={isDisabled}
             >
               Log out
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => navigate(RoutePath.Packs)}
+              color="primary"
+              disabled={isDisabled}
+            >
+              To Packs
             </Button>
           </Grid>
         </FormControl>
