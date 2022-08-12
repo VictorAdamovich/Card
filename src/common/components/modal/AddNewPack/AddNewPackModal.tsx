@@ -21,6 +21,8 @@ export const AddNewPackModal = (
 
   const handleAddNewPack = (): void => {
     dispatch(createNewPack(value));
+    setIsOpen(false);
+    setValue('');
   };
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>

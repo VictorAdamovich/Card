@@ -52,11 +52,6 @@ export const Packs = React.memo((): ReturnComponentType => {
     );
   }, [page, pageCount, sortFlag, myAll, debouncedValue, min, max, sortChoice]);
 
-  // ________________________колбэк для добавления колоды_____________________
-  /* const handleAddNewPack = useCallback((value: string): void => {
-    dispatch(createNewPack(value));
-  }, []); */
-
   // _______________________ колбэки для пагинации ____________________
   const changePageCount = useCallback((value: number): void => {
     dispatch(setPageCountNumber(value));

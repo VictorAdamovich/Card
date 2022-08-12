@@ -3,12 +3,17 @@ import React, { ReactElement, useCallback } from 'react';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type CustomModalProps = {
-  modalChild: (isOpen: boolean, setIsOpen: (newIsOpen: boolean) => void) => ReactElement;
+  modalChild: (
+    isOpen: boolean,
+    setIsOpen: (newIsOpen: boolean) => void,
+    packId?: string,
+  ) => ReactElement;
   buttonChild: (setIsOpen: () => void) => ReactElement;
+  packId?: string;
 };
 
 export const CustomModal = (props: CustomModalProps): ReturnComponentType => {
-  const { modalChild, buttonChild } = props;
+  const { modalChild, buttonChild, packId } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -23,7 +28,7 @@ export const CustomModal = (props: CustomModalProps): ReturnComponentType => {
   return (
     <div>
       {buttonChild(handleClickOpen)}
-      {modalChild(open, setIsOpen)}
+      {modalChild(open, setIsOpen, packId)}
     </div>
   );
 };

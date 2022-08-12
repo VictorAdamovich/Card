@@ -8,17 +8,14 @@ import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type TitleAreaPropsType = {
   title: string;
-  /* buttonTitle: string; */
-  /* addNewName: (newName: string) => void; */
 };
 
 export const TitleArea = React.memo((props: TitleAreaPropsType): ReturnComponentType => {
-  const { title /* addNewName, */ /* buttonTitle  */ } = props;
+  const { title } = props;
 
   return (
     <div className={styles.titleArea}>
       <div>{title}</div>
-      {/* <AddNewPackName buttonTitle={buttonTitle} addNewPackName={addNewName} /> */}
       <CustomModal modalChild={AddNewPackModal} buttonChild={AddNewPackButton} />
     </div>
   );
