@@ -9,7 +9,7 @@ import {
   createPackCardTC,
   setCardsPageCountNumberAC,
   setCardsPageNumberAC,
-  setPackCardsTC,
+  getPackCardsTC,
 } from 'features/cards/cards-reducer';
 import { CardsSearchArea } from 'features/cards/components/cardsSearchArea/CardsSearchArea';
 import { CardsTableArea } from 'features/cards/components/cardsTableArea/CardsTableArea';
@@ -51,7 +51,7 @@ export const Cards = React.memo((): ReturnComponentType => {
   useEffect(() => {
     const sortCards = sortFlag ? SortPacksFlag.up : SortPacksFlag.down;
     dispatch(
-      setPackCardsTC({
+      getPackCardsTC({
         cardsPack_id: packId,
         cardQuestion: debouncedValue,
         page,

@@ -93,7 +93,7 @@ export type CardsActionsType =
 type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
 
 // ______________________Thunks_____________________________
-export const setPackCardsTC =
+export const getPackCardsTC =
   (params: GetCardsParamsType): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
@@ -101,8 +101,8 @@ export const setPackCardsTC =
     try {
       dispatch(setPackCardsAC(response.data));
       dispatch(setAppStatusAC('succeeded'));
-    } catch (err: any) {
-      handleServerNetworkError(err.message, dispatch);
+    } catch (err) {
+      handleServerNetworkError((err as Error).message, dispatch);
     } finally {
       dispatch(setAppStatusAC('idle'));
     }
@@ -113,9 +113,9 @@ export const createPackCardTC =
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.createCard(params);
     try {
-      dispatch(setPackCardsTC({ cardsPack_id: params.cardsPack_id }));
-    } catch (err: any) {
-      handleServerNetworkError(err.message, dispatch);
+      dispatch(getPackCardsTC({ cardsPack_id: params.cardsPack_id }));
+    } catch (err) {
+      handleServerNetworkError((err as Error).message, dispatch);
     } finally {
       dispatch(setAppStatusAC('idle'));
     }
@@ -126,9 +126,9 @@ export const deletePackCardTC =
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.deleteCard(cardId);
     try {
-      dispatch(setPackCardsTC({ cardsPack_id: packId }));
-    } catch (err: any) {
-      handleServerNetworkError(err.message, dispatch);
+      dispatch(getPackCardsTC({ cardsPack_id: packId }));
+    } catch (err) {
+      handleServerNetworkError((err as Error).message, dispatch);
     } finally {
       dispatch(setAppStatusAC('idle'));
     }
@@ -139,9 +139,9 @@ export const updatePackCardTC =
     dispatch(setAppStatusAC('loading'));
     await cardsAPI.updateCard({ cardId, question, answer });
     try {
-      dispatch(setPackCardsTC({ cardsPack_id: packId }));
-    } catch (err: any) {
-      handleServerNetworkError(err.message, dispatch);
+      dispatch(getPackCardsTC({ cardsPack_id: packId }));
+    } catch (err) {
+      handleServerNetworkError((err as Error).message, dispatch);
     } finally {
       dispatch(setAppStatusAC('idle'));
     }
@@ -150,5 +150,12 @@ export const updateCardGradeTC =
   (grade: number, cardId: string): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
-    await cardsAPI.updateCardGrade({ grade, card_id: cardId });
+    const res = await cardsAPI.updateCardGrade({ grade, card_id: cardId });
+    try {
+      dispatch(setCardGradeAC(res.data.grade, cardId));
+    } catch (err) {
+      handleServerNetworkError((err as Error).message, dispatch);
+    } finally {
+      dispatch(setAppStatusAC('idle'));
+    }
   };

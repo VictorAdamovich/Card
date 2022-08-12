@@ -23,7 +23,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const canUserChangingPack = userId === currentUserId;
 
   const handleClickOpenPackCards = (): void => {
-    navigate(`${RoutePath.Packs}/${packId}/cards`);
+    navigate(`${RoutePath.Packs}/${packId}/cards/learn`);
   };
 
   return (
