@@ -63,7 +63,7 @@ export const CardQuestionForm = (): React.ReactElement => {
     if (cards.length) {
       setCard(getRandomCard(cards));
     }
-  }, [dispatch, cards, first]);
+  }, [dispatch, cards, packId, first]);
 
   return (
     <div>

@@ -67,7 +67,7 @@ export type CardsType = {
   _id: string;
 };
 export type UpdateCardParamsType = {
-  cardId: string;
+  _id: string;
   question?: string;
   answer?: string;
 };

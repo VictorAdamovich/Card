@@ -39,9 +39,7 @@ export const cardsReducer = (
       return {
         ...state,
         cards: state.cards.map(card =>
-          card._id === action.cardId
-            ? { ...card, grade: action.grade, shots: action.shots }
-            : card,
+          card._id === action.cardId ? { ...card, grade: action.grade } : card,
         ),
       };
     default:
@@ -80,8 +78,8 @@ export const setCardsSortFlagAC = () =>
   ({
     type: 'cards/SET-SORT-FLAG',
   } as const);
-export const setCardGradeAC = (grade: number, cardId: string, shots: number) =>
-  ({ type: 'cards/SET-CARD-GRADE', grade, cardId, shots } as const);
+export const setCardGradeAC = (grade: number, cardId: string) =>
+  ({ type: 'cards/SET-CARD-GRADE', grade, cardId } as const);
 
 // ______________________Types_______________________________
 export type CardsActionsType =
@@ -136,10 +134,10 @@ export const deletePackCardTC =
     }
   };
 export const updatePackCardTC =
-  (packId: string, cardId: string, question?: string, answer?: string): AppThunk =>
+  (packId: string, _id: string, question?: string, answer?: string): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
-    await cardsAPI.updateCard({ cardId, question, answer });
+    await cardsAPI.updateCard({ _id, question, answer });
     try {
       dispatch(getPackCardsTC({ cardsPack_id: packId }));
     } catch (err) {
@@ -154,7 +152,7 @@ export const updateCardGradeTC =
     dispatch(setAppStatusAC('loading'));
     const res = await cardsAPI.updateCardGrade({ grade, card_id: cardId });
     try {
-      dispatch(setCardGradeAC(res.data.grade, cardId, res.data.shots));
+      dispatch(setCardGradeAC(res.data.grade, cardId));
     } catch (err) {
       handleServerNetworkError((err as Error).message, dispatch);
     } finally {
