@@ -37,7 +37,6 @@ export const CardQuestionForm = (): React.ReactElement => {
 
   const currentPack = packs.find(p => p._id === packId);
   const packName = currentPack ? currentPack.name : 'Pack Name';
-  const nul = 0;
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [first, setFirst] = useState(true);
@@ -61,7 +60,7 @@ export const CardQuestionForm = (): React.ReactElement => {
       dispatch(getPackCardsTC({ cardsPack_id: packId }));
       setFirst(false);
     }
-    if (cards.length > nul) {
+    if (cards.length) {
       setCard(getRandomCard(cards));
     }
   }, [dispatch, cards, first]);
