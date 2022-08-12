@@ -4,14 +4,13 @@ import { School } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'app/store';
+import { useAppSelector } from 'app/store';
 import { CustomModal } from 'common/components/modal/CustomModal';
 import { DeletePackButton } from 'common/components/modal/deletePack/DeletePackButton';
 import { DeletePackModal } from 'common/components/modal/deletePack/DeletePackModal';
 import { UpdatePackButton } from 'common/components/modal/updatePack/UpdatePackButton';
 import { UpdatePackModal } from 'common/components/modal/updatePack/UpdatePackModal';
 import { RoutePath } from 'common/enums/route-path';
-import { setPackCardsTC } from 'features/cards/cards-reducer';
 
 type ActionsPropsType = {
   packId: string;
@@ -20,7 +19,6 @@ type ActionsPropsType = {
 
 export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { userId, packId } = props;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
@@ -28,8 +26,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const canUserChangingPack = userId === currentUserId;
 
   const handleClickOpenPackCards = (): void => {
-    dispatch(setPackCardsTC({ cardsPack_id: packId }));
-    navigate(`${RoutePath.Packs}/${packId}/cards`);
+    navigate(`${RoutePath.Packs}/${packId}/cards/learn`);
   };
 
   return (

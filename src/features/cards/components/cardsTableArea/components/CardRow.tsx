@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Rating } from '@mui/material';
+import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
@@ -14,7 +14,6 @@ type RowPropsType = {
 
 export const CardRow = React.memo((props: RowPropsType) => {
   const { item } = props;
-
   // eslint-disable-next-line camelcase
   const { _id, question, answer, updated, grade, cardsPack_id } = item;
 
@@ -22,24 +21,24 @@ export const CardRow = React.memo((props: RowPropsType) => {
   const endSlice = 20;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
-  const canUserChangingPack = item.user_id === currentUserId;
+  const canUserChangingCard = item.user_id === currentUserId;
 
   return (
     <TableRow key={_id}>
       <TableCell>{question}</TableCell>
       <TableCell>{answer}</TableCell>
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
-      <TableCell style={{ display: 'flex' }}>
-        <Rating
-          style={{ alignItems: 'center' }}
-          name="read-only"
-          value={grade}
-          readOnly
-        />
-        {canUserChangingPack && (
-          // eslint-disable-next-line camelcase
-          <CardActions packId={cardsPack_id} cardId={_id} />
-        )}
+      <TableCell>
+        <Box style={{ display: 'flex' }}>
+          <Rating
+            style={{ alignItems: 'center' }}
+            name="read-only"
+            value={grade}
+            readOnly
+          />
+          {/* eslint-disable-next-line camelcase */}
+          {canUserChangingCard && <CardActions packId={cardsPack_id} cardId={_id} />}
+        </Box>
       </TableCell>
     </TableRow>
   );

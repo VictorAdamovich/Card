@@ -21,16 +21,11 @@ type CardsTableAreaPropsType = {
 
 export const CardsTableArea = React.memo(
   ({ cards }: CardsTableAreaPropsType): React.ReactElement => {
-    const sortFlag = useAppSelector(state => state.packCards.sortFlag);
     const dispatch = useAppDispatch();
+    const sortFlag = useAppSelector(state => state.packCards.sortFlag);
 
     const sort = (): void => {
       dispatch(setCardsSortFlagAC());
-      /* if (sortFlag) {
-            // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.up }));
-          } else {
-            // dispatch(fetchCardPacks({ sortPacks: SortPacksFlag.down }));
-          } */
     };
 
     return (
@@ -38,20 +33,15 @@ export const CardsTableArea = React.memo(
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow sx={{ bgcolor: '#EFEFEF' }}>
-              <TableCell>Question</TableCell>
-              <TableCell>Answer</TableCell>
-              <TableCell>
+              <TableCell style={{ minWidth: 235 }}>Question</TableCell>
+              <TableCell style={{ minWidth: 235 }}>Answer</TableCell>
+              <TableCell style={{ minWidth: 130 }}>
                 Last Updated{'  '}
-                <IconButton
-                  onClick={sort}
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
+                <IconButton onClick={sort} color="primary">
                   {sortFlag ? <ArrowDropUpOutlined /> : <ArrowDropDownOutlined />}
                 </IconButton>
               </TableCell>
-              <TableCell>Grade</TableCell>
+              <TableCell style={{ minWidth: 100 }}>Grade</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

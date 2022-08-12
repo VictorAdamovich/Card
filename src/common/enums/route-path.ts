@@ -8,4 +8,5 @@ export enum RoutePath {
   CreateNewPassword = '/createNewPassword/*',
   Packs = '/packs',
   Cards = '/packs/:packId/cards',
+  CardLearning = '/packs/:packId/cards/learn',
 }
