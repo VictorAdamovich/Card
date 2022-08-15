@@ -14,5 +14,5 @@ export const FormWrapper = React.memo(
 );
 
 type PropsType = {
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactNode;
 };
