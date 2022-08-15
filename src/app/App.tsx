@@ -30,7 +30,11 @@ const App = (): ReturnComponentType => {
   }
   return (
     <div className="App">
-      {status === 'loading' && <LinearProgress />}
+      {status === 'loading' && (
+        <div style={{ position: 'fixed', top: 0, width: '100%' }}>
+          <LinearProgress />
+        </div>
+      )}
       <Router />
       <SimpleSnackbar />
       <div style={{ height: '60px' }}>

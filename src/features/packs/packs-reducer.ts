@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-import { setAppSnackbarAC, setAppStatusAC } from 'app/app-reducer';
+import { setAppStatusAC } from 'app/app-reducer';
 import { AppThunk } from 'app/store';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import { handleFetchPacks } from 'common/utils/refetchPacks-utills';
@@ -141,7 +141,6 @@ export const fetchCardPacks =
       const res = await packsAPI.fetchPacks(params);
       dispatch(setCardPacksAC(res.data));
       dispatch(setAppStatusAC('succeeded'));
-      dispatch(setAppSnackbarAC('success', res.statusText));
     } catch (err) {
       const error = err as Error | AxiosError<{ error: string }>;
       handleServerNetworkError(error.message, dispatch);
@@ -205,7 +204,7 @@ export type PacksActionType =
   | SetMinMaxFilterValueAT
   | SetPageCountNumberAT
   | SetPageNumberAT
-  | SetSortChoiseAT;
+  | SetSortChoiceAT;
 
 type SetCardPacksAT = ReturnType<typeof setCardPacksAC>;
 type SetSearchValueAT = ReturnType<typeof setSearchValueAC>;
@@ -213,6 +212,6 @@ type SetIsOnlyMyPacksAT = ReturnType<typeof setIsOnlyMyPacksAC>;
 type SetMinMaxFilterValueAT = ReturnType<typeof setMinMaxFilterValueAC>;
 type SetMinMaxCardsCountAT = ReturnType<typeof setMinMaxCardsCountAC>;
 type SetSortFlagAT = ReturnType<typeof setSortFlagAC>;
-type SetSortChoiseAT = ReturnType<typeof setSortChoiceAC>;
+type SetSortChoiceAT = ReturnType<typeof setSortChoiceAC>;
 type SetPageNumberAT = ReturnType<typeof setPageNumber>;
 type SetPageCountNumberAT = ReturnType<typeof setPageCountNumber>;

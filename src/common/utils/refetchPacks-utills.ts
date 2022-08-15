@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import { setAppSnackbarAC } from 'app/app-reducer';
+// import { setAppSnackbarAC } from 'app/app-reducer';
 import { AppRootStateType } from 'app/store';
 import { fetchCardPacks } from 'features/packs/packs-reducer';
 
@@ -19,6 +19,7 @@ export const handleFetchPacks = (
   const sortPacks = `${sortFlag ? sortOne : sortZero}${sortChoice}`;
   const userId = isOnlyMyPacks ? _id : '';
   const params = { page, pageCount, sortPacks, user_id: userId };
-  dispatch(setAppSnackbarAC('success', message)); // check what is status text
+  console.log(message);
+  // dispatch(setAppSnackbarAC('success', message)); // check what is status text
   dispatch(fetchCardPacks(params));
 };

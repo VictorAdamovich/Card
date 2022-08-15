@@ -23,8 +23,12 @@ export const HeaderRow = (): ReactElement => {
     dispatch(setSortFlagAC());
   };
   return (
-    <TableRow sx={{ bgcolor: '#EFEFEF' }}>
-      <TableCell className={styles.clickable} onClick={() => sortChoiceHandler('name')}>
+    <TableRow sx={{ bgcolor: '#EFEFEF', width: '100%' }}>
+      <TableCell
+        className={styles.clickable}
+        style={{ width: '35%' }}
+        onClick={() => sortChoiceHandler('name')}
+      >
         Name{'  '}
         {sortChoice === 'name' && (
           <IconButton
@@ -39,6 +43,7 @@ export const HeaderRow = (): ReactElement => {
       </TableCell>
       <TableCell
         className={styles.clickable}
+        style={{ width: '10%' }}
         onClick={() => sortChoiceHandler('cardsCount')}
       >
         Cards{'  '}
@@ -55,6 +60,7 @@ export const HeaderRow = (): ReactElement => {
       </TableCell>
       <TableCell
         className={styles.clickable}
+        style={{ width: '20%' }}
         onClick={() => sortChoiceHandler('updated')}
       >
         Last Updated{'  '}
@@ -69,8 +75,8 @@ export const HeaderRow = (): ReactElement => {
           </IconButton>
         )}
       </TableCell>
-      <TableCell>Created by</TableCell>
-      <TableCell>Actions</TableCell>
+      <TableCell style={{ width: '20%' }}>Created by</TableCell>
+      <TableCell style={{ width: '15%' }}>Actions</TableCell>
     </TableRow>
   );
 };

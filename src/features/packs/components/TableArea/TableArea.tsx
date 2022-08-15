@@ -19,7 +19,7 @@ export const TableArea = React.memo((props: TableAreaPropsType): React.ReactElem
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: '700px' }} aria-label="customized table">
         <TableHead>
           <HeaderRow />
         </TableHead>
