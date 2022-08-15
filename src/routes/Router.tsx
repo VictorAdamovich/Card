@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { NaviForDev } from 'common/components/_NAVI_FOR_DEV/NAVI_FOR_DEV';
 import Error404 from 'common/components/error404/Error404';
+import { ModalWrapperTest } from 'common/components/modal/modalWrapper/ModalWrapperTest';
 import { RoutePath } from 'common/enums/route-path';
 import { Cards } from 'features/cards/Cards';
 import { CheckEmail } from 'features/forgotPassword/CheckEmail';
@@ -30,6 +31,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.Packs, component: <Packs /> },
     { path: RoutePath.Cards, component: <Cards /> },
     { path: RoutePath.CardLearning, component: <CardQuestionForm /> },
+    { path: '/modalTest', component: <ModalWrapperTest /> },
   ];
 
   return (
