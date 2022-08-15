@@ -14,6 +14,7 @@ export const DeletePackModal = (
   isOpen: boolean,
   setIsOpen: (newIsOpen: boolean) => void,
   packId?: string,
+  packName?: string,
 ): ReactElement => {
   const dispatch = useAppDispatch();
 
@@ -26,7 +27,9 @@ export const DeletePackModal = (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <DialogTitle>Delete Pack</DialogTitle>
       <DialogContent>
-        <DialogContentText>Are you sure want delete this pack?</DialogContentText>
+        <DialogContentText>
+          Are you sure want delete this {packName} pack?
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setIsOpen(false)}>Cancel</Button>

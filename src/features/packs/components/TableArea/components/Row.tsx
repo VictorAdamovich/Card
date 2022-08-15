@@ -34,7 +34,7 @@ export const Row = React.memo((props: RowPropsType) => {
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
       <TableCell>{item.user_name}</TableCell>
       <TableCell>
-        <Actions userId={item.user_id} packId={_id} />
+        <Actions userId={item.user_id} packId={_id} packName={name} />
       </TableCell>
     </TableRow>
   );

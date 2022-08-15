@@ -56,7 +56,7 @@ export const Profile = (): ReturnComponentType => {
           sx={{ width: 150, height: 150 }}
         />
       </Badge>
-      <Grid container xs={12} justifyContent="center">
+      <Grid container justifyContent="center">
         <FormControl>
           <FormLabel>
             <h2>Personal information</h2>

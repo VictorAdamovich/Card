@@ -15,14 +15,17 @@ export const UpdatePackModal = (
   isOpen: boolean,
   setIsOpen: (newIsOpen: boolean) => void,
   packId?: string,
+  packName?: string,
 ): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(packName);
 
   const handleUpdatePack = (): void => {
     if (packId) {
-      dispatch(updatePack(packId, value));
+      if (value) {
+        dispatch(updatePack(packId, value));
+      }
     }
     setIsOpen(false);
     setValue('');

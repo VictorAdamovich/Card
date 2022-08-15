@@ -7,13 +7,15 @@ type CustomModalProps = {
     isOpen: boolean,
     setIsOpen: (newIsOpen: boolean) => void,
     packId?: string,
+    packName?: string,
   ) => ReactElement;
   buttonChild: (setIsOpen: () => void) => ReactElement;
   packId?: string;
+  packName?: string;
 };
 
 export const CustomModal = (props: CustomModalProps): ReturnComponentType => {
-  const { modalChild, buttonChild, packId } = props;
+  const { modalChild, buttonChild, packId, packName } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -28,7 +30,7 @@ export const CustomModal = (props: CustomModalProps): ReturnComponentType => {
   return (
     <div>
       {buttonChild(handleClickOpen)}
-      {modalChild(open, setIsOpen, packId)}
+      {modalChild(open, setIsOpen, packId, packName)}
     </div>
   );
 };

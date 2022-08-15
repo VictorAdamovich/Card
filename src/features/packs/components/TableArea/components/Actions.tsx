@@ -15,11 +15,12 @@ import { RoutePath } from 'common/enums/route-path';
 type ActionsPropsType = {
   packId: string;
   userId: string;
+  packName: string;
 };
 
 export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const navigate = useNavigate();
-  const { userId, packId } = props;
+  const { userId, packId, packName } = props;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
 
@@ -39,6 +40,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
           modalChild={UpdatePackModal}
           buttonChild={UpdatePackButton}
           packId={packId}
+          packName={packName}
         />
       )}
       {canUserChangingPack && (
@@ -46,6 +48,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
           modalChild={DeletePackModal}
           buttonChild={DeletePackButton}
           packId={packId}
+          packName={packName}
         />
       )}
     </div>
