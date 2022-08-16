@@ -48,7 +48,9 @@ export const LearningCard = (): React.ReactElement => {
   };
   useEffect(() => {
     if (firstRender) {
-      dispatch(getPackCardsTC({ cardsPack_id: packId }));
+      dispatch(
+        getPackCardsTC({ cardsPack_id: packId, pageCount: currentPack!.cardsCount }),
+      );
       setFirstRender(false);
     }
     if (cards.length) {
