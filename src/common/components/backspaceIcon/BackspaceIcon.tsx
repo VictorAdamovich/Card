@@ -14,10 +14,10 @@ export const BackspaceButton = (): React.ReactElement => {
   };
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <Button onClick={onClickHandler}>
+      <Button onClick={onClickHandler} color="inherit">
         <KeyboardBackspaceIcon />
+        <Typography style={{ padding: '15px' }}>Back to Packs List</Typography>
       </Button>
-      <Typography>Back to Packs List</Typography>
     </div>
   );
 };

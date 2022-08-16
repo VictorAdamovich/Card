@@ -29,41 +29,32 @@ export const getRandomCard = (cards: CardsType[]): CardsType => {
   return cards[res.id + one];
 };
 
-export const CardQuestionForm = (): React.ReactElement => {
+export const LearningCard = (): React.ReactElement => {
   const cards = useAppSelector(state => state.packCards.cards);
   const packs = useAppSelector(state => state.packs.cardPacks);
+
   const { packId } = useParams() as { packId: string };
   const dispatch = useAppDispatch();
 
   const currentPack = packs.find(p => p._id === packId);
-  const packName = currentPack ? currentPack.name : 'Pack Name';
+  const packName = currentPack!.name;
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
-  const [first, setFirst] = useState(true);
-  const [card, setCard] = useState<CardsType>({
-    _id: '',
-    cardsPack_id: '',
-    user_id: '',
-    answer: '',
-    question: '',
-    grade: 1,
-    shots: 0,
-    created: '',
-    updated: '',
-  });
+  const [firstRender, setFirstRender] = useState(true);
+  const [card, setCard] = useState<CardsType>({} as CardsType);
 
   const onCLickAnswerHandler = (): void => {
     setShowAnswer(true);
   };
   useEffect(() => {
-    if (first) {
+    if (firstRender) {
       dispatch(getPackCardsTC({ cardsPack_id: packId }));
-      setFirst(false);
+      setFirstRender(false);
     }
     if (cards.length) {
       setCard(getRandomCard(cards));
     }
-  }, [dispatch, cards, packId, first]);
+  }, [dispatch, cards, packId, firstRender]);
 
   return (
     <div>
