@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/store';
@@ -68,7 +69,9 @@ export const LearningCard = (): React.ReactElement => {
           <span>{card.question}</span>
         </div>
         <div style={{ marginBottom: '20px' }}>
-          <span>количество попыток ответов на вопрос: {card.shots}</span>
+          <Typography variant="body2" gutterBottom>
+            number of attempts to answer a question: {card.shots}
+          </Typography>
         </div>
         <Button variant="contained" onClick={onCLickAnswerHandler}>
           Show answer

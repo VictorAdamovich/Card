@@ -15,13 +15,15 @@ import { CardsType } from 'features/cards/cards-api';
 import { updateCardGradeTC } from 'features/cards/cards-reducer';
 import { getRandomCard } from 'features/learn/LearningCard';
 
-const grades = [
+const grades: GradeType[] = [
   { value: 1, label: 'Did not know' },
   { value: 2, label: 'Forgot' },
   { value: 3, label: 'A lot of thought' },
   { value: 4, label: 'Confused' },
   { value: 5, label: 'Knew the answer' },
 ];
+
+type GradeType = { value: number; label: string };
 
 type PropsType = {
   card: CardsType;
@@ -38,7 +40,7 @@ export const CardAnswerForm = ({
   const cards = useAppSelector(state => state.packCards.cards);
   const { packId } = useParams() as { packId: string };
 
-  const startValue = 1;
+  const startValue = 0;
 
   const [grade, setGrade] = useState<number>(startValue);
 
@@ -71,7 +73,11 @@ export const CardAnswerForm = ({
             />
           ))}
         </RadioGroup>
-        <Button variant="contained" onClick={onCLickNextCardHandler}>
+        <Button
+          variant="contained"
+          disabled={grade === startValue}
+          onClick={onCLickNextCardHandler}
+        >
           Next
         </Button>
       </FormControl>

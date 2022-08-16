@@ -27,10 +27,10 @@ export const Cards = React.memo((): ReturnComponentType => {
   const totalCount = useAppSelector(state => state.packCards.cardsTotalCount);
   const searchValue = useAppSelector(state => state.packCards.searchValue);
   const sortFlag = useAppSelector(state => state.packCards.sortFlag);
+  const sortChoice = useAppSelector(state => state.packCards.sortChoice);
   const { packId } = useParams<'packId'>() as { packId: string };
   const empty = 0;
-  const currentPack = packs.find(p => p._id === packId);
-  const packName = currentPack ? currentPack.name : 'Pack Name';
+  const packName = packs.find(p => p._id === packId)!.name;
 
   const handleAddNewCard = useCallback((question: string, answer: string): void => {
     dispatch(createPackCardTC({ cardsPack_id: packId, question, answer }));
@@ -46,10 +46,12 @@ export const Cards = React.memo((): ReturnComponentType => {
     //  dispatch Action forChanging pageCount value
     dispatch(setCardsPageCountNumberAC(value));
   }, []);
+
   const sortOne = 1;
   const sortZero = 0;
+
   useEffect(() => {
-    const sortCards = `${sortFlag ? sortOne : sortZero}updated`;
+    const sortCards = `${sortFlag ? sortOne : sortZero}${sortChoice}`;
     dispatch(
       getPackCardsTC({
         cardsPack_id: packId,
@@ -59,7 +61,7 @@ export const Cards = React.memo((): ReturnComponentType => {
         sortCards,
       }),
     );
-  }, [page, pageCount, debouncedValue, sortFlag]);
+  }, [page, pageCount, debouncedValue, sortFlag, sortChoice]);
 
   return (
     <div className={styles.packsWrapper}>

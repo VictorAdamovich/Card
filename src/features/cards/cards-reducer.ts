@@ -3,13 +3,14 @@ import { AppThunk } from 'app/store';
 import { handleServerNetworkError } from 'common/utils/error-utils';
 import {
   cardsAPI,
+  CardsType,
   CreateCardParamsType,
   GetCardsParamsType,
   GetCardsResponseType,
 } from 'features/cards/cards-api';
 
-const initialState: InitialStateType = {
-  cards: [],
+const initialState = {
+  cards: [] as CardsType[],
   cardsTotalCount: 12,
   maxGrade: 5,
   minGrade: 0,
@@ -18,6 +19,7 @@ const initialState: InitialStateType = {
   packUserId: '',
   searchValue: '',
   sortFlag: false,
+  sortChoice: 'updated',
 };
 
 export const cardsReducer = (
@@ -29,6 +31,7 @@ export const cardsReducer = (
     case 'cards/SET-PAGE-NUMBER':
     case 'cards/SET-PAGE-COUNT-NUMBER':
     case 'cards/SET-CARDS':
+    case 'cards/SET-CHOICE-FLAG':
       return { ...state, ...action.payload };
     case 'cards/SET-SORT-FLAG':
       return {
@@ -39,7 +42,9 @@ export const cardsReducer = (
       return {
         ...state,
         cards: state.cards.map(card =>
-          card._id === action.cardId ? { ...card, grade: action.grade } : card,
+          card._id === action.cardId
+            ? { ...card, grade: action.grade, shots: action.shots }
+            : card,
         ),
       };
     default:
@@ -78,8 +83,15 @@ export const setCardsSortFlagAC = () =>
   ({
     type: 'cards/SET-SORT-FLAG',
   } as const);
-export const setCardGradeAC = (grade: number, cardId: string) =>
-  ({ type: 'cards/SET-CARD-GRADE', grade, cardId } as const);
+export const setCardGradeAC = (grade: number, cardId: string, shots: number) =>
+  ({ type: 'cards/SET-CARD-GRADE', grade, cardId, shots } as const);
+export const setCardsSortChoiceAC = (sortChoice: 'question' | 'updated' | 'grade') =>
+  ({
+    type: 'cards/SET-CHOICE-FLAG',
+    payload: {
+      sortChoice,
+    },
+  } as const);
 
 // ______________________Types_______________________________
 export type CardsActionsType =
@@ -88,9 +100,10 @@ export type CardsActionsType =
   | ReturnType<typeof setCardsPageCountNumberAC>
   | ReturnType<typeof setCardsSortFlagAC>
   | ReturnType<typeof setCardGradeAC>
+  | ReturnType<typeof setCardsSortChoiceAC>
   | ReturnType<typeof setCardsSearchValueAC>;
 
-type InitialStateType = GetCardsResponseType & { searchValue: string; sortFlag: boolean };
+type InitialStateType = typeof initialState;
 
 // ______________________Thunks_____________________________
 export const getPackCardsTC =
@@ -107,6 +120,7 @@ export const getPackCardsTC =
       dispatch(setAppStatusAC('idle'));
     }
   };
+
 export const createPackCardTC =
   (params: CreateCardParamsType): AppThunk =>
   async dispatch => {
@@ -120,6 +134,7 @@ export const createPackCardTC =
       dispatch(setAppStatusAC('idle'));
     }
   };
+
 export const deletePackCardTC =
   (packId: string, cardId: string): AppThunk =>
   async dispatch => {
@@ -133,6 +148,7 @@ export const deletePackCardTC =
       dispatch(setAppStatusAC('idle'));
     }
   };
+
 export const updatePackCardTC =
   (packId: string, _id: string, question?: string, answer?: string): AppThunk =>
   async dispatch => {
@@ -146,13 +162,16 @@ export const updatePackCardTC =
       dispatch(setAppStatusAC('idle'));
     }
   };
+
 export const updateCardGradeTC =
   (grade: number, cardId: string): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
     const res = await cardsAPI.updateCardGrade({ grade, card_id: cardId });
     try {
-      dispatch(setCardGradeAC(res.data.grade, cardId));
+      dispatch(
+        setCardGradeAC(res.data.updatedGrade.grade, cardId, res.data.updatedGrade.shots),
+      );
     } catch (err) {
       handleServerNetworkError((err as Error).message, dispatch);
     } finally {

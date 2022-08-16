@@ -4,6 +4,8 @@ import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
+import s from './CardRow.module.css';
+
 import { useAppSelector } from 'app/store';
 import { CardsType } from 'features/cards/cards-api';
 import { CardActions } from 'features/cards/components/cardsTableArea/components/CardActions';
@@ -25,15 +27,16 @@ export const CardRow = React.memo((props: RowPropsType) => {
 
   return (
     <TableRow key={_id}>
-      <TableCell>{question}</TableCell>
-      <TableCell>{answer}</TableCell>
+      <TableCell className={s.text}>{question}</TableCell>
+      <TableCell className={s.text}>{answer}</TableCell>
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
       <TableCell>
-        <Box style={{ display: 'flex' }}>
+        <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Rating
             style={{ alignItems: 'center' }}
             name="read-only"
             value={grade}
+            precision={0.1}
             readOnly
           />
           {/* eslint-disable-next-line camelcase */}

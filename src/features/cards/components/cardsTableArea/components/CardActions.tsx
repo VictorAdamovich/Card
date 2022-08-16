@@ -30,11 +30,11 @@ export const CardActions = (props: ActionsPropsType): React.ReactElement => {
   };
 
   return (
-    <div>
-      <IconButton onClick={handleClickUpdateCard}>
+    <div style={{ marginLeft: '20px' }}>
+      <IconButton size="small" onClick={handleClickUpdateCard}>
         <Edit />
       </IconButton>
-      <IconButton onClick={handleClickDeleteCard}>
+      <IconButton size="small" onClick={handleClickDeleteCard}>
         <Delete />
       </IconButton>
       {edit && (
