@@ -19,7 +19,6 @@ import { updatePack } from 'features/packs/packs-reducer';
 type PropsType = {
   packName: string;
   packId: string;
-  canUserChangePack: boolean;
   deckCover: string | null;
 };
 
@@ -30,7 +29,6 @@ export const UpdatePackCoverModal = ({
   packName,
   packId,
   deckCover,
-  canUserChangePack,
 }: PropsType): ReactElement => {
   const dispatch = useAppDispatch();
 
@@ -68,20 +66,6 @@ export const UpdatePackCoverModal = ({
       setError('Choose new file');
     }
   };
-  if (!canUserChangePack) {
-    return (
-      <Badge
-        overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      >
-        <Avatar
-          alt="User"
-          src={deckCover || defaultCover}
-          sx={{ width: 50, height: 50 }}
-        />
-      </Badge>
-    );
-  }
 
   return (
     <div>

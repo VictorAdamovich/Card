@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Badge } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Row.module.css';
 
 import { useAppSelector } from 'app/store';
+import defaultCover from 'assets/images/defaultCover.jpg';
 import { UpdatePackCoverModal } from 'common/components/modal/updatePack/UpdatePackCoverModal';
 import { RoutePath } from 'common/enums/route-path';
 import { Actions } from 'features/packs/components/TableArea/components/Actions';
@@ -28,17 +31,30 @@ export const Row = React.memo((props: RowPropsType) => {
   const endSlice = 20;
 
   const onClickQuestionCardHandler = (): void => {
-    navigate(`${RoutePath.Packs}/${_id}/cards`);
+    if (canUserChangingPack) {
+      navigate(`${RoutePath.Packs}/${_id}/cards`);
+    } else {
+      navigate(`${RoutePath.Packs}/${_id}/cards/learn`);
+    }
   };
+
   return (
     <TableRow key={_id} className={styles.row}>
       <TableCell>
-        <UpdatePackCoverModal
-          packId={_id}
-          canUserChangePack={canUserChangingPack}
-          packName={name}
-          deckCover={deckCover}
-        />
+        {canUserChangingPack ? (
+          <UpdatePackCoverModal packId={_id} packName={name} deckCover={deckCover} />
+        ) : (
+          <Badge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          >
+            <Avatar
+              alt="User"
+              src={deckCover || defaultCover}
+              sx={{ width: 50, height: 50 }}
+            />
+          </Badge>
+        )}
       </TableCell>
       <TableCell onClick={onClickQuestionCardHandler} className={styles.name}>
         <p>{name}</p>
