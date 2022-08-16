@@ -17,7 +17,7 @@ type RowPropsType = {
 export const Row = React.memo((props: RowPropsType) => {
   const { item } = props;
   const navigate = useNavigate();
-  const { _id, name, cardsCount, updated } = item;
+  const { _id, name, cardsCount, updated, deckCover } = item;
 
   const startSlice = 0;
   const endSlice = 20;
@@ -34,7 +34,7 @@ export const Row = React.memo((props: RowPropsType) => {
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
       <TableCell>{item.user_name}</TableCell>
       <TableCell>
-        <Actions userId={item.user_id} packId={_id} packName={name} />
+        <Actions userId={item.user_id} packId={_id} packName={name} cover={deckCover} />
       </TableCell>
     </TableRow>
   );

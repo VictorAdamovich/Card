@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/store';
 import { CustomModal } from 'common/components/modal/CustomModal';
-import { DeletePackButton } from 'common/components/modal/deletePack/DeletePackButton';
-import { DeletePackModal } from 'common/components/modal/deletePack/DeletePackModal';
+import { DeletePackModal } from 'common/components/modal/deletePackModal/DeletePackModal';
 import { UpdatePackButton } from 'common/components/modal/updatePack/UpdatePackButton';
 import { UpdatePackModal } from 'common/components/modal/updatePack/UpdatePackModal';
 import { RoutePath } from 'common/enums/route-path';
@@ -16,11 +15,12 @@ type ActionsPropsType = {
   packId: string;
   userId: string;
   packName: string;
+  cover: string | null;
 };
 
 export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const navigate = useNavigate();
-  const { userId, packId, packName } = props;
+  const { userId, packId, packName, cover } = props;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
 
@@ -44,12 +44,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
         />
       )}
       {canUserChangingPack && (
-        <CustomModal
-          modalChild={DeletePackModal}
-          buttonChild={DeletePackButton}
-          packId={packId}
-          packName={packName}
-        />
+        <DeletePackModal packName={packName} packId={packId} cover={cover} />
       )}
     </div>
   );

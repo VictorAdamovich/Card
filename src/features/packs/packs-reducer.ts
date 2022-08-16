@@ -150,11 +150,11 @@ export const fetchCardPacks =
   };
 
 export const createNewPack =
-  (packName: string /* deckCover?: string */): AppThunk =>
+  (packName: string, isPrivate: boolean, deckCover?: string): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(setAppStatusAC('loading'));
-      const res = await packsAPI.createPack(packName);
+      const res = await packsAPI.createPack(packName, isPrivate, deckCover);
       handleFetchPacks(dispatch, getState(), res.statusText);
     } catch (e) {
       const error = e as Error | AxiosError<{ error: string }>;

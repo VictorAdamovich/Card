@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { AddNewPackButton } from 'common/components/modal/AddNewPack/AddNewPackButton';
-import { AddNewPackModal } from 'common/components/modal/AddNewPack/AddNewPackModal';
-import { CustomModal } from 'common/components/modal/CustomModal';
+import { AddNewPackModal } from 'common/components/modal/addNewPackModal/AddNewPackModal';
 import styles from 'common/components/titleArea/TitleArea.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -16,7 +14,7 @@ export const TitleArea = React.memo((props: TitleAreaPropsType): ReturnComponent
   return (
     <div className={styles.titleArea}>
       <div>{title}</div>
-      <CustomModal modalChild={AddNewPackModal} buttonChild={AddNewPackButton} />
+      <AddNewPackModal />
     </div>
   );
 });

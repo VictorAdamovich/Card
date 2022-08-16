@@ -15,12 +15,12 @@ export const packsAPI = {
     });
   },
 
-  createPack(packName: string, deckCover?: string) {
+  createPack(packName: string, isPrivate: boolean, deckCover?: string) {
     return instance.post('cards/pack', {
       cardsPack: {
         name: packName,
         deckCover, // адресс обложки колоды ( url or base64)
-        private: false,
+        private: isPrivate,
       },
     });
   },
