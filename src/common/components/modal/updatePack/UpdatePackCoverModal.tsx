@@ -1,11 +1,9 @@
 import React, { ChangeEvent, ReactElement, useState } from 'react';
 
-// import { AddAPhoto } from '@mui/icons-material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Badge, Button } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import DialogContentText from '@mui/material/DialogContentText';
-// import IconButton from '@mui/material/IconButton';
 
 import styles from './UpdatePackCover.module.css';
 
