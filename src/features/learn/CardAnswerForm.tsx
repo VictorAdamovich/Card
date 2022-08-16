@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/store';
 import { CardsType } from 'features/cards/cards-api';
 import { updateCardGradeTC } from 'features/cards/cards-reducer';
-import { getRandomCard } from 'features/learn/CardQuestionForm';
+import { getRandomCard } from 'features/learn/LearningCard';
 
 const grades = [
   { value: 1, label: 'Did not know' },

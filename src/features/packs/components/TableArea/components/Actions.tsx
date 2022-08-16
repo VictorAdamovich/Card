@@ -26,13 +26,13 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
 
   const canUserChangingPack = userId === currentUserId;
 
-  const handleClickOpenPackCards = (): void => {
+  const handleClickLearnCard = (): void => {
     navigate(`${RoutePath.Packs}/${packId}/cards/learn`);
   };
 
   return (
     <div style={{ display: 'flex' }}>
-      <IconButton onClick={handleClickOpenPackCards}>
+      <IconButton onClick={handleClickLearnCard}>
         <School />
       </IconButton>
       {canUserChangingPack && (

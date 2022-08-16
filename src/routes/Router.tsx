@@ -10,7 +10,7 @@ import { Cards } from 'features/cards/Cards';
 import { CheckEmail } from 'features/forgotPassword/CheckEmail';
 import { CreateNewPassword } from 'features/forgotPassword/CreateNewPassword';
 import { ForgotPassword } from 'features/forgotPassword/ForgotPassword';
-import { CardQuestionForm } from 'features/learn/CardQuestionForm';
+import { LearningCard } from 'features/learn/LearningCard';
 import { Login } from 'features/login/Login';
 import { Packs } from 'features/packs/Packs';
 import { Profile } from 'features/profile/Profile';
@@ -30,7 +30,7 @@ export const Router = (): ReturnComponentType => {
     { path: RoutePath.ForgotPassword, component: <ForgotPassword /> },
     { path: RoutePath.Packs, component: <Packs /> },
     { path: RoutePath.Cards, component: <Cards /> },
-    { path: RoutePath.CardLearning, component: <CardQuestionForm /> },
+    { path: RoutePath.CardLearning, component: <LearningCard /> },
     { path: '/modalTest', component: <ModalWrapperTest /> },
   ];
 

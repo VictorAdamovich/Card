@@ -27,7 +27,7 @@ export const Row = React.memo((props: RowPropsType) => {
   };
   return (
     <TableRow key={_id}>
-      <TableCell onDoubleClick={onClickQuestionCardHandler} className={styles.name}>
+      <TableCell onClick={onClickQuestionCardHandler} className={styles.name}>
         <p>{name}</p>
       </TableCell>
       <TableCell>{cardsCount}</TableCell>
