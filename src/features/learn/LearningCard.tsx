@@ -37,7 +37,7 @@ export const LearningCard = (): React.ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentPack = packs.find(p => p._id === packId);
-  const packName = currentPack ? currentPack.name : 'Pack Name';
+  const packName = currentPack!.name;
 
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [firstRender, setFirstRender] = useState(true);
@@ -48,9 +48,7 @@ export const LearningCard = (): React.ReactElement => {
   };
   useEffect(() => {
     if (firstRender) {
-      dispatch(
-        getPackCardsTC({ cardsPack_id: packId, pageCount: currentPack!.cardsCount }),
-      );
+      dispatch(getPackCardsTC({ cardsPack_id: packId }));
       setFirstRender(false);
     }
     if (cards.length) {
