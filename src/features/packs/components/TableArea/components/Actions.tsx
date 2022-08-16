@@ -5,10 +5,8 @@ import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/store';
-import { CustomModal } from 'common/components/modal/CustomModal';
 import { DeletePackModal } from 'common/components/modal/deletePackModal/DeletePackModal';
-import { UpdatePackButton } from 'common/components/modal/updatePack/UpdatePackButton';
-import { UpdatePackModal } from 'common/components/modal/updatePack/UpdatePackModal';
+import { UpdatePackNameModal } from 'common/components/modal/updatePack/UpdatePackNameModal';
 import { RoutePath } from 'common/enums/route-path';
 
 type ActionsPropsType = {
@@ -36,12 +34,7 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
         <School />
       </IconButton>
       {canUserChangingPack && (
-        <CustomModal
-          modalChild={UpdatePackModal}
-          buttonChild={UpdatePackButton}
-          packId={packId}
-          packName={packName}
-        />
+        <UpdatePackNameModal packName={packName} packId={packId} cover={cover} />
       )}
       {canUserChangingPack && (
         <DeletePackModal packName={packName} packId={packId} cover={cover} />

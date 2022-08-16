@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './Row.module.css';
 
+import { useAppSelector } from 'app/store';
+import { UpdatePackCoverModal } from 'common/components/modal/updatePack/UpdatePackCoverModal';
 import { RoutePath } from 'common/enums/route-path';
 import { Actions } from 'features/packs/components/TableArea/components/Actions';
 import { CardPackType } from 'features/packs/packs-api';
@@ -15,9 +17,12 @@ type RowPropsType = {
 };
 
 export const Row = React.memo((props: RowPropsType) => {
+  const currentUserId = useAppSelector(state => state.login.userInfo._id);
+
   const { item } = props;
   const navigate = useNavigate();
   const { _id, name, cardsCount, updated, deckCover } = item;
+  const canUserChangingPack = item.user_id === currentUserId;
 
   const startSlice = 0;
   const endSlice = 20;
@@ -26,8 +31,16 @@ export const Row = React.memo((props: RowPropsType) => {
     navigate(`${RoutePath.Packs}/${_id}/cards`);
   };
   return (
-    <TableRow key={_id}>
-      <TableCell onDoubleClick={onClickQuestionCardHandler} className={styles.name}>
+    <TableRow key={_id} className={styles.row}>
+      <TableCell>
+        <UpdatePackCoverModal
+          packId={_id}
+          canUserChangePack={canUserChangingPack}
+          packName={name}
+          deckCover={deckCover}
+        />
+      </TableCell>
+      <TableCell onClick={onClickQuestionCardHandler} className={styles.name}>
         <p>{name}</p>
       </TableCell>
       <TableCell>{cardsCount}</TableCell>

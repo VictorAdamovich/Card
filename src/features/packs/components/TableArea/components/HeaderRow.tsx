@@ -24,12 +24,13 @@ export const HeaderRow = (): ReactElement => {
   };
   return (
     <TableRow sx={{ bgcolor: '#EFEFEF', width: '100%' }}>
+      <TableCell style={{ width: '60px' }}>Cover</TableCell>
       <TableCell
         className={styles.clickable}
-        style={{ width: '35%' }}
+        style={{ width: '32%' }}
         onClick={() => sortChoiceHandler('name')}
       >
-        Name{'  '}
+        Name{' '}
         {sortChoice === 'name' && (
           <IconButton
             onClick={sort}
@@ -43,10 +44,10 @@ export const HeaderRow = (): ReactElement => {
       </TableCell>
       <TableCell
         className={styles.clickable}
-        style={{ width: '10%' }}
+        style={{ width: '13%' }}
         onClick={() => sortChoiceHandler('cardsCount')}
       >
-        Cards{'  '}
+        Cards
         {sortChoice === 'cardsCount' && (
           <IconButton
             onClick={sort}
@@ -63,7 +64,7 @@ export const HeaderRow = (): ReactElement => {
         style={{ width: '20%' }}
         onClick={() => sortChoiceHandler('updated')}
       >
-        Last Updated{'  '}
+        Last Updated{' '}
         {sortChoice === 'updated' && (
           <IconButton
             onClick={sort}

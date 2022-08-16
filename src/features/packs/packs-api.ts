@@ -29,11 +29,12 @@ export const packsAPI = {
     return instance.delete(`cards/pack?id=${packId}`);
   },
 
-  updatePack(packId: string, newPackName: string) {
+  updatePack(packId: string, newPackName: string, deckCover?: string) {
     return instance.put('cards/pack', {
       cardsPack: {
         _id: packId,
         name: newPackName,
+        deckCover,
       },
     });
   },

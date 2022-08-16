@@ -179,11 +179,11 @@ export const deletePack =
   };
 
 export const updatePack =
-  (packId: string, newPackName: string): AppThunk =>
+  (packId: string, newPackName: string, deckCover?: string): AppThunk =>
   async (dispatch, getState) => {
     try {
       dispatch(setAppStatusAC('loading'));
-      const res = await packsAPI.updatePack(packId, newPackName);
+      const res = await packsAPI.updatePack(packId, newPackName, deckCover);
       handleFetchPacks(dispatch, getState(), res.statusText);
     } catch (e) {
       const error = e as Error | AxiosError<{ error: string }>;

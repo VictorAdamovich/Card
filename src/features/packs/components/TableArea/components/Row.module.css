@@ -1,6 +1,9 @@
-.name:hover {
-   cursor: pointer;
+.row:hover {
     background-color: #f3f3f3;
+}
+
+.name:hover {
+    cursor: pointer;
 }
 
 .name p {
