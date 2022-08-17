@@ -45,7 +45,7 @@ export const IconMenu = (): ReturnComponentType => {
     <Box sx={{ flexGrow: 0 }}>
       {isLoggedIn ? (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography style={{ color: 'black' }} variant="h6">
+          <Typography style={{ color: 'black', paddingRight: '10px' }} variant="h6">
             {name}
           </Typography>
           <Tooltip title="Open settings">

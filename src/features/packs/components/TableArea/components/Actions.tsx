@@ -14,11 +14,12 @@ type ActionsPropsType = {
   userId: string;
   packName: string;
   cover: string | null;
+  cardsCount: number;
 };
 
 export const Actions = (props: ActionsPropsType): React.ReactElement => {
   const navigate = useNavigate();
-  const { userId, packId, packName, cover } = props;
+  const { userId, packId, packName, cover, cardsCount } = props;
 
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
 
@@ -30,7 +31,8 @@ export const Actions = (props: ActionsPropsType): React.ReactElement => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <IconButton onClick={handleClickLearnCard}>
+      {/* eslint-disable-next-line no-magic-numbers,@typescript-eslint/no-magic-numbers */}
+      <IconButton disabled={cardsCount === 0} onClick={handleClickLearnCard}>
         <School />
       </IconButton>
       {canUserChangingPack && (

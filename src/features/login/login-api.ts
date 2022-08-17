@@ -15,7 +15,7 @@ export const loginAPI = {
   me() {
     return instance.post<MeResponseType>('auth/me');
   },
-  updateUserInfo(data: { name: string; avatar?: string }) {
+  updateUserInfo(data: { name?: string; avatar?: string }) {
     return instance.put<UpdateUserInfoResponseType>('auth/me', data);
   },
 };
