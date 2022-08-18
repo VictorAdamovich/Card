@@ -65,10 +65,12 @@ export type CardsType = {
   created: string;
   updated: string;
   _id: string;
+  questionImg: string;
 };
 export type UpdateCardParamsType = {
   _id: string;
   question?: string;
   answer?: string;
+  questionImg?: string;
 };
 export type GradeCardParamsType = { grade: number; card_id: string };

@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { useCallback } from 'react';
 
 import Button from '@mui/material/Button';
 
-import { UpdateCardForm } from 'features/cards/components/common/updateCardForm/UpdateCardForm';
+import { UpdateCardForm } from 'common/components/modal/updateCardForm/UpdateCardForm';
+import { CreateUpdateCardPayloadType } from 'features/cards/Cards';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type AddNewPackNamePropsType = {
-  addNewCard: (question: string, answer: string) => void;
+  addNewCard: (payload: CreateUpdateCardPayloadType) => void;
 };
 
 export const AddCardForm = React.memo(
   ({ addNewCard }: AddNewPackNamePropsType): ReturnComponentType => {
-    const [open, setOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
 
-    const handleClickOpen = useCallback((): void => {
-      setOpen(true);
-    }, []);
+    const handleClickOpen = (): void => {
+      setIsOpen(true);
+    };
 
     const closeHandler = (): void => {
-      setOpen(false);
+      setIsOpen(false);
     };
 
     return (
@@ -28,10 +28,13 @@ export const AddCardForm = React.memo(
           Add new card
         </Button>
         <UpdateCardForm
-          open={open}
+          isOpen={isOpen}
           closeHandler={closeHandler}
           createUpdateCard={addNewCard}
           formTitle="add"
+          questionImg=""
+          question=""
+          answer=""
         />
       </div>
     );

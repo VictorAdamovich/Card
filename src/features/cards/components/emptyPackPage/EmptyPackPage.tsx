@@ -3,10 +3,11 @@ import React from 'react';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { AddCardForm } from 'features/cards/components/common/addCardForm/AddCardForm';
+import { AddCardForm } from 'common/components/modal/addCardForm/AddCardForm';
+import { CreateUpdateCardPayloadType } from 'features/cards/Cards';
 
 type PropsType = {
-  addNewCard: (question: string, answer: string) => void;
+  addNewCard: (payload: CreateUpdateCardPayloadType) => void;
 };
 export const EmptyPackPage = ({ addNewCard }: PropsType): React.ReactElement => (
   <Box

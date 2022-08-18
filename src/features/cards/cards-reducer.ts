@@ -105,6 +105,14 @@ export type CardsActionsType =
 
 type InitialStateType = typeof initialState;
 
+type UpdateCardsPayloadType = {
+  packId: string;
+  _id: string;
+  question?: string;
+  answer?: string;
+  questionImg?: string;
+};
+
 // ______________________Thunks_____________________________
 export const getPackCardsTC =
   (params: GetCardsParamsType): AppThunk =>
@@ -150,12 +158,12 @@ export const deletePackCardTC =
   };
 
 export const updatePackCardTC =
-  (packId: string, _id: string, question?: string, answer?: string): AppThunk =>
+  (payload: UpdateCardsPayloadType): AppThunk =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'));
-    await cardsAPI.updateCard({ _id, question, answer });
+    await cardsAPI.updateCard(payload);
     try {
-      dispatch(getPackCardsTC({ cardsPack_id: packId }));
+      dispatch(getPackCardsTC({ cardsPack_id: payload.packId }));
     } catch (err) {
       handleServerNetworkError((err as Error).message, dispatch);
     } finally {

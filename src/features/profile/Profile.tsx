@@ -83,7 +83,7 @@ export const Profile = (): ReturnComponentType => {
       >
         <Avatar
           onError={errorHandler}
-          alt="User"
+          alt="UserAvatar"
           src={isAvaBroken || !userInfo.avatar ? defaultImage : userInfo.avatar}
           sx={{ width: 150, height: 150 }}
         />

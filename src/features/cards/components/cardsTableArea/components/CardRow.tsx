@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
@@ -14,10 +14,16 @@ type RowPropsType = {
   item: CardsType;
 };
 
-export const CardRow = React.memo((props: RowPropsType) => {
-  const { item } = props;
-  // eslint-disable-next-line camelcase
-  const { _id, question, answer, updated, grade, cardsPack_id } = item;
+export const CardRow = React.memo(({ item }: RowPropsType) => {
+  const {
+    _id,
+    question,
+    answer,
+    updated,
+    grade,
+    cardsPack_id: packId,
+    questionImg,
+  } = item;
 
   const startSlice = 0;
   const endSlice = 20;
@@ -25,9 +31,25 @@ export const CardRow = React.memo((props: RowPropsType) => {
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
   const canUserChangingCard = item.user_id === currentUserId;
 
+  const [showImage, setShowImage] = useState(true);
+  const errorHandler = (): void => {
+    setShowImage(false);
+  };
+
   return (
     <TableRow key={_id}>
-      <TableCell className={s.text}>{question}</TableCell>
+      <TableCell className={s.text}>
+        {questionImg && showImage ? (
+          <img
+            onError={errorHandler}
+            style={{ maxWidth: '100px' }}
+            alt="questionImage"
+            src={questionImg}
+          />
+        ) : (
+          question
+        )}
+      </TableCell>
       <TableCell className={s.text}>{answer}</TableCell>
       <TableCell>{updated.split('T').join('  ').slice(startSlice, endSlice)}</TableCell>
       <TableCell>
@@ -39,8 +61,16 @@ export const CardRow = React.memo((props: RowPropsType) => {
             precision={0.1}
             readOnly
           />
-          {/* eslint-disable-next-line camelcase */}
-          {canUserChangingCard && <CardActions packId={cardsPack_id} cardId={_id} />}
+          {canUserChangingCard && (
+            <CardActions
+              answer={answer}
+              questionImg={questionImg}
+              question={question}
+              packId={packId}
+              cardId={_id}
+              canUserChangingCard={canUserChangingCard}
+            />
+          )}
         </Box>
       </TableCell>
     </TableRow>

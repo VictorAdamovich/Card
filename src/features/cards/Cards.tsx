@@ -18,6 +18,12 @@ import { Pagination } from 'features/packs/components/Pagination/Pagination';
 import styles from 'features/packs/Packs.module.css';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
+export type CreateUpdateCardPayloadType = {
+  question?: string;
+  questionImg?: string;
+  answer: string;
+};
+
 export const Cards = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
   const cards = useAppSelector(state => state.packCards.cards);
@@ -32,8 +38,15 @@ export const Cards = React.memo((): ReturnComponentType => {
   const empty = 0;
   const packName = packs.find(p => p._id === packId)!.name;
 
-  const handleAddNewCard = useCallback((question: string, answer: string): void => {
-    dispatch(createPackCardTC({ cardsPack_id: packId, question, answer }));
+  const handleAddNewCard = useCallback((payload: CreateUpdateCardPayloadType): void => {
+    dispatch(
+      createPackCardTC({
+        cardsPack_id: packId,
+        answer: payload.answer,
+        questionImg: payload.questionImg,
+        question: payload.question,
+      }),
+    );
   }, []);
   const delay = 1000;
   const debouncedValue = useDebounce<string | undefined>(searchValue, delay);
