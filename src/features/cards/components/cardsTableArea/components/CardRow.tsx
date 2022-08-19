@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box, Rating } from '@mui/material';
 import TableCell from '@mui/material/TableCell';
@@ -31,21 +31,11 @@ export const CardRow = React.memo(({ item }: RowPropsType) => {
   const currentUserId = useAppSelector(state => state.login.userInfo._id);
   const canUserChangingCard = item.user_id === currentUserId;
 
-  const [showImage, setShowImage] = useState(true);
-  const errorHandler = (): void => {
-    setShowImage(false);
-  };
-
   return (
     <TableRow key={_id}>
       <TableCell className={s.text}>
-        {questionImg && showImage ? (
-          <img
-            onError={errorHandler}
-            style={{ maxWidth: '100px' }}
-            alt="questionImage"
-            src={questionImg}
-          />
+        {questionImg && questionImg !== 'brokenAva' ? (
+          <img style={{ maxWidth: '100px' }} alt="questionImage" src={questionImg} />
         ) : (
           question
         )}

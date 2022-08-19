@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 
 import { Box, FormControl, Select } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
 import { SelectChangeEvent } from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import useState from 'react-usestateref';
 
 import { setAppSnackbarAC } from 'app/app-reducer';
 import { useAppDispatch } from 'app/store';
@@ -40,11 +41,14 @@ export const UpdateCardForm = React.memo((props: PropsType): ReturnComponentType
   } = props;
   const [newAnswer, setNewAnswer] = useState<string>(answer);
   const [newQuestion, setNewQuestion] = useState<string>(question);
-  const [newQuestionImg, setNewQuestionImg] = useState<string>(
+  const [newQuestionImg, setNewQuestionImg, imgRef] = useState<string>(
     questionImg || defaultQuestionImage,
   );
-  const [questionFormat, setQuestionFormat] = useState<string>('picture');
+  const [questionFormat, setQuestionFormat] = useState<string>(
+    questionImg && questionImg !== 'brokenAva' ? 'picture' : 'text',
+  );
   const [isAvaBroken, setIsAvaBroken] = useState(false);
+  const [showImage, setShowImage] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -53,10 +57,13 @@ export const UpdateCardForm = React.memo((props: PropsType): ReturnComponentType
   }, []);
 
   const handleUpdateCard = (): void => {
+    if (!showImage) {
+      setNewQuestionImg('brokenAva');
+    }
     createUpdateCard({
       answer: newAnswer,
       question: newQuestion,
-      questionImg: newQuestionImg,
+      questionImg: imgRef.current,
     });
     closeHandler();
   };
@@ -67,7 +74,7 @@ export const UpdateCardForm = React.memo((props: PropsType): ReturnComponentType
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     setNewQuestion(e.currentTarget.value);
-    setNewQuestionImg('brokenAva');
+    setShowImage(false);
   };
 
   const zeroIndex = 0;
@@ -80,7 +87,7 @@ export const UpdateCardForm = React.memo((props: PropsType): ReturnComponentType
         convertFileToBase64(file, (file64: string) => {
           setIsAvaBroken(false);
           setNewQuestionImg(file64);
-          setNewQuestion('your question');
+          setShowImage(true);
         });
       } else {
         dispatch(setAppSnackbarAC('error', 'Image is too big'));
