@@ -31,11 +31,8 @@ export const Row = React.memo((props: RowPropsType) => {
   const endSlice = 20;
 
   const onClickQuestionCardHandler = (): void => {
-    if (canUserChangingPack) {
+    if (canUserChangingPack || cardsCount > startSlice)
       navigate(`${RoutePath.Packs}/${_id}/cards`);
-    } else {
-      navigate(`${RoutePath.Packs}/${_id}/cards/learn`);
-    }
   };
 
   return (

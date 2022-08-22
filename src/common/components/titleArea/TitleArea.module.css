@@ -8,3 +8,13 @@
     margin-bottom: 34px;
     background-color: white;
 }
+
+.imageContainer {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 40px;
+}
+
+.image {
+    max-width: 150px;
+}

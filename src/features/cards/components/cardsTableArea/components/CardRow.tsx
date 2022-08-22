@@ -58,7 +58,6 @@ export const CardRow = React.memo(({ item }: RowPropsType) => {
               question={question}
               packId={packId}
               cardId={_id}
-              canUserChangingCard={canUserChangingCard}
             />
           )}
         </Box>

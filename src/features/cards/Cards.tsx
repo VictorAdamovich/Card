@@ -27,7 +27,6 @@ export type CreateUpdateCardPayloadType = {
 export const Cards = React.memo((): ReturnComponentType => {
   const dispatch = useAppDispatch();
   const cards = useAppSelector(state => state.packCards.cards);
-  const packs = useAppSelector(state => state.packs.cardPacks);
   const page = useAppSelector(state => state.packCards.page);
   const pageCount = useAppSelector(state => state.packCards.pageCount);
   const totalCount = useAppSelector(state => state.packCards.cardsTotalCount);
@@ -36,7 +35,6 @@ export const Cards = React.memo((): ReturnComponentType => {
   const sortChoice = useAppSelector(state => state.packCards.sortChoice);
   const { packId } = useParams<'packId'>() as { packId: string };
   const empty = 0;
-  const packName = packs.find(p => p._id === packId)!.name;
 
   const handleAddNewCard = useCallback((payload: CreateUpdateCardPayloadType): void => {
     dispatch(
@@ -78,7 +76,7 @@ export const Cards = React.memo((): ReturnComponentType => {
 
   return (
     <div className={styles.packsWrapper}>
-      <CardsTitleArea title={packName} addNewCard={handleAddNewCard} />
+      <CardsTitleArea addNewCard={handleAddNewCard} packId={packId} />
       <CardsSearchArea />
       {cards.length === empty ? (
         <EmptyPackPage addNewCard={handleAddNewCard} />
