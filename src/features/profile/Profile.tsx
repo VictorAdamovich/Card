@@ -62,7 +62,7 @@ export const Profile = (): ReturnComponentType => {
 
   return (
     <FormWrapper>
-      <h2>It-incubator</h2>
+      <h2>My Profile</h2>
       <Badge
         overlap="circular"
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
